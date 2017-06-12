@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# load misc
+INIT_HOME=$HOME/scripts
+cd $INIT_HOME
+source misc
+
+scripts=( */ )
+scripts=( "${scripts[@]%/}" )
+
+for script in "${scripts[@]}"; do
+  path=$(realpath "$script")
+  PATH=$PATH:${path}
+#  warn $PATH
+  export PATH
+done
+cd - >&1 >/dev/null
