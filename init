@@ -5,13 +5,13 @@ INIT_HOME=$HOME/scripts
 cd $INIT_HOME
 source misc
 
-scripts=( */ )
-scripts=( "${scripts[@]%/}" )
+scripts=(`find . -not -path "./.git/*" -perm 755 -type f -exec dirname {} \; | sort | uniq`)
+#debug "${scripts[@]}"
 
 for script in "${scripts[@]}"; do
-  path=$(realpath "$script")
+  path=$(realpath "${script}")
   PATH=$PATH:${path}
-#  warn $PATH
+#  debug "\$PATH:$path"
   export PATH
 done
 cd - >&1 >/dev/null
