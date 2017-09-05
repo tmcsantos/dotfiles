@@ -10,6 +10,30 @@ CYAN='\033[0;36m'
 B_CYAN='\033[1;36m'
 NC='\033[0m'
 
+export WORKDIR="$HOME/Projects"
+
+# make sure WORKDIR exists
+mkdir -p ${WORKDIR}
+
+alias ls='ls -GF'
+alias ll='ls -GFhl'
+alias la='ls -GFhal'
+alias tailf='tail -f'
+alias top='htop'
+alias tree='tree -a --charset utf-8'
+
+# OS specific support.
+darwin=false;
+case "$(uname -s)" in
+  Darwin*)
+    darwin=true
+    ;;
+esac
+
+function usagesort {
+  du -h -d 1 $1 | sort -k 1,1 -g
+}
+
 die() {
     echo -e "${RED}$@${NC}" >&2
     exit 1
@@ -43,3 +67,10 @@ realpath() {
   cd "${OURPWD}"
   echo "${REALPATH}"
 }
+
+### compare files/folders using meld
+if [ "${darwin}" = "true" ]; then
+  function meld-diff {
+    open -W -a Meld --args ${1} ${2}
+  }
+fi
