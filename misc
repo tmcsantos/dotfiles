@@ -11,6 +11,8 @@ B_CYAN='\033[1;36m'
 NC='\033[0m'
 
 export WORKDIR="$HOME/Projects"
+export COLUMNS
+export LINES
 
 # make sure WORKDIR exists
 mkdir -p ${WORKDIR}
