@@ -1,9 +1,9 @@
 [submodule "extras"]
 	path = extras
-	url = https://github.com/hbfernandes/scripts.git
+	url = git@github.com:tmcsantos/hf-scripts.git
 [submodule "mvn"]
 	path = mvn
 	url = git@gist.github.com:40c27ba46d08cbd21095946cf94dd9bc.git
 [submodule "docker"]
 	path = docker
-	url = https://gist.github.com/tmcsantos/ef406ba50acdf386e0fa8ca51626852f
+	url = git@gist.github.com:ef406ba50acdf386e0fa8ca51626852f.git
