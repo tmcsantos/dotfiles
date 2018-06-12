@@ -1,0 +1,32 @@
+#!/bin/sh
+
+set -eo pipefail
+# This script verifies if any credentials are being submited, and, fails if found.
+# Can be bypassed by using the --no-verify parameter when checking in
+
+RED='\033[0;41m'
+YELLOW='\033[0;33m'
+NC='\033[0m'
+
+files_modified=$(git diff-index --cached --name-only --diff-filter=ACM HEAD)
+#protected_files=(credentials)
+
+return_code=0
+
+#for FILE in ${protected_files} ; do
+#  if git diff --cached "HEAD@{1}" --name-only | grep ${FILE} 2>&1 > /dev/null; then
+#    echo "${RED}${FILE}${NC} changed!!! Please unstage it"!
+#    return_code=1
+#  fi
+#done
+
+for FILE in ${files_modified} ; do
+  if grep -Eq "[a-z0-9]{40}" $FILE; then
+    echo "${YELLOW}${FILE}${NC} contains a sequence of chars that resembles a password. Please remove it!"
+    return_code=1
+  fi
+done
+
+[[ $return_code -ne 0 ]] && echo "If you think this is a mistake please contact x-wing team."
+
+exit $return_code
