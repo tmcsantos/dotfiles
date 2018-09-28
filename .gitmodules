@@ -7,3 +7,6 @@
 [submodule "docker"]
 	path = docker
 	url = git@gist.github.com:ef406ba50acdf386e0fa8ca51626852f.git
+[submodule "ramdisk"]
+	path = ramdisk
+	url = git@gist.github.com:cefb76d8e0010f029ffd8a93156be7b7.git
