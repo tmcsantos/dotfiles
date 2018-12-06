@@ -8,7 +8,15 @@ RED='\033[0;41m'
 YELLOW='\033[0;33m'
 NC='\033[0m'
 
-files_modified=$(git diff-index --cached --name-only --diff-filter=ACM HEAD)
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+  against=HEAD
+else
+  # Initial commit: diff against an empty tree object
+  against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi
+
+files_modified=$(git diff-index --cached --name-only --diff-filter=ACM $against)
 #protected_files=(credentials)
 
 return_code=0
