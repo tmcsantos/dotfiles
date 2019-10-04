@@ -17,7 +17,7 @@ export LINES
 # make sure WORKDIR exists
 mkdir -p ${WORKDIR}
 
-alias ls='ls -GF'
+alias ls='ls -GF --color=auto'
 alias ll='ls -GFhl'
 alias la='ls -GFhal'
 alias tailf='tail -f'
