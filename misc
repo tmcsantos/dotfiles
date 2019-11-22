@@ -13,6 +13,8 @@ NC='\033[0m'
 export WORKDIR="$HOME/Projects"
 export COLUMNS
 export LINES
+export VISUAL=vim
+export EDITOR="$VISUAL"
 
 # make sure WORKDIR exists
 mkdir -p ${WORKDIR}
