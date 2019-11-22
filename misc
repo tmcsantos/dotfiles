@@ -79,11 +79,13 @@ realpath() {
 }
 
 ### compare files/folders using meld
-if [ "${darwin}" = "true" ]; then
-  function meld-diff {
+function meld-diff {
+  if [ "${darwin}" = "true" ]; then
     open -W -a Meld --args ${1} ${2}
-  }
-fi
+  else
+    meld ${1} ${2}
+  fi
+}
 
 # Shows you the largest objects in your repo's pack file.
 # Written for osx.

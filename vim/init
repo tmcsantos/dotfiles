@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+mkdir -p ~/.vim/swapfiles
+mkdir -p ~/.vim/backups
+
+[[ -r ~/.vimrc || -h ~/.vimrc ]] || ln -s $(pwd)/vim/vimrc ~/.vimrc
+
+

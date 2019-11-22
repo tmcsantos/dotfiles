@@ -1,15 +1,21 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # load misc
 INIT_HOME=$HOME/scripts
 cd $INIT_HOME
 source misc
 
-scripts=(`find . -not -path "./.git/*" -perm 755 -type f`)
-#debug "${scripts[@]}"
+scripts=(`find . -mindepth 2 -not -path "./.git/*" -perm 755 -type f`)
+# debug "${scripts[@]}"
 
 for script in "${scripts[@]}"; do
+  if [[ "$script" =~ ^.*/init$ ]]; then
+    # debug "${script}"
+    source ${script}
+    continue
+  fi
   if [[ "$script" =~ ^.*wrapper(s?)$ ]]; then
+    # debug "${script}"
     source ${script}
     continue
   fi
