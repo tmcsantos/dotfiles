@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# OS specific support.
+darwin=false;
+case "$(uname -s)" in
+  Darwin*)
+    darwin=true
+    ;;
+esac
+
+
 RED='\033[0;31m'
 B_RED='\033[1;31m'
 GREEN='\033[0;32m'
@@ -19,20 +28,17 @@ export EDITOR="$VISUAL"
 # make sure WORKDIR exists
 mkdir -p ${WORKDIR}
 
-alias ls='ls -GF --color=auto'
+if [ "${darwin}" = "true" ]; then
+  alias ls='ls -GF'
+else
+  alias ls='ls -GF --color=auto'
+fi
+
 alias ll='ls -GFhl'
 alias la='ls -GFhal'
 alias tailf='tail -f'
 alias top='htop'
 alias tree='tree -a --charset utf-8'
-
-# OS specific support.
-darwin=false;
-case "$(uname -s)" in
-  Darwin*)
-    darwin=true
-    ;;
-esac
 
 function usagesort {
   du -h -d 1 $1 | sort -k 1,1 -g
