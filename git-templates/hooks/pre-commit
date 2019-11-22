@@ -35,6 +35,6 @@ for FILE in ${files_modified} ; do
   fi
 done
 
-[[ $return_code -ne 0 ]] && echo "If you think this is a mistake please contact x-wing team."
+[[ $return_code -ne 0 ]] && echo "If you think this is a mistake add --no-verify when checking in." 
 
 exit $return_code
