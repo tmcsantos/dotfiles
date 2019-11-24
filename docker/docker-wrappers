@@ -1,0 +1,22 @@
+#!/bin/bash -lp
+
+#function usagesort {
+#  du -h -d 1 $1 | sort -k 1,1 -g
+#}
+
+### docker related
+if [ "${darwin}" = "true" ]; then
+  alias docker-du='usagesort $HOME/Library/Containers/com.docker.docker'
+else
+  alias docker-du='usagesort /var/lib/docker'
+fi
+
+function docker-clean {
+  docker rm -v $(docker ps --filter=status=exited --filter=status=created -q) 2>/dev/null
+  docker rmi $(docker images -a --filter=dangling=true -q) 2>/dev/null
+}
+
+function docker-flush {
+  docker rm -v $(docker ps -a -q) 2>/dev/null
+  docker rmi $(docker images -a -q) 2>/dev/null
+}
