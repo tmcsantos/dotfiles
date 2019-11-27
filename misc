@@ -45,8 +45,8 @@ function usagesort {
 }
 
 die() {
-    echo -e "${RED}$@${NC}" >&2
-    exit 1
+  echo -e "${RED}$@${NC}" >&2
+  exit 1
 }
 
 error() {
@@ -58,11 +58,11 @@ warn() {
 }
 
 info() {
-    echo -e "${B_GREEN}[INFO]${NC} ${GREEN}$@${NC}"
+  echo -e "${B_GREEN}[INFO]${NC} ${GREEN}$@${NC}"
 }
 
 debug() {
-    echo -e "${B_CYAN}[DEBUG]${NC} ${CYAN}$@${NC}"
+  echo -e "${B_CYAN}[DEBUG]${NC} ${CYAN}$@${NC}"
 }
 
 realpath() {

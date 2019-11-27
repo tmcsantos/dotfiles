@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ -z "$(which docker 2>/dev/null)" ]; then
+  warn "docker not installed"
+else
+  source ./docker/docker-wrappers
+fi

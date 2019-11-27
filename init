@@ -14,11 +14,11 @@ for script in "${scripts[@]}"; do
     source ${script}
     continue
   fi
-  if [[ "$script" =~ ^.*wrapper(s?)$ ]]; then
-    # debug "${script}"
-    source ${script}
-    continue
-  fi
+# if [[ "$script" =~ ^.*wrapper(s?)$ ]]; then
+#   # debug "${script}"
+#   source ${script}
+#   continue
+# fi
   path=$(dirname $(realpath "${script}"))
   [[ "$PATH" != *${path}* ]] && PATH=${PATH}:${path}
 #  debug "\$PATH:${path}"

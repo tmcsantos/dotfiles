@@ -1,33 +1,40 @@
 #!/usr/bin/env bash
 
-GPG_SIGNINGKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d/ -f 2)
+if [ -z "$(which git 2>/dev/null)" ]; then
+  warn "git not installed"
+else
 
-cfg="git config --global"
+  GPG_SIGNINGKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d/ -f 2)
 
-if [[ -n $GPG_SIGNINGKEY ]]; then 
+  cfg="git config --global"
+
+  if [[ -n $GPG_SIGNINGKEY ]]; then 
   export GPG_TTY=$(tty)
   $cfg user.signingkey $GPG_SIGNINGKEY
   $cfg commit.gpgsign true
   $cfg gpg.program gpg
+  fi
+
+  [[ -r ~/.gitignore_global || -h ~/.gitignore_global ]] || ln -s $(pwd)/git/gitignore_global ~/.gitignore_global
+
+  # core config
+
+  $cfg core.excludesfile "~/.gitignore_global"
+  $cfg core.autocrlf input
+  $cfg core.editor vim
+
+  # aliases
+
+  $cfg alias.lg "log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+  $cfg alias.st status
+
+  # init
+
+  $cfg init.templatedir $(pwd)/git-templates
+
+  # use new protocol
+
+  $cfg protocol.version 2
+
+  source ./git/git-wrappers
 fi
-
-[[ -r ~/.gitignore_global || -h ~/.gitignore_global ]] || ln -s $(pwd)/git/gitignore_global ~/.gitignore_global
-
-# core config
-
-$cfg core.excludesfile "~/.gitignore_global"
-$cfg core.autocrlf input
-$cfg core.editor vim
-
-# aliases
-
-$cfg alias.lg "log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-$cfg alias.st status
-
-# init
-
-$cfg init.templatedir $(pwd)/git-templates
-
-# use new protocol
-
-$cfg protocol.version 2

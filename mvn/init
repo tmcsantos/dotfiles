@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+if [ -z "$(which mvn 2>/dev/null)" ]; then
+  warn "maven not installed"
+else
+  source ./mvn/mvn-wrappers
+fi
