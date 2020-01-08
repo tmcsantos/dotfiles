@@ -1,21 +1,19 @@
 #!/usr/bin/env bash
 
-if [ -z "$(which git 2>/dev/null)" ]; then
-  warn "git not installed"
-else
+if is_app_installed git; then
+  if is_app_installed gpg; then
+    GPG_SIGNINGKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d/ -f 2)
 
-  GPG_SIGNINGKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d/ -f 2)
+    cfg="git config --global"
 
-  cfg="git config --global"
-
-  if [[ -n $GPG_SIGNINGKEY ]]; then 
-  export GPG_TTY=$(tty)
-  $cfg user.signingkey $GPG_SIGNINGKEY
-  $cfg commit.gpgsign true
-  $cfg gpg.program gpg
+    if [[ -n $GPG_SIGNINGKEY ]]; then 
+      export GPG_TTY=$(tty)
+      $cfg user.signingkey $GPG_SIGNINGKEY
+      $cfg commit.gpgsign true
+      $cfg gpg.program gpg
+    fi
   fi
-
-  [[ -r ~/.gitignore_global || -h ~/.gitignore_global ]] || ln -s $(pwd)/git/gitignore_global ~/.gitignore_global
+  [[ -r ~/.gitignore_global || -L ~/.gitignore_global ]] || ln -s $(pwd)/git/gitignore_global ~/.gitignore_global
 
   # core config
 

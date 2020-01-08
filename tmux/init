@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+if is_app_installed tmux; then
+  if ! is_app_installed git; then
+    warn "git command not found. Install it first."
+  else
+
+    # Add dotfiles to home
+    [[ -r ~/.tmux.conf || -L ~/.tmux.conf ]] || ln -s $(pwd)/tmux/tmux.conf ~/.tmux.conf
+    [[ -r ~/.tmux.default.theme || -L ~/.tmux.default.theme ]] || ln -s $(pwd)/tmux/tmux.default.theme.conf ~/.tmux.default.theme
+    [[ -r ~/.tmux.remote.conf || -L ~/.tmux.remote.conf ]] || ln -s $(pwd)/tmux/tmux.remote.conf ~/.tmux.remote.conf
+
+    # Check if tpm is installed
+    if [ ! -e "$HOME/.tmux/plugins/tpm" ]; then
+      info "Tmux Plugin Manager not found."
+      info "Installing now..."
+      git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+      # Install TPM Plugins
+      info "Installing TPM Plugins"
+      TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins "$HOME"/.tmux/plugins/tpm/bin/install_plugins
+      info "Done"
+    fi
+  fi
+fi

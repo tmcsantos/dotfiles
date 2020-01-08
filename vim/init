@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 
-mkdir -p ~/.vim/swapfiles
-mkdir -p ~/.vim/backups
+if is_app_installed vim; then
+  export VISUAL=vim
+  export EDITOR="$VISUAL"
 
-[[ -r ~/.vimrc || -h ~/.vimrc ]] || ln -s $(pwd)/vim/vimrc ~/.vimrc
+  mkdir -p ~/.vim/swapfiles
+  mkdir -p ~/.vim/backups
 
-
+  [[ -r ~/.vimrc || -L ~/.vimrc ]] || ln -s $(pwd)/vim/vimrc ~/.vimrc
+fi
