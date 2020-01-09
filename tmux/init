@@ -1,10 +1,19 @@
 #!/usr/bin/env bash
 
+show_available_sessions() {
+  if [[ -z "${TMUX}" ]]; then
+    sessions=$( tmux ls 2> /dev/null | awk '! /attached/ { sub(":", "", $1); print $1; }' | xargs echo )
+    if [[ ! -z $sessions ]]; then
+      echo "==> Available tmux sessions: $sessions"
+    fi
+    unset sessions
+  fi
+}
+
 if is_app_installed tmux; then
   if ! is_app_installed git; then
     warn "git command not found. Install it first."
   else
-
     # Add dotfiles to home
     [[ -r ~/.tmux.conf || -L ~/.tmux.conf ]] || ln -s $(pwd)/tmux/tmux.conf ~/.tmux.conf
     [[ -r ~/.tmux.default.theme || -L ~/.tmux.default.theme ]] || ln -s $(pwd)/tmux/tmux.default.theme.conf ~/.tmux.default.theme
@@ -21,5 +30,8 @@ if is_app_installed tmux; then
       TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins "$HOME"/.tmux/plugins/tpm/bin/install_plugins
       info "Done"
     fi
+
+    # show available tmux sessions
+    show_available_sessions
   fi
 fi
