@@ -6,17 +6,19 @@ cd $INIT_HOME
 source misc
 
 scripts=(`find . -mindepth 2 -not -path "./.git/*" -perm /u+x -type f`)
-# debug "scripts: ${scripts[@]}"
+[[ -n $DEBUG ]] && debug "scripts: ${scripts[@]}"
 
 for script in "${scripts[@]}"; do
   if [[ "$script" =~ ^.*/init$ ]]; then
-    # debug "loading: ${script}"
+    [[ -n $DEBUG ]] && debug "loading: ${script}"
     source ${script}
     continue
   fi
   path=$(dirname $(realpath "${script}"))
-  [[ "$PATH" != *${path}* ]] && PATH=${PATH}:${path}
-#  debug "\$PATH:${path}"
+  if [[ "$PATH" != *${path}* ]]; then
+    PATH=${PATH}:${path}
+    [[ -n $DEBUG ]] && debug "\$PATH:${path}"
+  fi
   export PATH
 done
 cd - >&1 >/dev/null

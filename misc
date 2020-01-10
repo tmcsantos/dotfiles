@@ -37,6 +37,7 @@ alias la='ls -GFhal'
 alias tailf='tail -f'
 alias top='htop'
 alias tree='tree -a --charset utf-8 -I ".git|__pycache__|*.pyc|.git|venv|.idea"'
+alias grep='grep --color'
 
 usagesort() {
   du -h -d 1 $1 | sort -k 1,1 -g
