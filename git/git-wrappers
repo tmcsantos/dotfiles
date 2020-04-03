@@ -32,3 +32,9 @@ function git-du {
 
   echo -e $output | column -t -s ', '
 }
+
+# perform git gc on all git repositories
+function git-gc {
+  path=${1:-$WORKDIR}
+  find ${path} -type d -name ".git" -print0 | xargs -0 -n1 -P4 sh -c 'cd $0; git gc --prune'
+}
