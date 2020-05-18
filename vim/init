@@ -4,8 +4,7 @@ if is_app_installed vim; then
   export VISUAL=vim
   export EDITOR="$VISUAL"
 
-  mkdir -p ~/.vim/swapfiles
-  mkdir -p ~/.vim/backups
+  mkdir -p ~/.vim/undodir
 
   [[ -r ~/.vimrc || -L ~/.vimrc ]] || ln -s $(pwd)/vim/vimrc ~/.vimrc
 fi
