@@ -30,6 +30,8 @@ Thumbs.db
 .classpath
 .project
 .settings
+.tags
+.vim
 
 # JENKINS GDSL #
 ################
@@ -37,3 +39,4 @@ Thumbs.db
 
 # PYTHON VIRTUAL ENV "
 venv
+.venv

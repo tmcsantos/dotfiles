@@ -31,10 +31,10 @@ highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 set cursorline
 
-
 " OSX backspace fix
 set backspace=indent,eol,start
 
+set tags=.tags;/
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -51,36 +51,25 @@ Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'jremmen/vim-ripgrep'
-Plug 'vim-utils/vim-man'
 Plug 'tpope/vim-surround'
 
 " Programming Generic
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-let g:coc_global_extensions = [
-      \ 'coc-python',
-      \ 'coc-java',
-      \ 'coc-eslint',
-      \ 'coc-json',
-      \ 'coc-yaml',
-      \ 'coc-highlight',
-      \]
 Plug 'liuchengxu/vista.vim'
-Plug 'jiangmiao/auto-pairs'
 Plug 'dense-analysis/ale'
-Plug 'pyx/pytest.vim'
+" Plug 'puremourning/vimspector'
 
 " Python programming
-" Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'fisadev/vim-isort'  " python import sort
 Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'Vimjas/vim-python-pep8-indent'
+Plug 'pyx/pytest.vim'
 
 " Git support
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-let g:gitgutter_map_keys = 0
 
 " Theme / Interface
 Plug 'morhetz/gruvbox'
@@ -90,6 +79,19 @@ call plug#end()
 
 colorscheme gruvbox
 set background=dark
+
+" let g:vimspector_enable_mappings = 'HUMAN'
+" packadd! vimspector
+
+let g:gitgutter_map_keys = 0
+let g:coc_global_extensions = [
+      \ 'coc-python',
+      \ 'coc-java',
+      \ 'coc-eslint',
+      \ 'coc-json',
+      \ 'coc-yaml',
+      \ 'coc-highlight',
+      \]
 
 if executable('rg')
     let g:rg_derive_root='true'
@@ -183,6 +185,9 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+" ctags
+nnoremap <leader>. :CtrlPTag<CR>
+nnoremap <silent><leader>b :TagbarToggle<CR>
 
 " Pytest
 autocmd FileType python nmap <silent><leader>f <Esc>:Pytest file<CR>
