@@ -6,6 +6,9 @@ set nocompatible
 syntax on
 filetype plugin on
 
+set guicursor=
+set noshowmatch
+set relativenumber
 set hidden
 set noerrorbells
 set tabstop=2 softtabstop=2
@@ -13,7 +16,6 @@ set shiftwidth=2
 set expandtab
 set smartindent
 set number
-set relativenumber
 set nowrap
 set smartcase
 set noswapfile
@@ -22,14 +24,23 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set pastetoggle=<F2>
-set cmdheight=2
-set colorcolumn=80
-set updatetime=300
+set scrolloff=8
 set clipboard=unnamed
 set mouse=a
-highlight ColorColumn ctermbg=0 guibg=lightgrey
 
+" Give more space for displaying messages
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms) leads to noticeable
+" delays and poor user experience
+set updatetime=50
+
+" Don't pass messages to |ins-completion-menu|
+set shortmess+=c
+
+set colorcolumn=80
 set cursorline
+highlight ColorColumn ctermbg=0 guibg=lightgrey
 
 " OSX backspace fix
 set backspace=indent,eol,start
@@ -47,7 +58,6 @@ call plug#begin('~/.vim/plugged')
 " Utility
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'jremmen/vim-ripgrep'
@@ -57,15 +67,12 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'liuchengxu/vista.vim'
 Plug 'dense-analysis/ale'
-" Plug 'puremourning/vimspector'
 
 " Python programming
 Plug 'fisadev/vim-isort'  " python import sort
 Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'Vimjas/vim-python-pep8-indent'
-Plug 'pyx/pytest.vim'
 
 " Git support
 Plug 'tpope/vim-fugitive'
@@ -80,9 +87,6 @@ call plug#end()
 colorscheme gruvbox
 set background=dark
 
-" let g:vimspector_enable_mappings = 'HUMAN'
-" packadd! vimspector
-
 let g:gitgutter_map_keys = 0
 let g:coc_global_extensions = [
       \ 'coc-python',
@@ -90,6 +94,7 @@ let g:coc_global_extensions = [
       \ 'coc-eslint',
       \ 'coc-json',
       \ 'coc-yaml',
+      \ 'coc-json',
       \ 'coc-highlight',
       \]
 
@@ -142,7 +147,6 @@ nmap <leader>gh :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 
 " Coc configs
-set shortmess+=c
 set signcolumn=yes
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
@@ -188,9 +192,4 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " ctags
 nnoremap <leader>. :CtrlPTag<CR>
 nnoremap <silent><leader>b :TagbarToggle<CR>
-
-" Pytest
-autocmd FileType python nmap <silent><leader>f <Esc>:Pytest file<CR>
-autocmd FileType python nmap <silent><leader>c <Esc>:Pytest class<CR>
-autocmd FileType python nmap <silent><leader>m <Esc>:Pytest method<CR>
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -eo pipefail
 # This script verifies if any credentials are being submited, and, fails if found.
