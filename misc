@@ -26,18 +26,28 @@ export LINES
 # make sure WORKDIR exists
 mkdir -p ${WORKDIR}
 
-if [ "${darwin}" = "true" ]; then
-  alias ls='ls -GF'
-else
-  alias ls='ls -GF --color=auto'
-fi
+# Verbosity
+alias \
+  cp='cp -iv' \
+  mv='mv -iv' \
+  rm='rm -v'
 
-alias ll='ls -GFhl'
-alias la='ls -GFhal'
-alias tailf='tail -f'
-alias top='htop'
-alias tree='tree -a --charset utf-8 -I ".git|__pycache__|*.pyc|.git|venv|.idea"'
-alias grep='grep --color'
+# Colorize commands when possible
+alias \
+  ls='ls -hNGF --color=auto --group-directories-first' \
+  grep='grep --color=auto' \
+  diff='diff --color=auto' \
+  ccat='highlight --out-format=ansi'
+
+# Some other stuff
+alias \
+  ll='ls -l' \
+  la='ls -al' \
+  tailf='tail -f' \
+  top='htop' \
+  tree='tree -a --charset utf-8 -I ".git|__pycache__|*.pyc|.git|.venv|.idea"' \
+  va='source .venv/bin/activate' \
+  ve='python3 -m venv .venv; source .venv/bin/activate'
 
 usagesort() {
   du -h -d 1 $1 | sort -k 1,1 -g
