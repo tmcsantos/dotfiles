@@ -23,6 +23,10 @@ export WORKDIR="$HOME/Projects"
 export COLUMNS
 export LINES
 
+if [ "${darwin}" = "false" ]; then
+  alias open='xdg-open'
+fi
+
 # make sure WORKDIR exists
 mkdir -p ${WORKDIR}
 
