@@ -41,7 +41,7 @@ alias \
   ls='ls -hNGF --color=auto --group-directories-first' \
   grep='grep --color=auto' \
   diff='diff --color=auto' \
-  ccat='highlight --out-format=ansi'
+  ccat='highlight --out-format=ansi --force'
 
 # Some other stuff
 alias \
