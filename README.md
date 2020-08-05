@@ -5,7 +5,7 @@ Add the following snippet to your `.bash_profile` file to enable the builtin fun
 
 ```
 # load custom scripts
-if [ -f "$HOME/scripts/init" ]; then
-  source $HOME/scripts/init
+if [ -f "$HOME/dotfiles/init" ]; then
+  source $HOME/dotfiles/init
 fi
 ```

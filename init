@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # load misc
-INIT_HOME=$HOME/scripts
+INIT_HOME=$HOME/dotfiles
 cd $INIT_HOME
 source misc
 

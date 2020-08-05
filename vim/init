@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
+
 if is_app_installed vim; then
   export VISUAL=vim
   export EDITOR="$VISUAL"
 
   mkdir -p ~/.vim/undodir
 
-  [[ -r ~/.vimrc || -L ~/.vimrc ]] || ln -s $(pwd)/vim/vimrc ~/.vimrc
+  check_dotfile ~/.vimrc || ln -s $(pwd)/vim/vimrc ~/.vimrc
+  check_dotfile ~/.vim/coc-settings.json || ln -s $(pwd)/vim/coc-settings.json ~/.vim/coc-settings.json
 fi

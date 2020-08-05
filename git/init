@@ -13,7 +13,7 @@ if is_app_installed git; then
       $cfg gpg.program gpg
     fi
   fi
-  [[ -r ~/.gitignore_global || -L ~/.gitignore_global ]] || ln -s $(pwd)/git/gitignore_global ~/.gitignore_global
+  check_dotfile ~/.gitignore_global || ln -s $(pwd)/git/gitignore_global ~/.gitignore_global
 
   # core config
 
