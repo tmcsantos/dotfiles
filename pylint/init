@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+check_dotfile ~/.pylintrc || ln -s $(pwd)/pylint/pylintrc ~/.pylintrc

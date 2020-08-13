@@ -51,7 +51,7 @@ alias \
   top='htop' \
   tree='tree -a --charset utf-8 -I ".git|__pycache__|*.pyc|.git|.venv|.idea"' \
   va='source .venv/bin/activate' \
-  ve='python3 -m venv --symlinks .venv; source .venv/bin/activate; pip install flake8 pylint wheel'
+  ve='python3 -m venv --symlinks .venv; source .venv/bin/activate; pip install flake8 pylint yapf wheel'
 
 usagesort() {
   du -h -d 1 $1 | sort -k 1,1 -g

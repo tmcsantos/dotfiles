@@ -2,5 +2,6 @@
   "yaml.schemas": {
     "kubernetes": "/*.yaml"
   },
-  "python.jediEnabled": false
+  "python.jediEnabled": false,
+  "diagnostic.displayByAle": true
 }
