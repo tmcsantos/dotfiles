@@ -6,7 +6,9 @@ if is_app_installed vim; then
   export EDITOR="$VISUAL"
 
   mkdir -p ~/.vim/undodir
+  mkdir -p ~/.vim/spell
 
   check_dotfile ~/.vimrc || ln -s $(pwd)/vim/vimrc ~/.vimrc
   check_dotfile ~/.vim/coc-settings.json || ln -s $(pwd)/vim/coc-settings.json ~/.vim/coc-settings.json
+  check_dotfile ~/.vim/spell/en.utf-8.add || ln -s $(pwd)/vim/spell/en.utf-8.add ~/.vim/spell/en.utf-8.add
 fi
