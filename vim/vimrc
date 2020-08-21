@@ -1,8 +1,3 @@
-" Set 'nocompatible' to ward off unexpected things that your distro might
-" have made, as well as sanely reset options when re-sourcing .vimrc
-set nocompatible
-
-
 syntax on
 filetype plugin on
 
@@ -27,7 +22,8 @@ set incsearch
 set pastetoggle=<F2>
 set scrolloff=8
 set mouse=a
-"
+set signcolumn=yes
+
 " Lets us yank in vim and paste to other programs
 set clipboard=unnamedplus
 
@@ -43,7 +39,8 @@ set shortmess+=c
 
 set colorcolumn=80
 set cursorline
-highlight ColorColumn ctermbg=0 guibg=lightgrey
+highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
+highlight SignColumn ctermbg=lightgrey guibg=lightgrey
 
 " OSX backspace fix
 set backspace=indent,eol,start
@@ -63,7 +60,6 @@ call plug#begin('~/.vim/plugged')
 " Utility
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'kien/ctrlp.vim'
 Plug 'majutsushi/tagbar'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-surround'
@@ -75,7 +71,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 
 " Python programming
-Plug 'fisadev/vim-isort'  " python import sort
+Plug 'fisadev/vim-isort'  " python import sorting
 Plug 'jeetsukumaran/vim-pythonsense'
 Plug 'Vimjas/vim-python-pep8-indent'
 
@@ -99,7 +95,6 @@ let g:coc_global_extensions = [
       \ 'coc-eslint',
       \ 'coc-json',
       \ 'coc-yaml',
-      \ 'coc-json',
       \ 'coc-highlight',
       \]
 
@@ -166,15 +161,6 @@ nmap <leader>gh :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 
 " Coc configs
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -230,3 +216,10 @@ nnoremap <silent><leader>b :TagbarToggle<CR>
 " YAML
 au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Enable spellchecking in natural language files
+augroup NaturalLanguage
+    autocmd!
+    autocmd BufRead,BufNewFile *.md,*.rst,*.txt setlocal spell spelllang=en_us
+    autocmd FileType gitcommit setlocal spell spelllang=en_us
+augroup END
