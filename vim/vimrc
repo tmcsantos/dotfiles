@@ -23,6 +23,7 @@ set pastetoggle=<F2>
 set scrolloff=8
 set mouse=a
 set signcolumn=yes
+set autoread
 
 " Lets us yank in vim and paste to other programs
 set clipboard=unnamedplus
@@ -42,7 +43,6 @@ set cursorline
 highlight ColorColumn ctermbg=lightgrey guibg=lightgrey
 highlight SignColumn ctermbg=lightgrey guibg=lightgrey
 
-" OSX backspace fix
 set backspace=indent,eol,start
 
 set tags=.tags;/
@@ -60,7 +60,6 @@ call plug#begin('~/.vim/plugged')
 " Utility
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'majutsushi/tagbar'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-surround'
 
@@ -111,7 +110,7 @@ let g:netrw_winsize = 25
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
-let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#enabled = 2
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
@@ -121,9 +120,6 @@ let g:airline#extensions#tabline#formatter = 'default'
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:airline#extensions#coc#enabled = 0
-
-" clear empty spaces at the end of lines on save of python files
-autocmd BufWritePre *.py :%s/\s\+$//e
 
 let g:ale_linters = {
   \ 'python': ['flake8', 'pylint'],
@@ -146,13 +142,17 @@ nnoremap <leader>h :wincmd h<CR>
 nnoremap <leader>j :wincmd j<CR>
 nnoremap <leader>k :wincmd k<CR>
 nnoremap <leader>l :wincmd l<CR>
+
+nnoremap <leader>b :Buffers<CR>
+nnoremap <leader>t :Tags<CR>
+
 nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
-nnoremap <Leader>ps :Rg<SPACE>
+nnoremap <leader>ps :Rg<SPACE>
 nnoremap <C-p> :GFiles<CR>
 nnoremap <leader>pf :Files<CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
-nnoremap <Leader>rp :resize 100<CR>
+nnoremap <leader>rp :resize 100<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -209,13 +209,6 @@ nmap <leader>f  <Plug>(coc-format-selected)
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" ctags
-nnoremap <silent><leader>b :TagbarToggle<CR>
-
-" YAML
-au! BufNewFile,BufReadPost *.{yaml,yml} set filetype=yaml 
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " Enable spellchecking in natural language files
 augroup NaturalLanguage
