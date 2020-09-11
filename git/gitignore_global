@@ -1,16 +1,25 @@
 # Compiled source #
 ###################
+*.a
 *.com
 *.class
 *.dll
 *.exe
 *.o
+*.o.d
+*.py[ocd]
 *.so
-*.pyc
 
 # Logs and databases #
 ######################
 *.log
+*.sql
+*.sqlite
+
+# Patches #
+##########
+*.patch
+*.diff
 
 # OS generated files #
 ######################
@@ -37,6 +46,24 @@ Thumbs.db
 ################
 *.gdsl
 
-# PYTHON VIRTUAL ENV "
+# PYTHON VIRTUAL ENV #
+######################
 venv
 .venv
+
+# Python files #
+################
+# setup.py working directory
+build
+# setup.py dist directory
+dist
+doc/build
+doc/cdoc/build
+# Egg metadata
+*.egg-info
+.cache
+pip-wheel-metadata
+
+# pytest generated files #
+##########################
+/.pytest_cache
