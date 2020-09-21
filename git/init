@@ -21,6 +21,9 @@ if is_app_installed git; then
   $cfg core.autocrlf input
   $cfg core.editor vim
 
+  # pull config
+  $cfg pull.rebase true
+
   # aliases
 
   $cfg alias.lg "log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
