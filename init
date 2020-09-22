@@ -8,6 +8,7 @@ source misc
 # Source completions
 [[ "$(which kubectl)" ]] && source <(kubectl completion bash)
 [[ "$(which k3d)" ]] && source <(k3d completion bash)
+[[ "$(which helm)" ]] && source <(helm completion bash)
 
 # install fzf
 if [ ! -d "$WORKDIR/.fzf" ]; then
