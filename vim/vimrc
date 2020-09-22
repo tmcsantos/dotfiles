@@ -26,7 +26,11 @@ set signcolumn=yes
 set autoread
 
 " Lets us yank in vim and paste to other programs
-set clipboard=unnamedplus
+if has('mac')
+  set clipboard=unnamed
+else
+  set clipboard=unnamedplus
+endif
 
 " Give more space for displaying messages
 set cmdheight=2
