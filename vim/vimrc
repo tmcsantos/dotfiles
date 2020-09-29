@@ -24,6 +24,8 @@ set scrolloff=8
 set mouse=a
 set signcolumn=yes
 set autoread
+set ignorecase
+set smartcase
 
 " Lets us yank in vim and paste to other programs
 if has('mac')
