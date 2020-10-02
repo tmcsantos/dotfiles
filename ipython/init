@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if is_app_installed ipython; then
+  if ! check_dotfile ~/.ipython/profile_default/ipython_config.py; then
+    ln -s $(pwd)/ipython/ipython_config.py ~/.ipython/profile_default/ipython_config.py
+    ipython profile create
+  fi
+fi
