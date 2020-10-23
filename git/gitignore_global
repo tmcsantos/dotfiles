@@ -63,6 +63,7 @@ doc/cdoc/build
 *.egg-info
 .cache
 pip-wheel-metadata
+.ipynb_checkpoints
 
 # pytest generated files #
 ##########################
