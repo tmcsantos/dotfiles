@@ -1,7 +1,4 @@
 {
-  "yaml.schemas": {
-    "kubernetes": "/*.yaml"
-  },
   "python.jediEnabled": false,
   "diagnostic.displayByAle": true
 }
