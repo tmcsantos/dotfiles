@@ -21,3 +21,9 @@ function docker-flush {
   docker rm -v $(docker ps -a -q) 2>/dev/null
   docker rmi $(docker images -a -q) 2>/dev/null
 }
+
+if [ "${darwin}" = "true" ]; then
+  function docker-gc {
+    docker run --rm --privileged -v /var/run/docker.sock:/var/run/docker.sock spotify/docker-gc
+  }
+fi
