@@ -21,8 +21,8 @@ if is_app_installed tmux; then
   else
     # Add dotfiles to home
     check_dotfile ~/.tmux.conf || ln -s $(pwd)/tmux/tmux.conf ~/.tmux.conf
-    check_dotfile ~/.tmux.default.theme || ln -s $(pwd)/tmux/tmux.default.theme.conf ~/.tmux.default.theme
-    check_dotfile ~/.tmux.gruvbox-dark.theme || ln -s $(pwd)/tmux/tmux.gruvbox-dark.theme.conf ~/.tmux.gruvbox-dark.theme
+    # check_dotfile ~/.tmux.default.theme || ln -s $(pwd)/tmux/tmux.default.theme.conf ~/.tmux.default.theme
+    # check_dotfile ~/.tmux.gruvbox-dark.theme || ln -s $(pwd)/tmux/tmux.gruvbox-dark.theme.conf ~/.tmux.gruvbox-dark.theme
     check_dotfile ~/.tmux.remote.conf || ln -s $(pwd)/tmux/tmux.remote.conf ~/.tmux.remote.conf
 
     # Check if tpm is installed
