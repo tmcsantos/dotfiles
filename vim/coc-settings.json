@@ -1,4 +1,9 @@
 {
   "python.jediEnabled": false,
-  "diagnostic.displayByAle": true
+  "diagnostic.displayByAle": true,
+  "pyright.disableDiagnostics": true,
+  "python.linting.enabled": false,
+  "python.linting.flake8Enabled": true,
+  "pyright.organizeimports.provider": "isort",
+  "python.formatting.provider": "yapf"
 }

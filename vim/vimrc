@@ -76,16 +76,19 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
 
 " Python programming
-Plug 'fisadev/vim-isort'  " python import sorting
 Plug 'jeetsukumaran/vim-pythonsense'
-Plug 'Vimjas/vim-python-pep8-indent'
+
+" Debugger 
+Plug 'puremourning/vimspector'
+Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
+Plug 'szw/vim-maximizer'
 
 " Git support
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Theme / Interface
-Plug 'morhetz/gruvbox'
+Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 
 call plug#end()
@@ -95,8 +98,7 @@ set background=dark
 
 let g:gitgutter_map_keys = 0
 let g:coc_global_extensions = [
-      \ 'coc-python',
-      \ 'coc-java',
+      \ 'coc-pyright',
       \ 'coc-eslint',
       \ 'coc-json',
       \ 'coc-yaml',
@@ -128,7 +130,7 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:airline#extensions#coc#enabled = 0
 
 let g:ale_linters = {
-  \ 'python': ['flake8', 'pylint'],
+  \ 'python': ['flake8', 'pyright'],
   \ 'javascript': ['eslint'],
   \}
 
@@ -136,6 +138,11 @@ let g:ale_fixers = {
   \ 'python': ['yapf', 'isort'],
   \ 'javascript': ['eslint'],
   \}
+
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+
+
+let g:vimspector_install_gadgets = [ 'debugpy' ]
 
 nmap <F10> :ALEFix<CR>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
@@ -163,8 +170,37 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
 nmap <leader>gs :G<CR>
-nmap <leader>gh :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
+nmap <leader>gh :diffget //3<CR>
+
+
+" Debugger remaps
+nnoremap <leader>m :MaximizerToggle!<CR>
+nnoremap <leader>dd :call vimspector#Launch()<CR>
+nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+nnoremap <leader>dt :call GotoWindow(g:vimspector_session_windows.tagpage)<CR>
+nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
+nnoremap <leader>de :call vimspector#Reset()<CR>
+
+nnoremap <leader>dtcb :call vimspector#CleanLineBreakpoint()<CR>
+
+nmap <leader>dl <Plug>VimspectorStepInto
+nmap <leader>dj <Plug>VimspectorStepOver
+nmap <leader>dk <Plug>VimspectorStepOut
+nmap <leader>d_ <Plug>VimspectorRestart
+nnoremap <leader>d<space> :call vimspector#Continue()<CR>
+
+nmap <leader>drc <Plug>VimspectorRunToCursor
+nmap <leader>dbp <Plug>VimspectorToggleBreakpoint
+nmap <leader>dcbp <Plug>VimspectorToggleConditionalBreakpoint
+
+fun! GotoWindow(id)
+    call win_gotoid(a:id)
+    MaximizerToggle
+endfun
 
 " Coc configs
 " Use tab for trigger completion with characters ahead and navigate.
