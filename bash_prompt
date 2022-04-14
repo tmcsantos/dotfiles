@@ -4,10 +4,10 @@
 # issues with command line editing/browsing/completion!
 PROMPT_DIRTRIM=4                           # shorten deep paths in the prompt
 line0='\[\033]0;Per Aspera Ad Astra\007\]' # set window title
-# line2="$line1\[${CYAN}\]\u\[${NC}\]"       # user
-# line1="$line1@\[${GREEN}\]\h\[${NC}\]"     # host
-# line1="$line1 "                            # seperator
-line1="\[${B_YELLOW}\]\w\[${NC}\]"   # working directory
+line1="\[${CYAN}\]\u\[${NC}\]"             # user
+line1="$line1@\[${GREEN}\]\h\[${NC}\]"     # host
+line1="$line1 "                            # seperator
+line1="$line1\[${B_YELLOW}\]\w\[${NC}\]"   # working directory
 
 line2="\n"
 # line2="\[${MAGENTA}\]\D{%b %d}\[${NC}\]" # Date, for more info, man 3 strftime
