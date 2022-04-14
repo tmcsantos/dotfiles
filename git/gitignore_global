@@ -45,11 +45,16 @@ Thumbs.db
 # JENKINS GDSL #
 ################
 *.gdsl
+.jenkins_version
 
 # PYTHON VIRTUAL ENV #
 ######################
 venv
 .venv
+
+# Bash .env integration #
+#########################
+.env
 
 # Python files #
 ################
@@ -68,3 +73,7 @@ pip-wheel-metadata
 # pytest generated files #
 ##########################
 /.pytest_cache
+
+# pyenv generated files #
+#########################
+.python-version

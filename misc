@@ -8,16 +8,14 @@ case "$(uname -s)" in
     ;;
 esac
 
-
-RED='\033[0;31m'
-B_RED='\033[1;31m'
-GREEN='\033[0;32m'
-B_GREEN='\033[1;32m'
-YELLOW='\033[0;33m'
-B_YELLOW='\033[1;33m'
-CYAN='\033[0;36m'
-B_CYAN='\033[1;36m'
-NC='\033[0m'
+RED='\033[0;31m'; B_RED='\033[1;31m'
+GREEN='\033[0;32m'; B_GREEN='\033[1;32m'
+YELLOW='\033[0;33m'; B_YELLOW='\033[1;33m'
+BLUE='\033[0;34m'; B_BLUE='\033[1;34m'
+MAGENTA='\033[0;35m'; B_MAGENTA='\033[1;35m'
+CYAN='\033[0;36m'; B_CYAN='\033[1;36m'
+WHITE='\033[0;37m'; B_WHITE='\033[1;37m'
+NC='\033[0m' # Return to default colour
 
 export WORKDIR="$HOME/Projects"
 export COLUMNS
@@ -41,7 +39,7 @@ alias \
   ls='ls -hNGF --color=auto --group-directories-first' \
   grep='grep --color=auto' \
   diff='diff --color=auto' \
-  ccat='highlight --out-format=ansi --force' \
+  cat='highlight --out-format=ansi --force' \
   less='less -r' \
   more='more -r'
 
@@ -105,12 +103,18 @@ realpath() {
   echo "${REALPATH}"
 }
 
-### compare files/folders using meld
-function meld-diff {
-  if [ "${darwin}" = "true" ]; then
-    open -W -a Meld --args ${1} ${2}
-  else
-    meld ${1} ${2}
+### Load .env files
+dotenv() {
+  if [ -f .env ]; then
+    set -o allexport; source .env; set +o allexport
   fi
 }
 
+try-lock() {
+  __LOCKFILE="${TMPDIR:-/tmp}/$1"
+  if ( set -o noclobber; : > "${__LOCKFILE}" ) &>/dev/null; then
+    trap 'rm -f "${__LOCKFILE}" &>/dev/null' INT TERM EXIT RETURN
+    return 0
+  fi
+  return 1
+}

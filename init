@@ -1,9 +1,12 @@
 #!/usr/bin/env bash
 
+set -o functrace
+
 # load misc
 INIT_HOME=$HOME/dotfiles
-cd $INIT_HOME
+pushd $INIT_HOME >&1 >/dev/null
 source misc
+source bash_prompt
 
 # Source completions
 [[ "$(which kubectl)" ]] && source <(kubectl completion bash)
@@ -24,9 +27,13 @@ scripts=(`find . -mindepth 2 -not -path "./.git/*" -perm /u+x -type f`)
 
 for script in "${scripts[@]}"; do
   if [[ "$script" =~ ^.*/init$ ]]; then
-    [[ -n $DEBUG ]] && debug "loading: ${script}"
-    source ${script}
-    continue
+    TIMEFORMAT=''
+    [[ -n $DEBUG ]] && debug "loading ${script}" && TIMEFORMAT=' > %R seconds.'
+    time {
+      if try-lock "$(dirname $script)-lock"; then
+        source ${script}
+      fi
+    }
   fi
   path=$(dirname $(realpath "${script}"))
   if [[ "$PATH" != *${path}* ]]; then
@@ -35,4 +42,5 @@ for script in "${scripts[@]}"; do
   fi
   export PATH
 done
-cd - >&1 >/dev/null
+pushd -0 >&1 >/dev/null
+dirs -c

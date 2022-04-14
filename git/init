@@ -1,10 +1,9 @@
 #!/usr/bin/env bash
 
 if is_app_installed git; then
+  cfg="git config --global"
   if is_app_installed gpg; then
     GPG_SIGNINGKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d/ -f 2)
-
-    cfg="git config --global"
 
     if [[ -n $GPG_SIGNINGKEY ]]; then 
       export GPG_TTY=$(tty)
@@ -20,6 +19,7 @@ if is_app_installed git; then
   $cfg core.excludesfile "~/.gitignore_global"
   $cfg core.autocrlf input
   $cfg core.editor vim
+  $cfg mergetool.keepBackup false
 
   # pull config
   $cfg pull.rebase true
@@ -40,12 +40,20 @@ if is_app_installed git; then
 
   source ./git/git-wrappers
 
-  # install bash-git-prompt
-  if [ ! -f "$WORKDIR/.bash-git-prompt/gitprompt.sh" ]; then
-    git clone https://github.com/magicmonty/bash-git-prompt.git $WORKDIR/.bash-git-prompt --depth=1 --quiet
+  # install git-filter-repo
+  if [ ! -f "$WORKDIR/.git-filter-repo/git-filter-repo" ]; then
+    pushd $WORKDIR >&1 >/dev/null
+    git clone https://github.com/newren/git-filter-repo.git .git-filter-repo  --depth=1 --quiet
+    pushd .git-filter-repo >&1 >/dev/null
+    git remote set-branches origin docs 
+    git fetch --dept=1 --quiet
+    mkdir -p man/man1
+    git show origin/docs:man1/git-filter-repo.1 >man/man1/git-filter-repo.1
   fi
 
-  GIT_PROMPT_ONLY_IN_REPO=1
-  GIT_PROMPT_THEME=Default_Ubuntu
-  source $WORKDIR/.bash-git-prompt/gitprompt.sh
+  PATH=$WORKDIR/.git-filter-repo:$PATH
+  export PATH
+
+  # git prompt
+  source $(pwd)/git/git-prompt
 fi
