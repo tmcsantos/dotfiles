@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+try-lock "git-lock" || return 0
 if is_app_installed git; then
   cfg="git config --global"
   if is_app_installed gpg; then
@@ -51,8 +52,7 @@ if is_app_installed git; then
     git show origin/docs:man1/git-filter-repo.1 >man/man1/git-filter-repo.1
   fi
 
-  PATH=$WORKDIR/.git-filter-repo:$PATH
-  export PATH
+  [[ "$PATH" == *"git-filter-repo"* ]] || PATH=$WORKDIR/.git-filter-repo:$PATH
 
   # git prompt
   source $(pwd)/git/git-prompt

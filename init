@@ -2,16 +2,30 @@
 
 set -o functrace
 
+[[ -n $DEBUG ]] && TIMEFORMAT=' > %R seconds.' || TIMEFORMAT=''
+[[ -n $DEBUG ]] && time=command time || time=
+
 # load misc
 INIT_HOME=$HOME/dotfiles
 pushd $INIT_HOME >&1 >/dev/null
 source misc
 source bash_prompt
 
+export BASH_COMPLETION_USER_DIR="$HOME/.local/share/bash-completion"
+mkdir -p $BASH_COMPLETION_USER_DIR/completions
+
 # Source completions
-[[ "$(which kubectl)" ]] && source <(kubectl completion bash)
-[[ "$(which k3d)" ]] && source <(k3d completion bash)
-[[ "$(which helm)" ]] && source <(helm completion bash)
+time {
+if is_app_installed kubectl && [[ ! -f $BASH_COMPLETION_USER_DIR/completions/kubectl ]]; then
+  kubectl completion bash > $BASH_COMPLETION_USER_DIR/completions/kubectl
+fi
+if is_app_installed k3d && [[ ! -f $BASH_COMPLETION_USER_DIR/completions/k3d ]]; then
+  k3d completion bash > $BASH_COMPLETION_USER_DIR/completions/k3d
+fi
+if is_app_installed helm && [[ ! -f $BASH_COMPLETION_USER_DIR/completions/helm ]]; then
+  helm completion bash > $BASH_COMPLETION_USER_DIR/completions/helm
+fi
+}
 
 # install fzf
 if [ ! -d "$WORKDIR/.fzf" ]; then
@@ -22,25 +36,27 @@ if [ ! -d "$WORKDIR/.fzf" ]; then
 fi
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-scripts=(`find . -mindepth 2 -not -path "./.git/*" -perm /u+x -type f`)
+time {
+scripts=(`find . -mindepth 2 -maxdepth 2 -not -path "./.git/*" -perm /u+x -type f`)
 [[ -n $DEBUG ]] && debug "scripts: ${scripts[@]}"
+}
 
 for script in "${scripts[@]}"; do
   if [[ "$script" =~ ^.*/init$ ]]; then
-    TIMEFORMAT=''
-    [[ -n $DEBUG ]] && debug "loading ${script}" && TIMEFORMAT=' > %R seconds.'
+    [[ -n $DEBUG ]] && debug "loading ${script}"
     time {
-      if try-lock "$(dirname $script)-lock"; then
-        source ${script}
-      fi
+      source ${script}
     }
+    continue
   fi
   path=$(dirname $(realpath "${script}"))
   if [[ "$PATH" != *${path}* ]]; then
     PATH=${PATH}:${path}
     [[ -n $DEBUG ]] && debug "\$PATH:${path}"
   fi
-  export PATH
 done
 pushd -0 >&1 >/dev/null
 dirs -c
+
+unset TIMEFORMAT
+unset scripts
