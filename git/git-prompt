@@ -123,7 +123,7 @@ function __git_prompt() {
   elif [[ "$inside_worktree" = "true" ]]; then
     stashed=$(git rev-parse --verify --quiet refs/stash | wc -l)
     untracked=$(git ls-files --others --exclude-standard --directory --no-empty-directory --error-unmatch -- ':/*' 2>/dev/null | wc -l)
-    staged=$(git diff --no-ext-diff --cached --name-only --diff-filter=A | wc -l)
+    staged=$(git diff --no-ext-diff --cached --name-only | wc -l)
     unstaged=$(git diff --no-ext-diff --name-only --diff-filter=M | wc -l)
     conflicts=$(git diff --no-ext-diff --name-only --diff-filter=U | wc -l)
   fi

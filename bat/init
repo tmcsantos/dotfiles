@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# for better highlight use bat if available!
+
+if is_app_installed bat; then
+  alias cat='bat'
+  check_dotfile ~/.config/bat/config || ln -s $(pwd)/bat/config ~/.config/bat/config
+elif is_app_installed highlight; then
+  alias cat='highlight --out-format=ansi --force'
+fi

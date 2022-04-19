@@ -39,9 +39,7 @@ alias \
   ls='ls -hNGF --color=auto --group-directories-first' \
   grep='grep --color=auto' \
   diff='diff --color=auto' \
-  cat='highlight --out-format=ansi --force' \
-  less='less -r' \
-  more='more -r'
+  less='less -R' 
 
 # Some other stuff
 alias \

@@ -16,13 +16,13 @@ mkdir -p $BASH_COMPLETION_USER_DIR/completions
 
 # Source completions
 time {
-if is_app_installed kubectl && [[ ! -f $BASH_COMPLETION_USER_DIR/completions/kubectl ]]; then
+if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/kubectl ]] && is_app_installed kubectl; then
   kubectl completion bash > $BASH_COMPLETION_USER_DIR/completions/kubectl
 fi
-if is_app_installed k3d && [[ ! -f $BASH_COMPLETION_USER_DIR/completions/k3d ]]; then
+if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/k3d ]] && is_app_installed k3d; then
   k3d completion bash > $BASH_COMPLETION_USER_DIR/completions/k3d
 fi
-if is_app_installed helm && [[ ! -f $BASH_COMPLETION_USER_DIR/completions/helm ]]; then
+if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/helm ]] && is_app_installed helm; then
   helm completion bash > $BASH_COMPLETION_USER_DIR/completions/helm
 fi
 }
