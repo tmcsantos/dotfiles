@@ -129,7 +129,7 @@ function __git_prompt() {
   fi
 
   clean=0
-  if (( staged == 0 && untracked == 0 && staged == 0 && unstaged == 0 && conflicts == 0 )); then
+  if (( staged == 0 && untracked == 0 && stashed == 0 && unstaged == 0 && conflicts == 0 )); then
     clean=1
   fi
 
