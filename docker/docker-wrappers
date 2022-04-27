@@ -15,11 +15,13 @@ function docker-clean {
   docker rm -v $(docker ps --filter=status=exited --filter=status=created -q) 2>/dev/null
   docker rmi $(docker images -a --filter=dangling=true -q) 2>/dev/null
   docker volume rm $(docker volume ls --filter=dangling=true -q) 2>/dev/null
+  return 0
 }
 
 function docker-flush {
   docker rm -v $(docker ps -a -q) 2>/dev/null
   docker rmi $(docker images -a -q) 2>/dev/null
+  return 0
 }
 
 if [ "${darwin}" = "true" ]; then
