@@ -41,6 +41,7 @@ Thumbs.db
 .settings
 .tags
 .vim
+.factorypath
 
 # JENKINS GDSL #
 ################

@@ -27,15 +27,6 @@ if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/helm ]] && is_app_installed hel
 fi
 }
 
-# install fzf
-if [ ! -d "$WORKDIR/.fzf" ]; then
-  if is_app_installed git; then
-    git clone --quiet --depth 1 https://github.com/junegunn/fzf.git $WORKDIR/.fzf
-    $WORKDIR/.fzf/install --completion --key-bindings --no-update-rc
-  fi
-fi
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
 time {
 scripts=(`find . -mindepth 2 -maxdepth 2 -not -path "./.git/*" -perm /u+x -type f`)
 [[ -n $DEBUG ]] && debug "scripts: ${scripts[@]}"

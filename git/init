@@ -29,7 +29,7 @@ if is_app_installed git; then
 
   $cfg alias.lg "log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
   $cfg alias.st status
-  $cfg alias.ctags '!.git/hooks/ctags'
+  $cfg alias.ctags 'hook run ctags'
 
   # init
 

@@ -46,7 +46,7 @@ alias \
   ll='ls -l' \
   la='ls -al' \
   tailf='tail -f' \
-  top='htop' \
+  top='btop || htop || \top' \
   tree='tree -a --charset utf-8 -I ".git|__pycache__|*.pyc|.git|.venv|.idea"' \
   va='source .venv/bin/activate' \
   ve='python3 -m venv --symlinks .venv; source .venv/bin/activate; pip install -U pip; pip install flake8 pylint yapf wheel ipython'
@@ -116,3 +116,13 @@ try-lock() {
   fi
   return 1
 }
+
+if [ "${darwin}" = "true" ]; then
+  used_ports() {
+    netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
+  }
+  cpu_check() {
+    pmset -g therm  
+    sudo powermetrics --samplers smc -i1 -n1
+  }
+fi

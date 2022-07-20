@@ -58,9 +58,9 @@ function __git_status() {
 
 function __git_prompt() {
 	# preserve exit status
-	local exit=$?
+  local exit=$?
   local gitstring
-	local repo_info rev_parse_exit_code
+  local repo_info rev_parse_exit_code
 	repo_info="$(git rev-parse --git-dir --is-inside-git-dir \
 		--is-bare-repository --is-inside-work-tree \
 		--short HEAD 2>/dev/null)"
@@ -137,7 +137,7 @@ function __git_prompt() {
   local up_state=$(__git_show_upstream)
 
   gitstring=" $GIT_PROMPT_PREFIX"
-  gitstring="$gitstring${MAGENTA}$branch${NC}"
+  gitstring="$gitstring${c}${MAGENTA}$branch${NC}"
   [[ -n "$state" ]] && gitstring="$gitstring$state"
   gitstring="$gitstring$up_state"
 

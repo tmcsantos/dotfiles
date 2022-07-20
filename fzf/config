@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+# Use ~~ as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER='~~'
+
+# export FZF_DEFAULT_COMMAND='rg --files'
+
+# Options to fzf command
+export FZF_DEFAULT_OPTS="--border -1 --reverse --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --color=always {} || cat {}) 2>/dev/null | head -300' --preview-window='right:hidden:wrap' --bind='f3:execute(bat {} || less -f {}),f2:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up'"
+
+_fzf_complete_ssh_notrigger() {
+    FZF_COMPLETION_TRIGGER='' _fzf_host_completion
+}
+
+complete -o bashdefault -o default -F _fzf_complete_ssh_notrigger ssh
+
+# Customize how fzf handles certain commands
+_fzf_comprun() {
+  local command=$1
+  shift
+
+  case "$command" in
+    cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    *)            fzf "$@" ;;
+  esac
+}
