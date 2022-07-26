@@ -17,7 +17,7 @@ CYAN='\033[0;36m'; B_CYAN='\033[1;36m'
 WHITE='\033[0;37m'; B_WHITE='\033[1;37m'
 NC='\033[0m' # Return to default colour
 
-export WORKDIR="$HOME/Projects"
+export WORKDIR="$HOME/projects"
 export COLUMNS
 export LINES
 

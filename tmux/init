@@ -15,7 +15,6 @@ tssh() {
   ssh -t $@ "tmux attach || tmux new"
 }
 
-
 if is_app_installed tmux; then
   if ! is_app_installed git; then
     warn "git command not found. Install it first."

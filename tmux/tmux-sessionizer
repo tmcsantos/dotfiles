@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+default_find="command find $HOME -mindepth 1 -maxdepth 1 -type d"
+
+if [[ $# -eq 1 ]]; then
+  selected=$1
+else
+  selected=$(${FZF_CTRL_T_COMMAND:-default_find} | fzf)
+fi
+
+if [[ -z $selected ]]; then
+  exit 0
+fi
+
+
+selected_name=$(basename "$selected" | tr . _)
+
+if [[ -z $TMUX ]]; then
+  tmux new-session -As $selected_name -c $selected
+else
+  tmux new-session -ds $selected_name -c $selected
+  tmux switch-client -t $selected_name
+fi

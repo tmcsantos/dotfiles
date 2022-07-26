@@ -1,9 +1,12 @@
 {
-  "python.jediEnabled": false,
   "diagnostic.displayByAle": true,
-  "pyright.disableDiagnostics": true,
+  // python
   "python.linting.enabled": false,
   "python.linting.flake8Enabled": true,
+  "python.formatting.provider": "yapf",
   "pyright.organizeimports.provider": "isort",
-  "python.formatting.provider": "yapf"
+  "pyright.disableDiagnostics": true,
+  // rust
+  "rust-analyzer.imports.merge.glob": false,
+  "notification.disabledProgressSources": ["*"]
 }

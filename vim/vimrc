@@ -71,12 +71,13 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'tpope/vim-surround'
+Plug 'mbbill/undotree'
 
 " Programming Generic
 Plug 'tpope/vim-commentary'
 Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'dense-analysis/ale'
+Plug 'dense-analysis/ale'  " https://github.com/dense-analysis/ale
 
 " Python programming
 Plug 'jeetsukumaran/vim-pythonsense'
@@ -110,6 +111,7 @@ let g:coc_global_extensions = [
       \ 'coc-highlight',
       \ 'coc-java',
       \ 'coc-java-debug',
+      \ 'coc-rust-analyzer',
       \]
 
 if executable('rg')
@@ -132,15 +134,15 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeShowHidden = 1
 
 " Open a NerdTree if no file is given as CLI argument
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
 
 let g:airline#extensions#ale#enabled = 2
 
-let g:airline#extensions#tabline#enabled = 1
+" let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'default'
 
 " Add (Neo)Vim's native statusline support.
@@ -148,16 +150,6 @@ let g:airline#extensions#tabline#formatter = 'default'
 " provide custom statusline: lightline.vim, vim-airline.
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:airline#extensions#coc#enabled = 0
-
-let g:ale_linters = {
-  \ 'python': ['flake8', 'pyright'],
-  \ 'javascript': ['eslint'],
-  \}
-
-let g:ale_fixers = {
-  \ 'python': ['yapf', 'isort'],
-  \ 'javascript': ['eslint'],
-  \}
 
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 
@@ -194,6 +186,7 @@ nmap <leader>gs :G<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gh :diffget //3<CR>
 
+nnoremap <leader>u :UndotreeToggle<CR>
 
 " Debugger remaps
 nnoremap <leader>m :MaximizerToggle!<CR>
