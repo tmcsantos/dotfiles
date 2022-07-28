@@ -27,12 +27,6 @@ set autoread
 set ignorecase
 set smartcase
 
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
-
 " Lets us yank in vim and paste to other programs
 if has('mac')
   set clipboard=unnamed
@@ -98,15 +92,28 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 
 " Theme / Interface
-Plug 'gruvbox-community/gruvbox'
+Plug 'sainnhe/gruvbox-material'
+" Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 
 Plug 'preservim/nerdtree'
 
 call plug#end()
 
+" You might have to force true color when using regular vim inside tmux as the
+" colorscheme can appear to be grayscale with "termguicolors" option enabled.
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+set termguicolors
+
 set background=dark
-colorscheme gruvbox
+let g:gruvbox_material_background = 'soft'
+let g:gruvbox_material_transparent_background = 2
+let g:airline_theme = 'gruvbox_material'
+colorscheme gruvbox-material
 
 let g:gitgutter_map_keys = 0
 let g:coc_global_extensions = [
