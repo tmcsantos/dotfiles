@@ -8,5 +8,10 @@
   "pyright.disableDiagnostics": true,
   // rust
   "rust-analyzer.imports.merge.glob": false,
-  "notification.disabledProgressSources": ["*"]
+  "notification.disabledProgressSources": ["*"],
+  // yaml
+  "yaml.format.enable": true,
+  "yaml.validate": true,
+  "yaml.completion": true,
+  "json.schemaDownload.enable": true
 }

@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+
+if is_app_installed alacritty; then
+  mkdir -p ~/.config/alacritty
+  
+  check_dotfile ~/.config/alacritty/alacritty.yml || ln -s $(pwd)/alacritty/alacritty.yml ~/.config/alacritty/alacritty.yml
+fi

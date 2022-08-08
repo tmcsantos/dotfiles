@@ -1,0 +1,160 @@
+# Configuration for Alacritty, the GPU enhanced terminal emulator.
+
+# Setup term for programs to be able to use it
+env:
+  TERM: xterm-256color
+
+# shell:
+#   program: /bin/bash
+#   args:
+#     - -l
+#     - -c
+#     - "tmux attach || tmux"
+
+window:
+  # Window dimensions (changes require restart)
+  #
+  # Number of lines/columns (not pixels) in the terminal. The number of columns
+  # must be at least `2`, while using a value of `0` for columns and lines will
+  # fall back to the window manager's recommended size.
+  dimensions:
+   columns: 120
+   lines: 25
+
+  # Window padding (changes require restart)
+  #
+  # Blank space added around the window in pixels. This padding is scaled
+  # by DPI and the specified value is always added at both opposing sides.
+  padding:
+    x: 5
+    y: 2
+
+  # Spread additional padding evenly around the terminal content.
+  # dynamic_padding: false
+
+  # Window decorations
+  #
+  # Values for `decorations`:
+  #     - full: Borders and title bar
+  #     - none: Neither borders nor title bar
+  #
+  # Values for `decorations` (macOS only):
+  #     - transparent: Title bar, transparent background and title bar buttons
+  #     - buttonless: Title bar, transparent background and no title bar buttons
+  decorations: buttonless
+
+  # Background opacity
+  #
+  # Window opacity as a floating point number from `0.0` to `1.0`.
+  # The value `0.0` is completely transparent and `1.0` is opaque.
+  opacity: 0.93
+
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  #startup_mode: Windowed
+
+scrolling:
+  # Maximum number of lines in the scrollback buffer.
+  # Specifying '0' will disable scrolling.
+  history: 10000
+
+  # Scrolling distance multiplier.
+  multiplier: 3
+
+# Font configuration
+font:
+  # Normal (roman) font face
+  normal:
+    # Font family
+    
+    # Default:
+    #   - (macOS) Menlo
+    #   - (Linux/BSD) monospace
+    #   - (Windows) Consolas
+    family: Monaco
+
+    # The `style` can be specified to pick a specific face.
+    #style: Regular
+
+  # Point size
+  size: 12.0
+
+  # Thin stroke font rendering (macOS only)
+  #
+  # Thin strokes are suitable for retina displays, but for non-retina screens
+  # it is recommended to set `use_thin_strokes` to `false`.
+  use_thin_strokes: true
+
+  # Use built-in font for box drawing characters.
+  #
+  # If `true`, Alacritty will use a custom built-in font for box drawing
+  # characters (Unicode points 2500 - 259f).
+  #
+  builtin_box_drawing: true
+
+cursor:
+  # Cursor style
+  style:
+    # Cursor shape
+    #
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    blinking: Off
+
+bell:
+  duration: 0
+
+# Colors (Gruvbox Material Dark Medium)
+colors:
+  primary:
+    background: '0x282828'
+    foreground: '0xdfbf8e'
+
+  normal:
+    black:   '0x665c54'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xe78a4e'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xdfbf8e'
+
+  bright:
+    black:   '0x928374'
+    red:     '0xea6962'
+    green:   '0xa9b665'
+    yellow:  '0xe3a84e'
+    blue:    '0x7daea3'
+    magenta: '0xd3869b'
+    cyan:    '0x89b482'
+    white:   '0xdfbf8e'
+
+# https://github.com/alacritty/alacritty/wiki/Keyboard-mappings#how-to-create-a-mapping
+key_bindings:
+  - { key: Comma,     mods: Command,      command:
+      {program: "sh", args: ["-c","open ~/.config/alacritty/alacritty.yml"]} }
+  - { key: 19,     mods: Alt,     chars: "@" }
+  - { key: 26,     mods: Alt,     chars: "{" }
+  - { key: 28,     mods: Alt,     chars: "[" }
+  - { key: 25,     mods: Alt,     chars: "]" }
+  - { key: 29,     mods: Alt,     chars: "}" }
+  - { key: 50,     mods: Alt,     chars: "\\" }
