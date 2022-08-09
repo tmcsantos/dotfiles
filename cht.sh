@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 languages=`echo "golang java rust python nodejs typescript cpp c tmux jq" | tr ' ' '\n'`
-core_utils=`echo "xargs find sed awk grep tr" | tr ' ' '\n'`
+core_utils=`echo "xargs find sed awk grep tr git" | tr ' ' '\n'`
 
-selected=`printf "$languages\n$core_utils" | fzf`
+selected=`printf "$languages\n$core_utils" | fzf --bind=enter:replace-query+print-query --header "type :help for help"`
 
 [[ -z $selected ]] && exit 0
 
