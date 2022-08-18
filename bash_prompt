@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+# avoid bash history duplicates..
+HISTCONTROL=ignoredups:erasedups
+HISTSIZE=20000
+# When the shell exits, append to the history file instead of overwriting it
+shopt -s histappend
+
 # Using \[ and \] around colors is necessary to prevent
 # issues with command line editing/browsing/completion!
 PROMPT_DIRTRIM=4                           # shorten deep paths in the prompt
@@ -17,7 +23,13 @@ line2="$line2 \$ "                         # prompt: always $
 
 _PS1="${line0}__nonzero_return____virtualenv_info__${line1}${line2}"
 
-PROMPT_COMMAND='__set_ps1;__nonzero_return;__virtualenv_info'
+PROMPT_COMMAND='__set_ps1;__nonzero_return;__virtualenv_info;__bash_history_sync'
+
+function __bash_history_sync() {
+  command history -a
+  command history -c
+  command history -r
+}
 
 function __set_ps1() {
   local exit=$?

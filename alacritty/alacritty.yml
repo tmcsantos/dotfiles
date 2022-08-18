@@ -158,3 +158,4 @@ key_bindings:
   - { key: 25,     mods: Alt,     chars: "]" }
   - { key: 29,     mods: Alt,     chars: "}" }
   - { key: 50,     mods: Alt,     chars: "\\" }
+  - { key: Space,  mods: Control, chars: "\x00" }
