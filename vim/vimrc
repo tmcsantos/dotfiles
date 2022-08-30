@@ -93,7 +93,6 @@ Plug 'airblade/vim-gitgutter'
 
 " Theme / Interface
 Plug 'sainnhe/gruvbox-material'
-" Plug 'gruvbox-community/gruvbox'
 Plug 'vim-airline/vim-airline'
 
 Plug 'preservim/nerdtree'

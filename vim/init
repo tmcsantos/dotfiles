@@ -10,11 +10,15 @@ if is_app_installed vim; then
   mkdir -p ~/.vim/after/ftplugin
 
   check_dotfile ~/.vimrc || ln -s $(pwd)/vim/vimrc ~/.vimrc
-  check_dotfile ~/.vim/after/ftplugin/python.vim || ln -s $(pwd)/vim/after/ftplugin/python.vim ~/.vim/after/ftplugin/python.vim
-  check_dotfile ~/.vim/after/ftplugin/yaml.vim || ln -s $(pwd)/vim/after/ftplugin/yaml.vim ~/.vim/after/ftplugin/yaml.vim
-  check_dotfile ~/.vim/after/ftplugin/json.vim || ln -s $(pwd)/vim/after/ftplugin/json.vim ~/.vim/after/ftplugin/json.vim
-  check_dotfile ~/.vim/after/ftplugin/javascript.vim || ln -s $(pwd)/vim/after/ftplugin/javascript.vim ~/.vim/after/ftplugin/javascript.vim
-  check_dotfile ~/.vim/after/ftplugin/rust.vim || ln -s $(pwd)/vim/after/ftplugin/rust.vim ~/.vim/after/ftplugin/rust.vim
+
+  ftplugin_dir="vim/after/ftplugin"
+  search_dir="$(pwd)/${ftplugin_dir}"
+
+  for cfg in "${search_dir}"/*.vim
+  do
+    check_dotfile ~/."${ftplugin_dir}"/"$(basename $cfg)" || ln -s "${cfg}" ~/."${ftplugin_dir}"/"$(basename $cfg)"
+  done
+  
   check_dotfile ~/.vim/coc-settings.json || ln -s $(pwd)/vim/coc-settings.json ~/.vim/coc-settings.json
   check_dotfile ~/.vim/spell/en.utf-8.add || ln -s $(pwd)/vim/spell/en.utf-8.add ~/.vim/spell/en.utf-8.add
 fi
