@@ -46,7 +46,7 @@ alias \
   ll='ls -l' \
   la='ls -al' \
   tailf='tail -f' \
-  top='btop || htop || \top' \
+  top='btop 2>/dev/null || htop 2>/dev/null || \top' \
   tree='tree -a --charset utf-8 -I ".git|__pycache__|*.pyc|.git|.venv|.idea"' \
   va='source .venv/bin/activate' \
   ve='python3 -m venv --symlinks .venv; source .venv/bin/activate; pip install -U pip; pip install flake8 pylint yapf wheel ipython'
