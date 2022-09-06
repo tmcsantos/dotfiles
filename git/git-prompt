@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-GIT_PROMPT_PREFIX="["                 # start of the git info string
-GIT_PROMPT_SUFFIX="]"                 # the end of the git info string
-GIT_PROMPT_SEPARATOR="|"              # separates each item
+GIT_PROMPT_PREFIX="["                     # start of the git info string
+GIT_PROMPT_SUFFIX="]"                     # the end of the git info string
+GIT_PROMPT_SEPARATOR="|"                  # separates each item
 
-GIT_PROMPT_STAGED="${RED}● "           # the number of staged files/directories
-GIT_PROMPT_CONFLICTS="${RED}✖ "       # the number of files in conflict
-GIT_PROMPT_CHANGED="${BLUE}✚ "        # the number of changed files
+GIT_PROMPT_STAGED="${MAGENTA}●"             # the number of staged files/directories
+GIT_PROMPT_CONFLICTS="${RED}✖"            # the number of files in conflict
+GIT_PROMPT_CHANGED="${YELLOW}✚"           # the number of changed files
 
-GIT_PROMPT_UNTRACKED="${CYAN}…"       # the number of untracked files/dirs
-GIT_PROMPT_STASHED="${B_BLUE}⚑ "      # the number of stashed files/dir
-GIT_PROMPT_CLEAN="${B_GREEN}✔"        # a colored flag indicating a "clean" repo
+GIT_PROMPT_UNTRACKED="${CYAN}…"           # the number of untracked files/dirs
+GIT_PROMPT_STASHED="${B_BLUE}⚑"           # the number of stashed files/dir
+GIT_PROMPT_CLEAN="${B_GREEN}✔"            # a colored flag indicating a "clean" repo
 
 GIT_PROMPT_SYMBOLS_AHEAD="↑·"             # The symbol for "n versions ahead of origin"
 GIT_PROMPT_SYMBOLS_BEHIND="↓·"            # The symbol for "n versions behind of origin"
@@ -121,18 +121,22 @@ function __git_prompt() {
       branch="GIT_DIR!"
     fi
   elif [[ "$inside_worktree" = "true" ]]; then
-    stashed=$(git rev-parse --verify --quiet refs/stash | wc -l)
-    untracked=$(git ls-files --others --exclude-standard --directory --no-empty-directory --error-unmatch -- ':/*' 2>/dev/null | wc -l)
-    staged=$(git diff --no-ext-diff --cached --name-only | wc -l)
-    # FIXME: next lines are too slow for bigger repos, find an alteranative.
-    unstaged=$(git diff --no-ext-diff --name-only --diff-filter=M | wc -l)
-    conflicts=$(git diff --no-ext-diff --name-only --diff-filter=U | wc -l)
+    while read line ; do
+      # echo $line
+      [[ $line =~ ^#' 'stash ]] && stashed=$(echo $line | awk '/stash/ {printf($3)}')
+      if [[ $line =~ ([MTARCD.])([MTARCD.]) ]]; then
+        unset x y
+        x=${BASH_REMATCH[1]}
+        y=${BASH_REMATCH[2]}
+        [[ $x =~ [MTARCD] ]] && ((staged++))
+        [[ $y =~ [MTARCD] ]] && ((unstaged++))
+      fi
+      [[ $line =~ ^\? ]] && ((untracked++))
+      [[ $line =~ ^u ]] && ((conflicts++))
+    done < <(git --no-optional-locks status --show-stash --porcelain=v2 --ignore-submodules)
   fi
 
-  clean=0
-  if (( staged == 0 && untracked == 0 && stashed == 0 && unstaged == 0 && conflicts == 0 )); then
-    clean=1
-  fi
+  dirty=$((staged + untracked + stashed + unstaged + conflicts))
 
   branch="${branch##refs/heads/}"
   local up_state=$(__git_show_upstream)
@@ -142,15 +146,16 @@ function __git_prompt() {
   [[ -n "$state" ]] && gitstring="$gitstring$state"
   gitstring="$gitstring$up_state"
 
-  if [[ $clean = 0 ]]; then
+  bits=()
+  if [[ $dirty -ne 0 ]]; then
     gitstring="$gitstring$GIT_PROMPT_SEPARATOR"
-    [[ $staged -eq 0 ]] || gitstring="$gitstring$GIT_PROMPT_STAGED$staged"
-    [[ $conflicts -eq 0 ]] || gitstring="$gitstring$GIT_PROMPT_CONFLICTS$conflicts"
-    [[ $unstaged -eq 0 ]] || gitstring="$gitstring$GIT_PROMPT_CHANGED$unstaged"
-    [[ $untracked -eq 0 ]] || gitstring="$gitstring$GIT_PROMPT_UNTRACKED$untracked"
-    [[ $stashed -eq 0 ]] || gitstring="$gitstring$GIT_PROMPT_STASHED$stashed"
+    [[ $staged -eq 0 ]] || bits+=( "$GIT_PROMPT_STAGED$staged" )
+    [[ $conflicts -eq 0 ]] || bits+=( "$GIT_PROMPT_CONFLICTS$conflicts" )
+    [[ $unstaged -eq 0 ]] || bits+=( "$GIT_PROMPT_CHANGED$unstaged" )
+    [[ $untracked -eq 0 ]] ||bits+=( "$GIT_PROMPT_UNTRACKED$untracked" )
+    [[ $stashed -eq 0 ]] || bits+=( "$GIT_PROMPT_STASHED$stashed" )
   fi
-  gitstring="$gitstring${NC}$GIT_PROMPT_SUFFIX"
+  gitstring="$gitstring${bits[*]}${NC}$GIT_PROMPT_SUFFIX"
 
   PS1="${PS1/__git_prompt__/$gitstring}"
 

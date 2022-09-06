@@ -124,6 +124,7 @@ let g:coc_global_extensions = [
       \ 'coc-java',
       \ 'coc-java-debug',
       \ 'coc-rust-analyzer',
+      \ 'coc-tsserver',
       \]
 
 if executable('rg')
@@ -146,8 +147,8 @@ let NERDTreeAutoDeleteBuffer = 1
 let NERDTreeShowHidden = 1
 
 " Open a NerdTree if no file is given as CLI argument
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
@@ -172,6 +173,9 @@ nmap <F10> :ALEFix<CR>
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+nmap <C-d> <C-d>zz
+nmap <C-u> <C-u>zz
+
 nnoremap <leader>ghw :h <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>prw :CocSearch <C-R>=expand("<cword>")<CR><CR>
 nnoremap <leader>pw :Rg <C-R>=expand("<cword>")<CR><CR>
@@ -190,7 +194,6 @@ nnoremap <C-p> :GFiles<CR>
 nnoremap <leader>pf :Files<CR>
 nnoremap <silent> <Leader>+ :vertical resize +5<CR>
 nnoremap <silent> <Leader>- :vertical resize -5<CR>
-nnoremap <leader>rp :resize 100<CR>
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
