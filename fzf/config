@@ -12,7 +12,12 @@ _fzf_complete_ssh_notrigger() {
     FZF_COMPLETION_TRIGGER='' _fzf_host_completion
 }
 
+_fzf_complete_kill_notrigger() {
+    FZF_COMPLETION_TRIGGER='' _fzf_complete_kill
+}
+
 complete -o bashdefault -o default -F _fzf_complete_ssh_notrigger ssh
+complete -o bashdefault -o default -F _fzf_complete_kill_notrigger kill
 
 # Customize how fzf handles certain commands
 _fzf_comprun() {
@@ -21,6 +26,8 @@ _fzf_comprun() {
 
   case "$command" in
     cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
+    export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
+    # ssh)          fzf "$@" --preview 'dig {}' ;;
     *)            fzf "$@" ;;
   esac
 }
