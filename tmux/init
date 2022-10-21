@@ -38,6 +38,6 @@ if is_app_installed tmux; then
     fi
 
     # show available tmux sessions
-    show_available_sessions
+    # show_available_sessions
   fi
 fi

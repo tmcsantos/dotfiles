@@ -6,10 +6,12 @@ set -o functrace
 [[ -n $DEBUG ]] && time=command time || time=
 
 # load misc
+time {
 INIT_HOME=$HOME/dotfiles
 pushd $INIT_HOME >&1 >/dev/null
 source misc
 source bash_prompt
+}
 
 export BASH_COMPLETION_USER_DIR="$HOME/.local/share/bash-completion"
 mkdir -p $BASH_COMPLETION_USER_DIR/completions

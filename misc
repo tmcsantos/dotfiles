@@ -56,7 +56,7 @@ usagesort() {
 }
 
 is_app_installed() {
-  type "$1" &>/dev/null
+  command -v "$1" &>/dev/null
 }
 
 check_dotfile() {

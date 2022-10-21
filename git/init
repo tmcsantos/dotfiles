@@ -2,7 +2,15 @@
 
 try-lock "git-lock" || return 0
 if is_app_installed git; then
+  mkdir -p ~/.config/git
+
+  check_dotfile ~/.config/git/config || ln -s $(pwd)/git/config ~/.config/git/config
+  check_dotfile ~/.gitignore_global || ln -s $(pwd)/git/gitignore_global ~/.gitignore_global
+  
+  export GIT_TEMPLATE_DIR=$(pwd)/git-templates
+
   cfg="command git --no-optional-locks config --global"
+
   if is_app_installed gpg; then
     GPG_SIGNINGKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d/ -f 2)
 
@@ -13,31 +21,6 @@ if is_app_installed git; then
       $cfg gpg.program gpg
     fi
   fi
-  check_dotfile ~/.gitignore_global || ln -s $(pwd)/git/gitignore_global ~/.gitignore_global
-
-  # core config
-
-  $cfg core.excludesfile "~/.gitignore_global"
-  $cfg core.autocrlf input
-  $cfg core.editor vim
-  $cfg mergetool.keepBackup false
-
-  # pull config
-  $cfg pull.rebase true
-
-  # aliases
-
-  $cfg alias.lg "log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
-  $cfg alias.st status
-  $cfg alias.ctags 'hook run ctags'
-
-  # init
-
-  $cfg init.templatedir $(pwd)/git-templates
-
-  # use new protocol
-
-  $cfg protocol.version 2
 
   source ./git/git-wrappers
 

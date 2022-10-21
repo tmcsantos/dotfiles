@@ -7,6 +7,24 @@ if [ ! -d "$WORKDIR/.fzf" ]; then
     $WORKDIR/.fzf/install --completion --key-bindings --no-update-rc
   fi
 fi
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# Setup fzf
+# ---------
+if [[ ! "$PATH" == *$WORKDIR/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}${WORKDIR}/.fzf/bin"
+fi
+
+# Auto-completion
+# ---------------
+time {
+if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/fzf ]] then
+  check_dotfile $BASH_COMPLETION_USER_DIR/completions/fzf || ln -s $WORKDIR/.fzf/shell/completion.bash $BASH_COMPLETION_USER_DIR/completions/fzf
+fi
+}
+
+# Key bindings
+# ------------
+source "$WORKDIR/.fzf/shell/key-bindings.bash"
+
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 source $(pwd)/fzf/config
