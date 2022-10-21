@@ -6,9 +6,9 @@ set -o functrace
 [[ -n $DEBUG ]] && time=command time || time=
 
 # load misc
-time {
 INIT_HOME=$HOME/dotfiles
 pushd $INIT_HOME >&1 >/dev/null
+time {
 source misc
 source bash_prompt
 }
@@ -42,11 +42,13 @@ for script in "${scripts[@]}"; do
     }
     continue
   fi
+  time {
   path=$(dirname $(realpath "${script}"))
   if [[ "$PATH" != *${path}* ]]; then
     PATH=${PATH}:${path}
     [[ -n $DEBUG ]] && debug "\$PATH:${path}"
   fi
+  }
 done
 pushd -0 >&1 >/dev/null
 dirs -c
