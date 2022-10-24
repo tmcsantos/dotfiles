@@ -18,7 +18,7 @@ fi
 
 # Auto-completion
 # ---------------
-if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/fzf ]] then
+if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/fzf ]]; then
   check_dotfile $BASH_COMPLETION_USER_DIR/completions/fzf || ln -s $WORKDIR/.fzf/shell/completion.bash $BASH_COMPLETION_USER_DIR/completions/fzf
 fi
 
