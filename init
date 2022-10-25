@@ -32,10 +32,7 @@ for script in "${scripts[@]}"; do
   fi
   time {
   path=$(dirname $(realpath "${script}"))
-  if [[ "$PATH" != *${path}* ]]; then
-    PATH=${PATH}:${path}
-    [[ -n $DEBUG ]] && debug "\$PATH:${path}"
-  fi
+  pathmunge "${path}"
   }
 done
 pushd -0 >&1 >/dev/null

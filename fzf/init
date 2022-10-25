@@ -12,9 +12,7 @@ fi
 
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == *$WORKDIR/.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}${WORKDIR}/.fzf/bin"
-fi
+pathmunge "${WORKDIR}/.fzf/bin"
 
 # Auto-completion
 # ---------------

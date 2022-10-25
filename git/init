@@ -37,7 +37,7 @@ if is_app_installed git; then
     git show origin/docs:man1/git-filter-repo.1 >man/man1/git-filter-repo.1
   fi
 
-  [[ "$PATH" == *"git-filter-repo"* ]] || PATH=$WORKDIR/.git-filter-repo:$PATH
+  pathmunge "$WORKDIR/.git-filter-repo"
 
   # git prompt
   source $(pwd)/git/git-prompt
