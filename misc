@@ -63,8 +63,9 @@ check_dotfile() {
   # if file is a symbolic link but broken, 
   # delete it so it can be recreated
   local dotfile="$1"
+  local src="$2"
   [[ ! -r $dotfile && -L $dotfile ]] && rm $dotfile
-  [[ -r $dotfile ]]
+  [[ -r $dotfile ]] || ln -s $src $dotfile
 }
 
 die() {

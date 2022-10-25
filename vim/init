@@ -9,16 +9,15 @@ if is_app_installed vim; then
   mkdir -p ~/.vim/spell
   mkdir -p ~/.vim/after/ftplugin
 
-  check_dotfile ~/.vimrc || ln -s $(pwd)/vim/vimrc ~/.vimrc
+  check_dotfile ~/.vimrc $(pwd)/vim/vimrc 
 
   ftplugin_dir="vim/after/ftplugin"
   search_dir="$(pwd)/${ftplugin_dir}"
 
-  for cfg in "${search_dir}"/*.vim
-  do
-    check_dotfile ~/."${ftplugin_dir}"/"$(basename $cfg)" || ln -s "${cfg}" ~/."${ftplugin_dir}"/"$(basename $cfg)"
+  for cfg in "${search_dir}"/*.vim; do
+    check_dotfile ~/."${ftplugin_dir}"/"$(basename $cfg)" "${cfg}" 
   done
   
-  check_dotfile ~/.vim/coc-settings.json || ln -s $(pwd)/vim/coc-settings.json ~/.vim/coc-settings.json
-  check_dotfile ~/.vim/spell/en.utf-8.add || ln -s $(pwd)/vim/spell/en.utf-8.add ~/.vim/spell/en.utf-8.add
+  check_dotfile ~/.vim/coc-settings.json $(pwd)/vim/coc-settings.json 
+  check_dotfile ~/.vim/spell/en.utf-8.add $(pwd)/vim/spell/en.utf-8.add 
 fi

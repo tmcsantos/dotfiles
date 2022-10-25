@@ -8,38 +8,26 @@ set -o functrace
 # load misc
 INIT_HOME=$HOME/dotfiles
 pushd $INIT_HOME >&1 >/dev/null
-time {
 source misc
 source bash_prompt
-}
 
 export BASH_COMPLETION_USER_DIR="$HOME/.local/share/bash-completion"
 mkdir -p $BASH_COMPLETION_USER_DIR/completions
 
-# Source completions
-time {
-if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/kubectl ]] && is_app_installed kubectl; then
-  kubectl completion bash > $BASH_COMPLETION_USER_DIR/completions/kubectl
-fi
-if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/k3d ]] && is_app_installed k3d; then
-  k3d completion bash > $BASH_COMPLETION_USER_DIR/completions/k3d
-fi
-if [[ ! -f $BASH_COMPLETION_USER_DIR/completions/helm ]] && is_app_installed helm; then
-  helm completion bash > $BASH_COMPLETION_USER_DIR/completions/helm
-fi
-}
+# Bash completions
+for comp in completion/*.bash; do
+  [[ -n $DEBUG ]] && TIMEFORMAT="${comp} > %R seconds."
+  time source ${comp}
+done
+  
 
-time {
 scripts=(`find . -mindepth 2 -maxdepth 2 -not -path "./.git/*" -perm /u+x -type f`)
 [[ -n $DEBUG ]] && debug "scripts: ${scripts[@]}"
-}
 
 for script in "${scripts[@]}"; do
+  [[ -n $DEBUG ]] && TIMEFORMAT="${script} > %R seconds."
   if [[ "$script" =~ ^.*/init$ ]]; then
-    [[ -n $DEBUG ]] && debug "loading ${script}"
-    time {
-      source ${script}
-    }
+    time source ${script}
     continue
   fi
   time {

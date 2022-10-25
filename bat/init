@@ -5,7 +5,7 @@
 if is_app_installed bat; then
   alias cat='bat'
   mkdir -p ~/.config/bat
-  check_dotfile ~/.config/bat/config || ln -s $(pwd)/bat/config ~/.config/bat/config
+  check_dotfile ~/.config/bat/config $(pwd)/bat/config
 elif is_app_installed highlight; then
   alias cat='highlight --out-format=ansi --force'
 fi
