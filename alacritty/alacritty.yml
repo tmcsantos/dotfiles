@@ -11,6 +11,9 @@ shell:
     - -c
     - "tmux new -As local"
 
+# Send ESC (\x1b) before characters when alt is pressed.
+alt_send_esc: false
+
 window:
   # Window dimensions (changes require restart)
   #
@@ -179,10 +182,10 @@ colors:
 key_bindings:
   - { key: Comma,     mods: Command,      command:
       {program: "sh", args: ["-c","open ~/.config/alacritty/alacritty.yml"]} }
-  - { key: 19,     mods: Alt,     chars: "@" }
-  - { key: 26,     mods: Alt,     chars: "{" }
-  - { key: 28,     mods: Alt,     chars: "[" }
-  - { key: 25,     mods: Alt,     chars: "]" }
-  - { key: 29,     mods: Alt,     chars: "}" }
-  - { key: 50,     mods: Alt,     chars: "\\" }
+  - { key: 19,     mods: Alt,     chars: "@"    }
+  - { key: 26,     mods: Alt,     chars: "{"    }
+  - { key: 28,     mods: Alt,     chars: "["    }
+  - { key: 25,     mods: Alt,     chars: "]"    }
+  - { key: 29,     mods: Alt,     chars: "}"    }
+  - { key: 50,     mods: Alt,     chars: "\\"   }
   - { key: Space,  mods: Control, chars: "\x00" }
