@@ -4,5 +4,9 @@
 if is_app_installed alacritty; then
   mkdir -p ~/.config/alacritty
   
-  check_dotfile ~/.config/alacritty/alacritty.yml $(pwd)/alacritty/alacritty.yml 
+  if [ "${darwin}" = "true" ]; then
+    check_dotfile ~/.config/alacritty/alacritty.yml $(pwd)/alacritty/alacritty-osx.yml 
+  else
+    check_dotfile ~/.config/alacritty/alacritty.yml $(pwd)/alacritty/alacritty-linux.yml 
+  fi
 fi
