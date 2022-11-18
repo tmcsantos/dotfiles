@@ -125,6 +125,7 @@ let g:coc_global_extensions = [
       \ 'coc-java-debug',
       \ 'coc-rust-analyzer',
       \ 'coc-tsserver',
+      \ 'coc-swagger',
       \]
 
 if executable('rg')
