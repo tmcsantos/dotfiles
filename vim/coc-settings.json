@@ -6,7 +6,8 @@
   "python.formatting.provider": "yapf",
   "pyright.organizeimports.provider": "isort",
   "pyright.disableDiagnostics": true,
-  "pyright.inlayHints.enable": false,
+  "pyright.inlayHints.variableTypes": false,
+  "pyright.inlayHints.functionReturnTypes": false,
   // rust
   "rust-analyzer.imports.merge.glob": false,
   "notification.disabledProgressSources": ["*"],
