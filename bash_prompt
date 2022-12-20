@@ -25,6 +25,7 @@ _PS1="${line0}__nonzero_return____virtualenv_info__${line1}${line2}"
 
 PROMPT_COMMAND='__set_ps1;__nonzero_return;__virtualenv_info;__bash_history_sync'
 
+# sync up history on all bash sessions
 function __bash_history_sync() {
   command history -a
   command history -c

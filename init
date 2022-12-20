@@ -9,6 +9,7 @@ set -o functrace
 INIT_HOME=$HOME/dotfiles
 pushd $INIT_HOME >&1 >/dev/null
 source misc
+source shells/aliases
 source bash_prompt
 
 export BASH_COMPLETION_USER_DIR="$HOME/.local/share/bash-completion"

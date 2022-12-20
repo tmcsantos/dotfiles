@@ -1,3 +1,0 @@
-[submodule "extras"]
-	path = extras
-	url = git@github.com:tmcsantos/hf-scripts.git

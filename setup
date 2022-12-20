@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+# make sure WORKDIR exists
+[[ -n ${WORKDIR} ]] && mkdir -p ${WORKDIR}
+
+# bash completion user dir
+mkdir -p $BASH_COMPLETION_USER_DIR/completions
