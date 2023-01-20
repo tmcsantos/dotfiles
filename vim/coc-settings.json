@@ -15,5 +15,6 @@
   "yaml.format.enable": true,
   "yaml.validate": true,
   "yaml.completion": true,
-  "json.schemaDownload.enable": true
+  "json.schemaDownload.enable": true,
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/15.0.6/clangd_15.0.6/bin/clangd"
 }
