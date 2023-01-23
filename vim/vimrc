@@ -70,7 +70,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'jremmen/vim-ripgrep'
-Plug 'tpope/vim-surround'
+" Plug 'tpope/vim-surround'
 Plug 'mbbill/undotree'
 
 " Programming Generic

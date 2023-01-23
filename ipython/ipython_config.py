@@ -6,9 +6,10 @@ c.TerminalInteractiveShell.true_color = True
 # from pygments.styles import get_all_styles
 # list(get_all_styles())
 c.TerminalInteractiveShell.highlighting_style = 'gruvbox-dark'
-
+# c.TerminalInteractiveShell.editing_mode = 'vi'
 
 c.InteractiveShellApp.exec_lines = []
 c.InteractiveShellApp.exec_lines.append('%load_ext autoreload')
 c.InteractiveShellApp.exec_lines.append('%autoreload 2')
+c.InteractiveShellApp.exec_lines.append('%matplotlib osx')
 c.InteractiveShellApp.exec_lines.append('print("Warning: disable autoreload in ipython_config.py to improve performance.")')

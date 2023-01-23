@@ -26,7 +26,7 @@ alias \
   top='btop 2>/dev/null || htop 2>/dev/null || \top' \
   tree='tree -a --charset utf-8 -I ".git|__pycache__|*.pyc|.git|.venv|.idea"' \
   va='source .venv/bin/activate' \
-  ve='python3 -m venv --symlinks .venv; source .venv/bin/activate; pip install -U pip; pip install flake8 pylint yapf wheel ipython'
+  ve='python3 -m venv --symlinks .venv; source .venv/bin/activate; pip install -U pip; pip install flake8 pylint yapf wheel ipython matplotlib'
 
 # don't use URL to create filename (do I really want a file called
 # unetbootin-source-494.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Funetbootin%2Ffiles%2FUNetbootin%2F494%2F&ts=1391695063&use_mirror=heanet?)

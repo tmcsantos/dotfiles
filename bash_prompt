@@ -18,8 +18,9 @@ line1="$line1\[${B_YELLOW}\]\w\[${NC}\]"   # working directory
 line2="\n"
 # line2="\[${MAGENTA}\]\D{%b %d}\[${NC}\]" # Date, for more info, man 3 strftime
 # line2="$line2 "                          # seperator
-line2="$line2\[${WHITE}\]\A\[${NC}\]"      # 24h time
-line2="$line2 \$ "                         # prompt: always $
+# line2="$line2\[${WHITE}\]\A\[${NC}\]"      # 24h time
+# line2="$line2 "                            # seperator
+line2="$line2\$ "                          # prompt: always $
 
 _PS1="${line0}__nonzero_return____virtualenv_info__${line1}${line2}"
 
