@@ -7,7 +7,6 @@ lsp.nvim_workspace()
 
 lsp.ensure_installed({
     'sumneko_lua',
-    'rust_analyzer',
 })
 
 lsp.configure('sumneko_lua', {
@@ -43,12 +42,14 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['<C-y>'] = cmp.mapping.confirm({
+    ['ç'] = cmp.mapping.confirm({
         behavior = cmp.ConfirmBehavior.Replace,
         select = true,
     }),
     ["<C-Space>"] = cmp.mapping.complete(),
 })
+
+cmp_mappings['<CR>'] = nil
 
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
