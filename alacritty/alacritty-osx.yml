@@ -175,8 +175,6 @@ colors:
 
 # https://github.com/alacritty/alacritty/wiki/Keyboard-mappings#how-to-create-a-mapping
 key_bindings:
-  - { key: Comma,     mods: Command,      command:
-      {program: "sh", args: ["-c","open ~/.config/alacritty/alacritty.yml"]} }
   - { key: 19,     mods: Alt,     chars: "@"    }
   - { key: 26,     mods: Alt,     chars: "{"    }
   - { key: 28,     mods: Alt,     chars: "["    }

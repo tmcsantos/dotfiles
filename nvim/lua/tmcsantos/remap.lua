@@ -1,4 +1,3 @@
-vim.g.mapleader = " "
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 vim.keymap.set("n", "<leader>+", ":vertical resize +5<CR>", { silent = true })
@@ -44,3 +43,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 
 -- Keymaps for better default experience
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Clears hlsearch after doing search
+vim.keymap.set('n', '<CR>', '<cmd>nohl<CR><CR>')

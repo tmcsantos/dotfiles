@@ -39,4 +39,19 @@ require 'nvim-treesitter.configs'.setup {
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
     },
+
+    refactor = {
+        highlight_definitions = { enable = true },
+        highlight_current_scope = { enable = false },
+    },
+
+    incremental_selection = {
+        enable = true,
+        keymaps = {
+            init_selection = "<TAB>", -- maps in normal mode to init the node/scope selection
+            node_incremental = "<TAB>", -- increment to the upper named parent
+            node_decremental = "<S-TAB>", -- decrement to the previous node
+            scope_incremental = "<C-TAB>", -- increment to the upper scope (as defined in locals.scm)
+        },
+    },
 }
