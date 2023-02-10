@@ -16,6 +16,4 @@ look up `install .rcfile ~/.config/app/rcfile`
 SEE: https://github.com/naggie/dotfiles/
 
 
-[] - switch to neovim
-   [] - try lsp-zero: https://github.com/VonHeikemen/lsp-zero.nvim
-   [] - try nvim-dap: https://github.com/rcarriga/nvim-dap-ui
+[] - try nvim-dap: https://github.com/rcarriga/nvim-dap-ui

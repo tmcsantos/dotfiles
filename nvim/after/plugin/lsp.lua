@@ -18,6 +18,7 @@ lsp.configure('sumneko_lua', {
                 -- Setup your lua path
                 path = vim.split(package.path, ';'),
             },
+            completion = { keywordSnippet = 'Disabled' },
             workspace = {
                 checkThirdParty = false,
                 -- Make the server aware of Neovim runtime file
@@ -29,8 +30,9 @@ lsp.configure('sumneko_lua', {
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = { enable = false },
             diagnostics = {
+                enabled = true,
                 -- Get the language server to recognize the `vim` global
-                globals = { 'vim' },
+                globals = { 'vim', 'describe', 'it', 'before_each', 'after_each' },
             }
         }
     }
@@ -43,7 +45,7 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-e>'] = cmp.mapping.abort(),
     ['ç'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
+        -- behavior = cmp.ConfirmBehavior.Replace,
         select = true,
     }),
     ["<C-Space>"] = cmp.mapping.complete(),

@@ -39,24 +39,24 @@ return require('packer').startup(function(use)
         'VonHeikemen/lsp-zero.nvim',
         requires = {
             -- LSP Support
-            { 'neovim/nvim-lspconfig' },
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
+            { 'neovim/nvim-lspconfig' }, -- Required
+            { 'williamboman/mason.nvim' }, -- Required
+            { 'williamboman/mason-lspconfig.nvim' }, -- Required
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-path' },
-            { 'saadparwaiz1/cmp_luasnip' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-nvim-lua' },
+            { 'hrsh7th/nvim-cmp' }, -- Required
+            { 'hrsh7th/cmp-buffer' }, -- Optional
+            { 'hrsh7th/cmp-path' }, -- Optional
+            { 'saadparwaiz1/cmp_luasnip' }, -- Optional
+            { 'hrsh7th/cmp-nvim-lsp' }, -- Optional
+            { 'hrsh7th/cmp-nvim-lua' }, -- Optional
 
             -- Snippets
-            { 'L3MON4D3/LuaSnip' },
-            { 'rafamadriz/friendly-snippets' },
+            { 'L3MON4D3/LuaSnip' }, -- Required
+            -- { 'rafamadriz/friendly-snippets' }, -- Optional
 
             -- Useful status updates for LSP
-            { 'j-hui/fidget.nvim' },
+            { 'j-hui/fidget.nvim' }, -- Optional
         }
     }
 
