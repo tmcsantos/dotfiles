@@ -6,10 +6,11 @@ lsp.preset('recommended')
 lsp.nvim_workspace()
 
 lsp.ensure_installed({
-    'sumneko_lua',
+    'lua_ls',
+    'pyright',
 })
 
-lsp.configure('sumneko_lua', {
+lsp.configure('lua_ls', {
     settings = {
         Lua = {
             runtime = {
