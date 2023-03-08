@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if is_app_installed kubectl; then
+  source ./kubectl/kubectl-wrappers
+fi

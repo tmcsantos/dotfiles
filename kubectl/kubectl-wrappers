@@ -1,0 +1,7 @@
+#!/bin/bash 
+
+
+function kubectl-gc {
+    kubectl delete pod --all-namespaces --field-selector=status.phase==Failed
+    return 0
+}
