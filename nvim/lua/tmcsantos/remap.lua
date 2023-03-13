@@ -46,3 +46,7 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Clears hlsearch after doing search
 vim.keymap.set('n', '<CR>', '<cmd>nohl<CR><CR>')
+
+
+-- fml
+vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>")

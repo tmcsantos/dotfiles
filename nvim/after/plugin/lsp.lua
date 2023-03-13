@@ -13,25 +13,13 @@ lsp.ensure_installed({
 lsp.configure('lua_ls', {
     settings = {
         Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-                -- Setup your lua path
-                path = vim.split(package.path, ';'),
-            },
-            completion = { keywordSnippet = 'Disabled' },
-            workspace = {
-                checkThirdParty = false,
-                -- Make the server aware of Neovim runtime file
-                library = {
-                    [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-                    [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-                },
+            completion = {
+                keywordSnippet = 'Disabled',
+                showWord = 'Disabled',
             },
             -- Do not send telemetry data containing a randomized but unique identifier
             telemetry = { enable = false },
             diagnostics = {
-                enabled = true,
                 -- Get the language server to recognize the `vim` global
                 globals = { 'vim', 'describe', 'it', 'before_each', 'after_each' },
             }
@@ -45,17 +33,27 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
     ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-e>'] = cmp.mapping.abort(),
-    ['ç'] = cmp.mapping.confirm({
+    ['<C-y>'] = cmp.mapping.confirm({
         -- behavior = cmp.ConfirmBehavior.Replace,
         select = true,
     }),
-    ["<C-Space>"] = cmp.mapping.complete(),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = vim.NIL,
 })
-
-cmp_mappings['<CR>'] = nil
 
 lsp.setup_nvim_cmp({
     mapping = cmp_mappings,
+    sources = {
+        -- { name = 'buffer' },
+        { name = 'path' },
+        { name = 'luasnip' },
+        {
+            name = 'nvim_lsp',
+            entry_filter = function(entry, _)
+                return require('cmp').lsp.CompletionItemKind.Text ~= entry:get_kind()
+            end
+        },
+    },
 })
 
 lsp.on_attach(function(_, bufnr)
@@ -63,6 +61,9 @@ lsp.on_attach(function(_, bufnr)
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
+
+    vim.keymap.set("n", "<C-j>", vim.diagnostic.goto_next, opts)
+    vim.keymap.set("n", "<C-k>", vim.diagnostic.goto_prev, opts)
 
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
@@ -84,44 +85,6 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true,
 })
-
--- configure null-ls
-local null_ls = require("null-ls")
-local null_opts = lsp.build_options('null-ls', {})
-
-null_ls.setup({
-    on_attach = function(client, bufnr)
-        null_opts.on_attach(client, bufnr)
-
-        local format_cmd = function(input)
-            vim.lsp.buf.format({
-                id = client.id,
-                timeout_ms = 5000,
-                async = input.bang,
-            })
-        end
-
-        local bufcmd = vim.api.nvim_buf_create_user_command
-        bufcmd(bufnr, 'NullFormat', format_cmd, {
-            bang = true,
-            range = true,
-            desc = 'Format using null-ls'
-        })
-    end,
-    sources = {
-        null_ls.builtins.completion.spell,
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.formatting.yapf,
-        null_ls.builtins.formatting.yamlfmt,
-    }
-})
-
-require('mason-null-ls').setup({
-    ensure_installed = nil,
-    automatic_installation = true,
-    automatic_setup = false,
-})
-require('mason-null-ls').setup_handlers()
 
 -- Turn on lsp status information
 require('fidget').setup()
