@@ -27,6 +27,21 @@ lsp.configure('lua_ls', {
     }
 })
 
+lsp.configure('yamlls', {
+    settings = {
+        yaml = {
+            format = { enable = true },
+            keyOrdering = false,
+            validate = true,
+            completion = true,
+            schemaStore = { enable = true },
+            schemas = {
+                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+            }
+        }
+    }
+})
+
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
