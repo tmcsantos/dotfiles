@@ -34,9 +34,26 @@ lsp.configure('yamlls', {
             keyOrdering = false,
             validate = true,
             completion = true,
-            schemaStore = { enable = true },
+            schemaStore = {
+                enable = true,
+                url = 'https://www.schemastore.org/api/json/catalog.json',
+            },
             schemas = {
-                ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*",
+                kubernetes = {
+                    "helm/**/templates/**/*.{yml,yaml}",
+                    "kube/**/*.{yml,yaml}",
+                    "**/*.k8s.{yml,yaml}",
+                },
+                -- seldon schema
+                ["/Users/tsantos/k8s-schema/seldondeployment.json"] = "**/*.sdep.{yml,yaml}",
+                -- istio schema
+                ["/Users/tsantos/k8s-schema/virtualservice.json"] = "**/*.{vs,virtualservice}.{yml,yaml}",
+                ["/Users/tsantos/k8s-schema/gateway.json"] = "**/*.{gateway}.{yml,yaml}",
+                -- github schema
+                ["https://json.schemastore.org/github-workflow.json"] = ".github/workflows/*.{yml,yaml}",
+                ["https://json.schemastore.org/github-action.json"] = ".github/action.{yml,yaml}",
+                -- kustomization
+                ['https://json.schemastore.org/kustomization.json'] = 'kustomization.{yml,yaml}',
             }
         }
     }
@@ -61,7 +78,7 @@ lsp.setup_nvim_cmp({
     sources = {
         -- { name = 'buffer' },
         { name = 'path' },
-        { name = 'luasnip' },
+        -- { name = 'luasnip' },
         {
             name = 'nvim_lsp',
             entry_filter = function(entry, _)

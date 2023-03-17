@@ -14,6 +14,16 @@ function ColorMyPencils(color)
         lualine_bold = true,
     })
 
+    require("rose-pine").setup({
+        --- @usage 'auto'|'main'|'moon'|'dawn'
+        variant = 'moon',
+        --- @usage 'main'|'moon'|'dawn'
+        dark_variant = 'moon',
+        dim_nc_background = true,
+        disable_background = true,
+        disable_float_background = true,
+    })
+
     vim.cmd.colorscheme(color)
 end
 

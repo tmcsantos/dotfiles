@@ -65,7 +65,7 @@ return require('packer').startup(function(use)
             -- { 'hrsh7th/cmp-nvim-lua' },     -- Optional
 
             -- Snippets
-            { 'L3MON4D3/LuaSnip' }, -- Required
+            { 'L3MON4D3/LuaSnip' },             -- Required
             { 'rafamadriz/friendly-snippets' }, -- Optional
 
             -- Useful status updates for LSP
@@ -89,7 +89,7 @@ return require('packer').startup(function(use)
     }
 
     use 'voldikss/vim-floaterm'
-    use("laytan/cloak.nvim")
-    use("folke/zen-mode.nvim")
+    use "laytan/cloak.nvim"
+    use "folke/zen-mode.nvim"
     use 'eandrju/cellular-automaton.nvim'
 end)
