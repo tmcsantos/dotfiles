@@ -17,7 +17,7 @@ set show-mode-in-prompt on
 #     4: steady underline
 #     5: blinking bar (xterm)
 #     6: steady bar (xterm)
-set vi-ins-mode-string \1\e[6 q\2
+set vi-ins-mode-string \1\e[5 q\2
 set vi-cmd-mode-string \1\e[2 q22
 
 set show-all-if-ambiguous on
