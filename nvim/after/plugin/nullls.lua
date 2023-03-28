@@ -24,10 +24,7 @@ null_ls.setup({
         })
     end,
     sources = {
-        null_ls.builtins.completion.spell,
-        null_ls.builtins.formatting.isort,
-        null_ls.builtins.formatting.yapf,
-        null_ls.builtins.formatting.yamlfmt,
+        -- Add tools not supported by mason.nvim
     }
 })
 

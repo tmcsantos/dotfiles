@@ -92,4 +92,7 @@ return require('packer').startup(function(use)
     use "laytan/cloak.nvim"
     use "folke/zen-mode.nvim"
     use 'eandrju/cellular-automaton.nvim'
+    use 'neo4j-contrib/cypher-vim-syntax'
+
+    use 'github/copilot.vim'
 end)

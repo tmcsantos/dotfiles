@@ -8,7 +8,7 @@ opt.colorcolumn = "80"
 opt.completeopt = { 'menu', 'menuone', 'noselect' } -- Set completeopt to have a better completion experience
 opt.equalalways = false
 opt.expandtab = true
-opt.guicursor = ""
+opt.guicursor = "n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20"
 opt.hidden = true
 opt.hlsearch = true
 opt.incsearch = true
@@ -34,6 +34,9 @@ opt.undodir = os.getenv("HOME") .. "/.vim/.undodir"
 opt.undofile = true
 opt.updatetime = 50
 opt.wrap = false
+opt.laststatus = 3
+opt.confirm = true
+opt.breakindent = true
 
 -- Case insensitive searching UNLESS /C or capital in search
 opt.ignorecase = true

@@ -71,6 +71,8 @@ local cmp_mappings = lsp.defaults.cmp_mappings({
     }),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = vim.NIL,
+    -- ['<TAB>'] = vim.NIL,
+    -- ['<S-TAB>'] = vim.NIL,
 })
 
 lsp.setup_nvim_cmp({
@@ -82,7 +84,7 @@ lsp.setup_nvim_cmp({
         {
             name = 'nvim_lsp',
             entry_filter = function(entry, _)
-                return require('cmp').lsp.CompletionItemKind.Text ~= entry:get_kind()
+                return cmp.lsp.CompletionItemKind.Text ~= entry:get_kind()
             end
         },
     },
@@ -110,6 +112,11 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, opts)
 
     vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+
+
+    vim.keymap.set("i", "<C-j>", '<C-R>=copilot#Accept("")<CR>', opts)
+    vim.keymap.set("i", "<C-k>", '<C-R>=copilot#Next()<CR>', opts)
+    vim.keymap.set("i", "<C-h>", '<C-R>=copilot#Previous()<CR>', opts)
 end)
 
 lsp.setup()
@@ -117,6 +124,25 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true,
 })
+
+-- copilot config
+vim.g.copilot_assume_mapped = true
+vim.g.copilot_no_tab_map = true
+-- vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("")', { silent = true, expr = true })
+-- vim.api.nvim_set_keymap("i", "<C-K>", 'copilot#Next()', { silent = true, expr = true })
+-- vim.api.nvim_set_keymap("i", "<C-H>", 'copilot#Previous()', { silent = true, expr = true })
+vim.g.copilot_filetypes = {
+    ["*"] = false,
+    ["javascript"] = true,
+    ["typescript"] = true,
+    ["lua"] = false,
+    ["rust"] = true,
+    ["c"] = true,
+    ["c#"] = true,
+    ["c++"] = true,
+    ["go"] = true,
+    ["python"] = true,
+}
 
 -- Turn on lsp status information
 require('fidget').setup()
