@@ -15,6 +15,7 @@
 *.log
 *.sql
 *.sqlite
+*.db
 
 # Patches #
 ##########
@@ -70,6 +71,7 @@ doc/cdoc/build
 .cache
 pip-wheel-metadata
 .ipynb_checkpoints
+__pycache__
 
 # pytest generated files #
 ##########################

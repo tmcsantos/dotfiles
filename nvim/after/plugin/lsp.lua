@@ -7,7 +7,6 @@ lsp.nvim_workspace()
 
 lsp.ensure_installed({
     'lua_ls',
-    'pyright',
 })
 
 lsp.configure('lua_ls', {
@@ -55,6 +54,26 @@ lsp.configure('yamlls', {
                 -- kustomization
                 ['https://json.schemastore.org/kustomization.json'] = 'kustomization.{yml,yaml}',
             }
+        }
+    }
+})
+
+lsp.configure('pylsp', {
+    settings = {
+        pylsp = {
+            plugins = {
+                rope_autoimport = { enabled = true },
+                autopep8 = { enabled = false },
+                flake8 = { enabled = true },
+                jedi_completion = {
+                    enabled = true,
+                    fuzzy = true,
+                },
+                pyling = { enabled = false },
+                pyflakes = { enabled = false },
+                mccabe = { enabled = false },
+                pycodestyle = { enabled = false },
+            },
         }
     }
 })
