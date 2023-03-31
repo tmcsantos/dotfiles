@@ -1,3 +1,4 @@
+require('neodev').setup()
 local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
@@ -58,9 +59,27 @@ lsp.configure('yamlls', {
     }
 })
 
+lsp.configure('pyright', {
+    settings = {
+        pyright = {
+            disableLanguageServices = true,
+            disableOrganizeImports = true,
+        },
+        python = {
+            venvPath = '.venv',
+            analysis = {
+                autoSearchPaths = true,
+                autoImportCompletions = true,
+                diagnosticMode = "workspace",
+            },
+        },
+    }
+})
+
 lsp.configure('pylsp', {
     settings = {
         pylsp = {
+            configurationSources = { 'flake8' },
             plugins = {
                 rope_autoimport = { enabled = true },
                 autopep8 = { enabled = false },
@@ -69,7 +88,7 @@ lsp.configure('pylsp', {
                     enabled = true,
                     fuzzy = true,
                 },
-                pyling = { enabled = false },
+                pylint = { enabled = false },
                 pyflakes = { enabled = false },
                 mccabe = { enabled = false },
                 pycodestyle = { enabled = false },
@@ -147,9 +166,6 @@ vim.diagnostic.config({
 -- copilot config
 vim.g.copilot_assume_mapped = true
 vim.g.copilot_no_tab_map = true
--- vim.api.nvim_set_keymap("i", "<C-J>", 'copilot#Accept("")', { silent = true, expr = true })
--- vim.api.nvim_set_keymap("i", "<C-K>", 'copilot#Next()', { silent = true, expr = true })
--- vim.api.nvim_set_keymap("i", "<C-H>", 'copilot#Previous()', { silent = true, expr = true })
 vim.g.copilot_filetypes = {
     ["*"] = false,
     ["javascript"] = true,

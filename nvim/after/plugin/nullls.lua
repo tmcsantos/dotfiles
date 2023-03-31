@@ -24,13 +24,12 @@ null_ls.setup({
         })
     end,
     sources = {
-        -- Add tools not supported by mason.nvim
+        null_ls.builtins.formatting.isort,
     }
 })
 
-require('mason-null-ls').setup({
-    ensure_installed = nil,
-    automatic_installation = true,
-    automatic_setup = false,
-})
-require('mason-null-ls').setup_handlers()
+-- require('mason-null-ls').setup({
+--     ensure_installed = {},
+--     automatic_installation = true,
+--     automatic_setup = false,
+-- })

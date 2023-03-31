@@ -13,7 +13,7 @@ return require('packer').startup(function(use)
         'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
     }
     use { 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-    use { 'jay-babu/mason-null-ls.nvim' }
+    -- use { 'jay-babu/mason-null-ls.nvim' }
 
     use 'sainnhe/gruvbox-material'
     use 'folke/tokyonight.nvim'
@@ -42,6 +42,7 @@ return require('packer').startup(function(use)
             pcall(require('nvim-treesitter.install').update { with_sync = true })
         end
     }
+    use 'nvim-treesitter/nvim-treesitter-context'
 
     use 'mbbill/undotree'
     use 'tpope/vim-fugitive'
@@ -63,6 +64,7 @@ return require('packer').startup(function(use)
             { 'saadparwaiz1/cmp_luasnip' }, -- Optional
             { 'hrsh7th/cmp-nvim-lsp' },     -- Optional
             -- { 'hrsh7th/cmp-nvim-lua' },     -- Optional
+            { 'folke/neodev.nvim' },        -- Optional, nvim lua api completion
 
             -- Snippets
             { 'L3MON4D3/LuaSnip' },             -- Required
