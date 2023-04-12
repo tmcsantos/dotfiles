@@ -1,4 +1,6 @@
-require('neodev').setup()
+require('neodev').setup({
+    library = { plugins = { 'nvim-dap-ui' }, types = true },
+})
 local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
@@ -100,8 +102,8 @@ lsp.configure('pylsp', {
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
-    ['<C-k>'] = cmp.mapping.select_prev_item(cmp_select),
-    ['<C-j>'] = cmp.mapping.select_next_item(cmp_select),
+    ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+    ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<C-y>'] = cmp.mapping.confirm({
         -- behavior = cmp.ConfirmBehavior.Replace,
@@ -149,13 +151,39 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, opts)
 
-    vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+    vim.keymap.set({ "n", "v" }, "<leader>f", vim.lsp.buf.format, opts)
 
 
     vim.keymap.set("i", "<C-j>", '<C-R>=copilot#Accept("")<CR>', opts)
-    vim.keymap.set("i", "<C-k>", '<C-R>=copilot#Next()<CR>', opts)
+    vim.keymap.set("i", "<C-l>", '<C-R>=copilot#Next()<CR>', opts)
     vim.keymap.set("i", "<C-h>", '<C-R>=copilot#Previous()<CR>', opts)
 end)
+
+require('mason').setup()
+require('mason-nvim-dap').setup({
+    automatic_setup = true,
+    ensure_installed = { 'python', },
+    handlers = {
+        function(config)
+          -- all sources with no handler get passed here
+
+          -- Keep original functionality
+          require('mason-nvim-dap').default_setup(config)
+        end,
+        -- python = function(config)
+        --     config.adapters = {
+	       --      type = "executable",
+	       --      command = "/usr/bin/python3",
+	       --      args = {
+		      --       "-m",
+		      --       "debugpy.adapter",
+	       --      },
+        --     }
+        --     require('mason-nvim-dap').default_setup(config) -- don't forget this!
+        -- end,
+    },
+})
+require('dapui').setup()
 
 lsp.setup()
 

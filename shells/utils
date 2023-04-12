@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+function gql {
+    data=${1}
+    curl -s -X POST ${2:-$SCHEMA_ENDPOINT} --json "$(jq -c -n --arg query "$(cat $data)" '{"query": $query}')"
+}

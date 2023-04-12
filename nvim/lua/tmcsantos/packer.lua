@@ -13,7 +13,6 @@ return require('packer').startup(function(use)
         'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
     }
     use { 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } }
-    -- use { 'jay-babu/mason-null-ls.nvim' }
 
     use 'sainnhe/gruvbox-material'
     use 'folke/tokyonight.nvim'
@@ -56,6 +55,7 @@ return require('packer').startup(function(use)
             { 'neovim/nvim-lspconfig' },             -- Required
             { 'williamboman/mason.nvim' },           -- Required
             { 'williamboman/mason-lspconfig.nvim' }, -- Required
+            -- { 'jay-babu/mason-null-ls.nvim' },       -- Optional
 
             -- Autocompletion
             { 'hrsh7th/nvim-cmp' },         -- Required
@@ -72,6 +72,10 @@ return require('packer').startup(function(use)
 
             -- Useful status updates for LSP
             { 'j-hui/fidget.nvim' }, -- Optional
+
+            -- Debugger
+            { 'mfussenegger/nvim-dap' },
+            { 'jay-babu/mason-nvim-dap.nvim' }, -- Optional
         }
     }
 
@@ -97,4 +101,8 @@ return require('packer').startup(function(use)
     use 'neo4j-contrib/cypher-vim-syntax'
 
     use 'github/copilot.vim'
+    use {
+        'rcarriga/nvim-dap-ui',
+        requires = { 'mfussenegger/nvim-dap' }
+    }
 end)
