@@ -14,13 +14,14 @@ return require('packer').startup(function(use)
     }
     use { 'jose-elias-alvarez/null-ls.nvim', requires = { 'nvim-lua/plenary.nvim' } }
 
+    -- colors
     use 'sainnhe/gruvbox-material'
     use 'folke/tokyonight.nvim'
-
     use {
         'rose-pine/neovim',
         as = 'rose-pine',
     }
+    use { "catppuccin/nvim", as = "catppuccin" }
 
     use {
         "folke/trouble.nvim",
@@ -94,7 +95,6 @@ return require('packer').startup(function(use)
         tag = 'nightly'                    -- optional, updated every week. (see issue #1193)
     }
 
-    use 'voldikss/vim-floaterm'
     use "laytan/cloak.nvim"
     use "folke/zen-mode.nvim"
     use 'eandrju/cellular-automaton.nvim'

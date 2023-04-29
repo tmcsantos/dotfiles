@@ -24,9 +24,20 @@ function ColorMyPencils(color)
         disable_float_background = true,
     })
 
+
+    require("catppuccin").setup({
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        -- background = {
+        --     light = "latte",
+        --     dark = "mocha",
+        -- },
+        transparent_background = true,
+    })
+
     vim.cmd.colorscheme(color)
 end
 
 -- ColorMyPencils()
 ColorMyPencils("gruvbox-material")
+-- ColorMyPencils("catppuccin")
 -- ColorMyPencils("tokyonight")

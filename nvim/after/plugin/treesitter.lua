@@ -7,7 +7,7 @@ require 'nvim-treesitter.configs'.setup {
         "go",
         "gomod",
         "graphql",
-        "help",
+        "vimdoc",
         "java",
         "javascript",
         "json",
