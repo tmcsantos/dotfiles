@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
 if is_app_installed docker; then
-  source ./docker/docker-wrappers
+    export DOCKER_USER="$(id -u)"
+    export DOCKER_GROUP="$(id -g)"
+    source ./docker/docker-wrappers
 fi
