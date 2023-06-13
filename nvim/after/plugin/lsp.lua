@@ -83,9 +83,10 @@ lsp.configure('pylsp', {
         pylsp = {
             configurationSources = { 'flake8' },
             plugins = {
+                ruff = { enabled = true },
                 rope_autoimport = { enabled = true },
                 autopep8 = { enabled = false },
-                flake8 = { enabled = true },
+                flake8 = { enabled = false },
                 jedi_completion = {
                     enabled = true,
                     fuzzy = true,
@@ -94,6 +95,7 @@ lsp.configure('pylsp', {
                 pyflakes = { enabled = false },
                 mccabe = { enabled = false },
                 pycodestyle = { enabled = false },
+                yapf = { enabled = true },
             },
         }
     }
@@ -165,19 +167,19 @@ require('mason-nvim-dap').setup({
     ensure_installed = { 'python', },
     handlers = {
         function(config)
-          -- all sources with no handler get passed here
+            -- all sources with no handler get passed here
 
-          -- Keep original functionality
-          require('mason-nvim-dap').default_setup(config)
+            -- Keep original functionality
+            require('mason-nvim-dap').default_setup(config)
         end,
         -- python = function(config)
         --     config.adapters = {
-	       --      type = "executable",
-	       --      command = "/usr/bin/python3",
-	       --      args = {
-		      --       "-m",
-		      --       "debugpy.adapter",
-	       --      },
+        --      type = "executable",
+        --      command = "/usr/bin/python3",
+        --      args = {
+        --       "-m",
+        --       "debugpy.adapter",
+        --      },
         --     }
         --     require('mason-nvim-dap').default_setup(config) -- don't forget this!
         -- end,
@@ -208,4 +210,4 @@ vim.g.copilot_filetypes = {
 }
 
 -- Turn on lsp status information
-require('fidget').setup()
+-- require('fidget').setup()
