@@ -74,20 +74,21 @@ scrolling:
 # Font configuration
 font:
   # Normal (roman) font face
-  # normal:
+  normal:
     # Font family
     
     # Default:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    # family: Monaco
+    family: UbuntuMonoNerdFontMono
+    # family: InconsolataNerdFontMono
 
     # The `style` can be specified to pick a specific face.
-    #style: Regular
+    style: Regular
 
   # Point size
-  # size: 10.0
+  size: 14.0
 
   # Use built-in font for box drawing characters.
   #

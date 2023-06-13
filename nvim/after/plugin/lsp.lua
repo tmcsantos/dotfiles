@@ -61,22 +61,22 @@ lsp.configure('yamlls', {
     }
 })
 
-lsp.configure('pyright', {
-    settings = {
-        pyright = {
-            disableLanguageServices = true,
-            disableOrganizeImports = true,
-        },
-        python = {
-            venvPath = '.venv',
-            analysis = {
-                autoSearchPaths = true,
-                autoImportCompletions = true,
-                diagnosticMode = "workspace",
-            },
-        },
-    }
-})
+-- lsp.configure('pyright', {
+--     settings = {
+--         pyright = {
+--             disableLanguageServices = true,
+--             disableOrganizeImports = true,
+--         },
+--         python = {
+--             venvPath = '.venv',
+--             analysis = {
+--                 autoSearchPaths = true,
+--                 autoImportCompletions = true,
+--                 diagnosticMode = "workspace",
+--             },
+--         },
+--     }
+-- })
 
 lsp.configure('pylsp', {
     settings = {
