@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+mkdir -p ~/.config/yapf/
+
+check_dotfile ~/.config/yapf/style $(pwd)/yapf/style
