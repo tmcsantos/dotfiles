@@ -29,7 +29,7 @@ return_code=0
 #done
 
 for FILE in ${files_modified} ; do
-  if grep -Eq "[a-z0-9]{40}" $FILE; then
+  if grep -Eq "[a-zA-Z0-9]{40}" $FILE; then
     echo "${YELLOW}${FILE}${NC} contains a sequence of chars that resembles a password. Please remove it!"
     return_code=1
   fi
