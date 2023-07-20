@@ -78,28 +78,65 @@ lsp.configure('yamlls', {
 --     }
 -- })
 
-lsp.configure('pylsp', {
-    settings = {
-        pylsp = {
-            configurationSources = { 'flake8' },
-            plugins = {
-                ruff = { enabled = true },
-                rope_autoimport = { enabled = true },
-                autopep8 = { enabled = false },
-                flake8 = { enabled = false },
-                jedi_completion = {
-                    enabled = true,
-                    fuzzy = true,
+-- lsp.configure('pylsp', {
+--     settings = {
+--         pylsp = {
+--             configurationSources = { 'flake8' },
+--             plugins = {
+--                 ruff = { enabled = true },
+--                 rope_autoimport = { enabled = true },
+--                 autopep8 = { enabled = false },
+--                 flake8 = { enabled = false },
+--                 jedi_completion = {
+--                     enabled = true,
+--                     fuzzy = true,
+--                 },
+--                 pylint = { enabled = false },
+--                 pyflakes = { enabled = false },
+--                 mccabe = { enabled = false },
+--                 pycodestyle = { enabled = false },
+--                 yapf = { enabled = true },
+--             },
+--         }
+--     }
+-- })
+
+lsp.configure('ruff_lsp', {
+    on_init = function(client)
+        client.server_capabilities.hoverProvider = false
+    end
+})
+
+lsp.configure('diagnosticls', {
+    filetypes = { "python", },
+    init_options = {
+        filetypes = {
+            python = "flake8",
+        },
+        formatFiletypes = {
+            python = { "yapf", "isort" },
+        },
+        formatters = {
+            yapf = {
+                command = "yapf",
+                args = { "--quiet" },
+                rootPatterns = {
+                    'requirements.txt',
+                    '.style.yapf',
+                    'setup.cfg',
+                    'pyproject.toml',
+                    '.git',
                 },
-                pylint = { enabled = false },
-                pyflakes = { enabled = false },
-                mccabe = { enabled = false },
-                pycodestyle = { enabled = false },
-                yapf = { enabled = true },
             },
-        }
+            isort = {
+                command = "isort",
+                args = { "--quiet", "--stdout", "-" },
+                rootPatterns = { "pyproject.toml", ".isort.cfg", ".git" },
+            }
+        },
     }
 })
+
 
 local cmp = require('cmp')
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
@@ -133,7 +170,7 @@ lsp.setup_nvim_cmp({
 })
 
 lsp.on_attach(function(_, bufnr)
-    local opts = { buffer = bufnr, remap = false, silent = true }
+    local opts = { buffer = bufnr, remap = false, silent = true, noremap = true }
 
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
@@ -153,7 +190,9 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, opts)
 
-    vim.keymap.set({ "n", "v" }, "<leader>f", vim.lsp.buf.format, opts)
+    vim.keymap.set({ "n", "v" }, "<leader>f", function()
+        vim.lsp.buf.format { async = true, timeout_ms = 5000 }
+    end, opts)
 
 
     vim.keymap.set("i", "<C-j>", '<C-R>=copilot#Accept("")<CR>', opts)
@@ -192,22 +231,3 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true,
 })
-
--- copilot config
-vim.g.copilot_assume_mapped = true
-vim.g.copilot_no_tab_map = true
-vim.g.copilot_filetypes = {
-    ["*"] = false,
-    ["javascript"] = true,
-    ["typescript"] = true,
-    ["lua"] = false,
-    ["rust"] = true,
-    ["c"] = true,
-    ["c#"] = true,
-    ["c++"] = true,
-    ["go"] = true,
-    ["python"] = true,
-}
-
--- Turn on lsp status information
--- require('fidget').setup()
