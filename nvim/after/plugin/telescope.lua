@@ -21,6 +21,7 @@ require("telescope").setup({
 })
 
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('ui-select')
 
 vim.keymap.set('n', '<C-p>', function()
     vim.fn.system('git rev-parse --is-inside-work-tree')
