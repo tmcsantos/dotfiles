@@ -12,3 +12,10 @@ vim.g.copilot_filetypes = {
     ["go"] = true,
     ["python"] = true,
 }
+
+vim.g.copilot_enabled = false
+
+
+function CopilotEnable()
+    vim.g.copilot_enabled = true
+end

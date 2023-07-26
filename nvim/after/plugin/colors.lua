@@ -8,36 +8,37 @@ function ColorMyPencils(color)
     vim.g.gruvbox_material_background = 'soft'
     vim.g.gruvbox_material_transparent_background = 2
 
-    -- require("tokyonight").setup({
-    --     style = "moon",
-    --     transparent = true,
-    --     lualine_bold = true,
-    -- })
-    --
-    -- require("rose-pine").setup({
-    --     --- @usage 'auto'|'main'|'moon'|'dawn'
-    --     variant = 'moon',
-    --     --- @usage 'main'|'moon'|'dawn'
-    --     dark_variant = 'moon',
-    --     dim_nc_background = true,
-    --     disable_background = true,
-    --     disable_float_background = true,
-    -- })
-    --
-    --
-    -- require("catppuccin").setup({
-    --     flavour = "mocha", -- latte, frappe, macchiato, mocha
-    --     -- background = {
-    --     --     light = "latte",
-    --     --     dark = "mocha",
-    --     -- },
-    --     transparent_background = true,
-    -- })
+    require("tokyonight").setup({
+        style = "moon",
+        transparent = true,
+        lualine_bold = true,
+    })
+
+    require("rose-pine").setup({
+        --- @usage 'auto'|'main'|'moon'|'dawn'
+        variant = 'moon',
+        --- @usage 'main'|'moon'|'dawn'
+        dark_variant = 'moon',
+        dim_nc_background = true,
+        disable_background = true,
+        disable_float_background = true,
+    })
+
+
+    require("catppuccin").setup({
+        flavour = "mocha", -- latte, frappe, macchiato, mocha
+        -- background = {
+        --     light = "latte",
+        --     dark = "mocha",
+        -- },
+        transparent_background = true,
+    })
 
     vim.cmd.colorscheme(color)
 end
 
 -- ColorMyPencils()
+-- ColorMyPencils("rose-pine")
 ColorMyPencils("gruvbox-material")
 -- ColorMyPencils("catppuccin")
 -- ColorMyPencils("tokyonight")
