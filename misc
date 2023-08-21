@@ -84,6 +84,12 @@ dotenv() {
   if [ -f .env ]; then
     set -o allexport; source .env; set +o allexport
   fi
+  if [ -f .env.dev ]; then
+    set -o allexport; source .env.dev; set +o allexport
+  fi
+  if [ -f .env.prod ]; then
+    set -o allexport; source .env.prod; set +o allexport
+  fi
 }
 
 try-lock() {
