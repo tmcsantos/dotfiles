@@ -184,14 +184,15 @@ lsp.on_attach(function(_, bufnr)
     vim.keymap.set("n", "gi", require("telescope.builtin").lsp_implementations, opts)
     vim.keymap.set("n", "<leader>D", require('telescope.builtin').lsp_type_definitions, opts)
     vim.keymap.set("n", "<leader>ds", require('telescope.builtin').lsp_document_symbols, opts)
-    vim.keymap.set("n", "<leader>ws", require('telescope.builtin').lsp_dynamic_workspace_symbols, opts)
+    -- vim.keymap.set("n", "<leader>ws", require('telescope.builtin').lsp_dynamic_workspace_symbols, opts)
+    vim.keymap.set("n", "<leader>ws", require('telescope.builtin').lsp_workspace_symbols, opts)
 
     vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, opts)
 
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
-        vim.lsp.buf.format { async = true, timeout_ms = 5000 }
+        vim.lsp.buf.format { async = false, timeout_ms = 1500 }
     end, opts)
 
 

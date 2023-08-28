@@ -2,6 +2,14 @@
 local builtin = require('telescope.builtin')
 local actions = require("telescope.actions")
 
+local fzf_opts = {
+    fuzzy = true,                   -- false will only do exact matching
+    override_generic_sorter = true, -- override the generic sorter
+    override_file_sorter = true,    -- override the file sorter
+    case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+    -- the default case_mode is "smart_case"
+}
+
 require("telescope").setup({
     defaults = {
         layout_strategy = 'vertical',
@@ -17,7 +25,17 @@ require("telescope").setup({
                 ["<C-k>"] = actions.move_selection_previous,
             },
         },
-    }
+    },
+    pickers = {
+        -- Manually set sorter, for some reason not picked up automatically
+        -- Ref: https://github.com/nvim-telescope/telescope.nvim/issues/2104#issuecomment-1223790155
+        lsp_dynamic_workspace_symbols = {
+            sorter = require("telescope").extensions.fzf.native_fzf_sorter(fzf_opts),
+        },
+    },
+    extensions = {
+        fzf = fzf_opts,
+    },
 })
 
 require('telescope').load_extension('fzf')
@@ -31,6 +49,7 @@ vim.keymap.set('n', '<C-p>', function()
         builtin.find_files({ hidden = true })
     end
 end, {})
+
 
 vim.keymap.set('n', '<leader>?', builtin.oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader><space>', builtin.buffers, { desc = '[ ] Find existing buffers' })
