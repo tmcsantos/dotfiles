@@ -1,5 +1,8 @@
 -- empty setup using defaults
 require("nvim-tree").setup({
+    view = {
+        width = 35,
+    },
     actions = {
         open_file = { quit_on_open = false }
     },

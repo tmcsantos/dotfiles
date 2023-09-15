@@ -18,13 +18,13 @@ require("telescope").setup({
             "secret.d/*",
             "%.pem",
         },
-        mappings = {
-            i = {
-                ["<ESC>"] = actions.close,
-                ["<C-j>"] = actions.move_selection_next,
-                ["<C-k>"] = actions.move_selection_previous,
-            },
-        },
+        -- mappings = {
+        --     i = {
+        --         ["<ESC>"] = actions.close,
+        --         ["<C-j>"] = actions.move_selection_next,
+        --         ["<C-k>"] = actions.move_selection_previous,
+        --     },
+        -- },
     },
     pickers = {
         -- Manually set sorter, for some reason not picked up automatically

@@ -38,12 +38,17 @@ return require('packer').startup(function(use)
 
     -- Highlight, edit, and navigate code
     use {
-        'nvim-treesitter/nvim-treesitter',
+        "nvim-treesitter/nvim-treesitter",
         run = function()
-            pcall(require('nvim-treesitter.install').update { with_sync = true })
+            pcall(require("nvim-treesitter.install").update { with_sync = true })
         end
     }
     use 'nvim-treesitter/nvim-treesitter-context'
+    use {
+        "nvim-treesitter/nvim-treesitter-textobjects",
+        after = "nvim-treesitter",
+        requires = "nvim-treesitter/nvim-treesitter",
+    }
 
     use 'mbbill/undotree'
     use 'tpope/vim-fugitive'
