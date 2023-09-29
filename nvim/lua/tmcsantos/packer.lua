@@ -17,12 +17,12 @@ return require('packer').startup(function(use)
 
     -- colors
     use 'sainnhe/gruvbox-material'
-    use 'folke/tokyonight.nvim'
-    use {
-        'rose-pine/neovim',
-        as = 'rose-pine',
-    }
-    use { "catppuccin/nvim", as = "catppuccin" }
+    -- use 'folke/tokyonight.nvim'
+    -- use {
+    --     'rose-pine/neovim',
+    --     as = 'rose-pine',
+    -- }
+    -- use { "catppuccin/nvim", as = "catppuccin" }
 
     use {
         "folke/trouble.nvim",

@@ -7,5 +7,5 @@ function gql {
 
 
 if is_app_installed fortune; then
-    alias clear="command clear && fortune -s"
+    alias cclear="command clear && fortune -s"
 fi
