@@ -9,3 +9,18 @@ function gql {
 if is_app_installed fortune; then
     alias cclear="command clear && fortune -s"
 fi
+
+function free-port {
+    comm -23 <(seq 10000 65535) <(lsof -nP -i | awk '{print $9}' | cut -d':' -f2 | cut -d'-' -f1 | grep "[0-9]\{1,5\}" | sort | uniq) | head -n 1
+}
+
+if [ "${darwin}" = "true" ]; then
+  function used_ports {
+    netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
+  }
+
+  function cpu_check {
+    pmset -g therm  
+    sudo powermetrics --samplers smc -i1 -n1
+  }
+fi
