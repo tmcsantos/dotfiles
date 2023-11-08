@@ -66,6 +66,7 @@ debug() {
   echo -e "${B_CYAN}[DEBUG]${NC} ${CYAN}$@${NC}"
 }
 
+if ! is_app_installed realpath; then
 realpath() {
   OURPWD=${PWD}
   cd "$(dirname "${1}")"
@@ -77,6 +78,19 @@ realpath() {
   REALPATH="${PWD}/$(basename "${1}")"
   cd "${OURPWD}"
   echo "${REALPATH}"
+}
+fi
+
+relPath() {
+    local common path up
+    common=$(realpath ${1})
+    path=$(realpath ${2})
+    while test "${path#"$common"/}" = "$path"; do
+        common=${common%/*} 
+        up=../$up
+    done
+    path=$up${path#"$common"/} 
+    path=${path%/}; printf %s "${path:-.}"
 }
 
 ### Load .env files
@@ -93,12 +107,12 @@ dotenv() {
 }
 
 try-lock() {
-__LOCKFILE="${TMPDIR:-/tmp}/$1"
-if ( set -o noclobber; : > "${__LOCKFILE}" ) &>/dev/null; then
-  trap 'rm -f "${__LOCKFILE}" &>/dev/null' INT TERM EXIT RETURN
-  return 0
-fi
-return 1
+  __LOCKFILE="${TMPDIR:-/tmp}/$1"
+  if ( set -o noclobber; : > "${__LOCKFILE}" ) &>/dev/null; then
+    trap 'rm -f "${__LOCKFILE}" &>/dev/null' INT TERM EXIT RETURN
+    return 0
+  fi
+  return 1
 }
 
 function pathmunge() {

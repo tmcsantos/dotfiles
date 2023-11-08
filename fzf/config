@@ -3,7 +3,7 @@
 # Use ~~ as the trigger sequence instead of the default **
 export FZF_COMPLETION_TRIGGER='~~'
 
-export FZF_CTRL_T_COMMAND="command find $WORKDIR $HOME/journal $HOME/services -maxdepth 1 -type d"
+export FZF_CTRL_T_COMMAND="command find $WORKDIR $HOME/journal $HOME/services $HOME/playground -maxdepth 2 -type d"
 
 # Options to fzf command
 export FZF_DEFAULT_OPTS="--border -1 --reverse --preview='[[ \$(file --mime {}) =~ binary ]] && echo {} is a binary file || (bat --color=always {} || cat {}) 2>/dev/null | head -300' --preview-window='right:hidden:wrap' --bind='f3:execute(bat {} || less -f {}),f2:toggle-preview,ctrl-d:half-page-down,ctrl-u:half-page-up'"
@@ -27,7 +27,7 @@ _fzf_comprun() {
   case "$command" in
     cd)           fzf "$@" --preview 'tree -C {} | head -200' ;;
     export|unset) fzf "$@" --preview "eval 'echo \$'{}" ;;
-    # ssh)          fzf "$@" --preview 'dig {}' ;;
+    ssh)          fzf "$@" --preview 'dig {}' ;;
     *)            fzf "$@" ;;
   esac
 }

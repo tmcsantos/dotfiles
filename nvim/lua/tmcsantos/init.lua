@@ -22,3 +22,11 @@ vim.api.nvim_command('autocmd TermOpen * startinsert')
 vim.api.nvim_command('autocmd TermOpen * :set nonumber norelativenumber')
 vim.api.nvim_command('augroup END')
 
+-- [[ Change syntax for Helm ]]
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = '*/templates/*.{yml,yaml,tpl}',
+  callback = function()
+    vim.bo.filetype = 'helm'
+    vim.bo.syntax = 'yaml'
+  end
+})
