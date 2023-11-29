@@ -1,4 +1,4 @@
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 vim.keymap.set("n", "<leader>+", ":vertical resize +5<CR>", { silent = true })
 vim.keymap.set("n", "<leader>-", ":vertical resize -5<CR>", { silent = true })

@@ -1,4 +1,4 @@
-require("tmcsantos.packer")
+require("tmcsantos.lazy")
 require("tmcsantos.set")
 require("tmcsantos.remap")
 require("tmcsantos.disable_builtin")
