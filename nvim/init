@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+
+if is_app_installed nvim; then
+  export VISUAL=nvim
+  export EDITOR="$VISUAL"
+
+  check_dotfile ~/.config/nvim $(pwd)/nvim
+fi
