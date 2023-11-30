@@ -14,62 +14,64 @@ vim.opt.rtp:prepend(lazypath)
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
 
 require("lazy").setup({
-  {"folke/neodev.nvim"},
+  { "folke/neodev.nvim" },
   { "folke/neoconf.nvim", cmd = "Neoconf" },
   {
-    "nvim-telescope/telescope.nvim", brach = '0.1.x',
-    dependencies = {'nvim-lua/plenary.nvim'}, 
+    "nvim-telescope/telescope.nvim",
+    brach = '0.1.x',
+    dependencies = { 'nvim-lua/plenary.nvim' },
   },
-  { 
-    'nvim-telescope/telescope-fzf-native.nvim', 
-    build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' 
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build =
+    'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build'
   },
-  {'nvim-telescope/telescope-ui-select.nvim'},
-  {'sainnhe/gruvbox-material'},
+  { 'nvim-telescope/telescope-ui-select.nvim' },
+  { 'sainnhe/gruvbox-material' },
   {
     "folke/trouble.nvim",
-    dependencies = {"nvim-tree/nvim-web-devicons"},
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function () 
+    config = function()
       local configs = require("nvim-treesitter.configs")
       configs.setup({
-          ensure_installed = { "lua", "vim", "vimdoc", },
-          sync_install = false,
-          highlight = { enable = true },
-          indent = { enable = true },  
-        })
+        ensure_installed = { "lua", "vim", "vimdoc", },
+        sync_install = false,
+        highlight = { enable = true },
+        indent = { enable = true },
+      })
     end
   },
-  {'nvim-treesitter/nvim-treesitter-context'},
+  { 'nvim-treesitter/nvim-treesitter-context' },
   {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    dependencies = {"nvim-treesitter/nvim-treesitter"},
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
   },
-  {'mbbill/undotree'},
-  {'tpope/vim-fugitive'},
-  {'lewis6991/gitsigns.nvim'},
+  { 'mbbill/undotree' },
+  { 'tpope/vim-fugitive' },
+  { 'lewis6991/gitsigns.nvim' },
 
   -- LSP Configuration & Plugins
-  {'williamboman/mason.nvim'},
-  {'williamboman/mason-lspconfig.nvim'},
-  {'VonHeikemen/lsp-zero.nvim', branch = 'v3.x'},
-  {'neovim/nvim-lspconfig'},
-  {'hrsh7th/cmp-nvim-lsp'},
-  {'hrsh7th/nvim-cmp'},
-  { 'hrsh7th/cmp-path'},
-  {'L3MON4D3/LuaSnip'},
+  { 'williamboman/mason.nvim' },
+  { 'williamboman/mason-lspconfig.nvim' },
+  { 'VonHeikemen/lsp-zero.nvim',              branch = 'v3.x' },
+  { 'neovim/nvim-lspconfig' },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'hrsh7th/nvim-cmp' },
+  { 'hrsh7th/cmp-path' },
+  { 'L3MON4D3/LuaSnip' },
   -- Debugger
   { 'mfussenegger/nvim-dap' },
   { 'jay-babu/mason-nvim-dap.nvim' },
 
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = {'nvim-tree/nvim-web-devicons' },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
-  {'numToStr/Comment.nvim'}, -- "gc" to comment visual regions/lines
+  { 'numToStr/Comment.nvim' }, -- "gc" to comment visual regions/lines
 
   {
     'nvim-tree/nvim-tree.lua',
@@ -78,19 +80,19 @@ require("lazy").setup({
     },
   },
 
-  {"laytan/cloak.nvim"},
-  {"folke/zen-mode.nvim"},
-  {'eandrju/cellular-automaton.nvim'},
-  {'neo4j-contrib/cypher-vim-syntax'},
+  { "laytan/cloak.nvim" },
+  { "folke/zen-mode.nvim" },
+  { 'eandrju/cellular-automaton.nvim' },
+  { 'neo4j-contrib/cypher-vim-syntax' },
 
-  {'github/copilot.vim'},
+  { 'github/copilot.vim' },
   {
     'rcarriga/nvim-dap-ui',
     dependencies = { 'mfussenegger/nvim-dap' },
   },
 
   -- python notebooks
-  {'goerz/jupytext.vim'},
+  { 'goerz/jupytext.vim' },
 
   {
     'folke/noice.nvim',
