@@ -44,6 +44,16 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 -- Clears hlsearch after doing search
 vim.keymap.set('n', '<CR>', '<cmd>nohl<CR><CR>')
 
+-- terminal
+local opts = { noremap = true }
+vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
 
--- fml
-vim.keymap.set("n", "<leader>ml", "<cmd>CellularAutomaton make_it_rain<CR>")
+vim.api.nvim_command('augroup neovim_terminal')
+vim.api.nvim_command('autocmd!')
+vim.api.nvim_command('autocmd TermOpen * startinsert')
+vim.api.nvim_command('autocmd TermOpen * :set nonumber norelativenumber')
+vim.api.nvim_command('augroup END')
+
+vim.keymap.set("n", "<leader>k9", '<cmd>vsplit term://k9s<cr>', opts)
+vim.keymap.set("n", "<leader>tt", '<cmd>vsplit term://bash<cr>', opts)
+vim.keymap.set("n", "<leader>py", '<cmd>vsplit term://ipython<cr>', opts)
