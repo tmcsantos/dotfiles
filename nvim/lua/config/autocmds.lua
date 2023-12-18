@@ -35,15 +35,16 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 
 -- Cursor highlight control
 -- Only have it on in the active buffer
-local set_cursorline = function(event, value, pattern)
-  vim.api.nvim_create_autocmd(event, {
-    group = augroup("CursorLineControl"),
-    pattern = pattern,
-    callback = function()
-      vim.opt_local.cursorline = value
-    end,
-  })
-end
-set_cursorline("WinLeave", false)
-set_cursorline("WinEnter", true)
-set_cursorline("FileType", false, "TelescopePrompt")
+local cursorline = augroup("CursorLineControl")
+vim.api.nvim_create_autocmd({ 'VimEnter', 'WinEnter', 'BufWinEnter' }, {
+  group = cursorline,
+  callback = function()
+    vim.opt_local.cursorline = true
+  end
+})
+vim.api.nvim_create_autocmd({ 'WinLeave' }, {
+  group = cursorline,
+  callback = function()
+    vim.opt_local.cursorline = false
+  end
+})
