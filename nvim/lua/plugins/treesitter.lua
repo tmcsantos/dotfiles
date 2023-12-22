@@ -8,6 +8,7 @@ return {
         ensure_installed = {
           "bash",
           "c",
+          "css",
           "dockerfile",
           "go",
           "gomod",
@@ -16,7 +17,10 @@ return {
           "javascript",
           "json",
           "jsonc",
+          "latex",
           "lua",
+          "markdown",
+          "markdown_inline",
           "python",
           "rust",
           "tsx",
