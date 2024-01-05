@@ -1,13 +1,29 @@
 return {
   -- gruvbox
   {
-    "sainnhe/gruvbox-material",
+    "ellisonleao/gruvbox.nvim",
+    priority = 1000,
     lazy = false,
+    config = function()
+      require("gruvbox").setup({
+        terminal_colors = true,
+        undercurl = true,
+        underline = true,
+        bold = true,
+        -- transparent_mode = true,
+      })
+      vim.o.background = "dark"
+      vim.cmd.colorscheme "gruvbox"
+    end,
+  },
+  {
+    "sainnhe/gruvbox-material",
+    lazy = true,
     priority = 1000,
     config = function()
       vim.g.gruvbox_material_better_performance = 1
       vim.g.gruvbox_material_background = 'soft'
-      vim.g.gruvbox_material_transparent_background = 2
+      -- vim.g.gruvbox_material_transparent_background = 2
       vim.cmd.colorscheme "gruvbox-material"
     end
   },
@@ -20,15 +36,11 @@ return {
     priority = 1000,
     opts = {
       flavour = "mocha", -- latte, frappe, macchiato, mocha
-      -- background = {
-      --   light = "latte",
-      --   dark = "mocha",
+      -- styles = {
+      --   keywords = { "bold" },
+      --   functions = { "italic" },
       -- },
-      styles = {
-        keywords = { "bold" },
-        functions = { "italic" },
-      },
-      transparent_background = true,
+      -- transparent_background = true,
       integrations = {
         gitsigns = true,
         mason = true,
@@ -42,7 +54,7 @@ return {
           },
         },
         neotree = true,
-        noice = true,
+        -- noice = true,
         lsp_trouble = true,
         telescope = true,
         treesitter = true,
@@ -62,7 +74,7 @@ return {
     priority = 1000,
     opts = {
       style = "moon",
-      transparent = true,
+      -- transparent = true,
       lualine_bold = true,
     },
     config = function(_, opts)

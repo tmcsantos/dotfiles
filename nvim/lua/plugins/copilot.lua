@@ -2,6 +2,8 @@ return {
   -- consider replacing with zbirenbaum/copilot.lua
   "github/copilot.vim",
   config = function()
+    local opts = { remap = false, silent = true, noremap = true }
+
     vim.g.copilot_assume_mapped = true
     vim.g.copilot_no_tab_map = true
     vim.g.copilot_filetypes = {
@@ -18,6 +20,9 @@ return {
     }
 
     vim.g.copilot_enabled = false
+    vim.keymap.set("i", "<C-j>", '<C-R>=copilot#Accept("")<CR>', opts)
+    vim.keymap.set("i", "<C-l>", '<C-R>=copilot#Next()<CR>', opts)
+    vim.keymap.set("i", "<C-h>", '<C-R>=copilot#Previous()<CR>', opts)
 
     function CopilotEnable()
       vim.g.copilot_enabled = true

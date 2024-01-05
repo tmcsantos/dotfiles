@@ -1,8 +1,8 @@
 return {
   -- lsp-zero and mason
   {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
+    "VonHeikemen/lsp-zero.nvim",
+    branch = "v3.x",
     lazy = true,
     opts = {},
     config = false,
@@ -11,58 +11,6 @@ return {
       vim.g.lsp_zero_extend_cmp = 0
       vim.g.lsp_zero_extend_lspconfig = 0
     end,
-  },
-
-  -- Autocompletion
-  {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      "hrsh7th/cmp-path",
-      "L3MON4D3/LuaSnip",
-    },
-    config = function()
-      -- Config autocompletion settings
-      local lsp_zero = require("lsp-zero")
-      lsp_zero.extend_cmp()
-
-      local cmp = require('cmp')
-      local cmp_select = { behavior = cmp.SelectBehavior.Select }
-      local cmp_action = lsp_zero.cmp_action()
-      cmp.setup({
-        formatting = lsp_zero.cmp_format(),
-        window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
-        },
-        mapping = cmp.mapping.preset.insert({
-          ['<C-Space>'] = cmp.mapping.complete(),
-          ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-          ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-          ['<C-e>'] = cmp.mapping.abort(),
-          ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-          ['<C-b>'] = cmp_action.luasnip_jump_backward(),
-          ['<C-u>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-d>'] = cmp.mapping.scroll_docs(4),
-          ['<C-y>'] = cmp.mapping.confirm({
-            select = true, -- behavior = cmp.ConfirmBehavior.Replace,
-          }),
-          ['<CR>'] = vim.NIL,
-        }),
-        sources = {
-          -- { name = 'buffer' },
-          { name = 'path' },
-          -- { name = 'luasnip' },
-          {
-            name = 'nvim_lsp',
-            entry_filter = function(entry, _)
-              return cmp.lsp.CompletionItemKind.Text ~= entry:get_kind()
-            end
-          },
-        },
-      })
-    end
   },
 
   -- lspconfig
@@ -98,17 +46,13 @@ return {
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
         vim.keymap.set("n", "gr", require("telescope.builtin").lsp_references, opts)
         vim.keymap.set("n", "gi", require("telescope.builtin").lsp_implementations, opts)
-        vim.keymap.set("n", "<leader>D", require('telescope.builtin').lsp_type_definitions, opts)
-        vim.keymap.set("n", "<leader>ds", require('telescope.builtin').lsp_document_symbols, opts)
-        vim.keymap.set("n", "<leader>ws", require('telescope.builtin').lsp_workspace_symbols, opts)
+        vim.keymap.set("n", "<leader>D", require("telescope.builtin").lsp_type_definitions, opts)
+        vim.keymap.set("n", "<leader>ds", require("telescope.builtin").lsp_document_symbols, opts)
+        vim.keymap.set("n", "<leader>ws", require("telescope.builtin").lsp_workspace_symbols, opts)
 
         vim.keymap.set("n", "<leader>vd", vim.diagnostic.open_float, opts)
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, opts)
-
-        vim.keymap.set("i", "<C-j>", '<C-R>=copilot#Accept("")<CR>', opts)
-        vim.keymap.set("i", "<C-l>", '<C-R>=copilot#Next()<CR>', opts)
-        vim.keymap.set("i", "<C-h>", '<C-R>=copilot#Previous()<CR>', opts)
 
         vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
       end)
@@ -176,7 +120,7 @@ return {
                   completion = true,
                   schemaStore = {
                     enable = true,
-                    url = 'https://www.schemastore.org/api/json/catalog.json',
+                    url = "https://www.schemastore.org/api/json/catalog.json",
                   },
                   schemas = {
                     kubernetes = {
@@ -193,7 +137,7 @@ return {
                     ["https://json.schemastore.org/github-workflow.json"] = ".github/workflows/*.{yml,yaml}",
                     ["https://json.schemastore.org/github-action.json"] = ".github/action.{yml,yaml}",
                     -- kustomization
-                    ['https://json.schemastore.org/kustomization.json'] = 'kustomization.{yml,yaml}',
+                    ["https://json.schemastore.org/kustomization.json"] = "kustomization.{yml,yaml}",
                   }
                 }
               }
@@ -223,11 +167,11 @@ return {
                     command = "yapf",
                     args = { "--quiet" },
                     rootPatterns = {
-                      'requirements.txt',
-                      '.style.yapf',
-                      'setup.cfg',
-                      'pyproject.toml',
-                      '.git',
+                      "requirements.txt",
+                      ".style.yapf",
+                      "setup.cfg",
+                      "pyproject.toml",
+                      ".git",
                     },
                   },
                   isort = {
