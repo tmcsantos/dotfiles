@@ -85,7 +85,7 @@ program = "/bin/bash"
 
 [window]
 decorations = "none"
-opacity = 0.96
+opacity = 1
 option_as_alt = "None"
 
 [window.dimensions]
