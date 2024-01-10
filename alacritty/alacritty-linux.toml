@@ -39,7 +39,8 @@ builtin_box_drawing = true
 size = 14.0
 
 [font.normal]
-family = "UbuntuMonoNerdFontMono"
+# family = "UbuntuMonoNerdFontMono"
+family = "Monaco Nerd Font Mono"
 style = "Regular"
 
 [[keyboard.bindings]]
