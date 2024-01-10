@@ -129,10 +129,10 @@ return {
                       "**/*.k8s.{yml,yaml}",
                     },
                     -- seldon schema
-                    ["/Users/tsantos/k8s-schema/seldondeployment.json"] = "**/*.sdep.{yml,yaml}",
+                    [vim.uv.os_homedir() .. "/k8s-schema/seldondeployment.json"] = "**/*.sdep.{yml,yaml}",
                     -- istio schema
-                    ["/Users/tsantos/k8s-schema/virtualservice.json"] = "**/*.{vs,virtualservice}.{yml,yaml}",
-                    ["/Users/tsantos/k8s-schema/gateway.json"] = "**/*.{gateway}.{yml,yaml}",
+                    [vim.uv.os_homedir() .. "/k8s-schema/virtualservice.json"] = "**/*.{vs,virtualservice}.{yml,yaml}",
+                    [vim.uv.os_homedir() .. "/k8s-schema/gateway.json"] = "**/*.{gateway}.{yml,yaml}",
                     -- github schema
                     ["https://json.schemastore.org/github-workflow.json"] = ".github/workflows/*.{yml,yaml}",
                     ["https://json.schemastore.org/github-action.json"] = ".github/action.{yml,yaml}",
