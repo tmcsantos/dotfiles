@@ -91,6 +91,7 @@ return {
       vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
       vim.diagnostic.config({
+        update_in_insert = true,
         virtual_text = true,
       })
 
