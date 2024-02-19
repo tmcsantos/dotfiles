@@ -57,6 +57,7 @@ venv
 # Bash .env integration #
 #########################
 .env
+.dev.vars
 
 # Python files #
 ################

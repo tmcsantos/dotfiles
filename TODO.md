@@ -19,3 +19,6 @@ SEE: https://github.com/naggie/dotfiles/
 [] - try nvim-dap: https://github.com/rcarriga/nvim-dap-ui
 [] - try Quarto for notebook integration in neovim: https://quarto.org/docs/get-started/hello/neovim.html
 [] - https://github.com/benlubas/molten-nvim/blob/main/docs/Notebook-Setup.md
+[] - give a shot at https://starship.rs
+[] - try pandoc: for markdown
+[] - markdownpreview nvim plugin

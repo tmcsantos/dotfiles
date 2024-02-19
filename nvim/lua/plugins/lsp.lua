@@ -54,7 +54,7 @@ return {
         vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
         vim.keymap.set("n", "<leader>rr", vim.lsp.buf.rename, opts)
 
-        vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+        -- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
       end)
     end
   },
@@ -153,37 +153,37 @@ return {
             })
           end,
           -- diagnosticls
-          diagnosticls = function()
-            lspconfig.diagnosticls.setup({
-              filetypes = { "python", },
-              init_options = {
-                filetypes = {
-                  python = "flake8",
-                },
-                formatFiletypes = {
-                  python = { "yapf", "isort" },
-                },
-                formatters = {
-                  yapf = {
-                    command = "yapf",
-                    args = { "--quiet" },
-                    rootPatterns = {
-                      "requirements.txt",
-                      ".style.yapf",
-                      "setup.cfg",
-                      "pyproject.toml",
-                      ".git",
-                    },
-                  },
-                  isort = {
-                    command = "isort",
-                    args = { "--quiet", "--stdout", "-" },
-                    rootPatterns = { "pyproject.toml", ".isort.cfg", ".git" },
-                  }
-                },
-              }
-            })
-          end,
+          -- diagnosticls = function()
+          --   lspconfig.diagnosticls.setup({
+          --     filetypes = { "python", },
+          --     init_options = {
+          --       filetypes = {
+          --         python = "flake8",
+          --       },
+          --       formatFiletypes = {
+          --         python = { "yapf", "isort" },
+          --       },
+          --       formatters = {
+          --         yapf = {
+          --           command = "yapf",
+          --           args = { "--quiet" },
+          --           rootPatterns = {
+          --             "requirements.txt",
+          --             ".style.yapf",
+          --             "setup.cfg",
+          --             "pyproject.toml",
+          --             ".git",
+          --           },
+          --         },
+          --         isort = {
+          --           command = "isort",
+          --           args = { "--quiet", "--stdout", "-" },
+          --           rootPatterns = { "pyproject.toml", ".isort.cfg", ".git" },
+          --         }
+          --       },
+          --     }
+          --   })
+          -- end,
         },
       })
     end,

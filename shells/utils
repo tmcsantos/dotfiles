@@ -24,3 +24,16 @@ if [ "${darwin}" = "true" ]; then
     sudo powermetrics --samplers smc -i1 -n1
   }
 fi
+
+### Load .env files
+function dotenv {
+  if [ -f .env ]; then
+    set -o allexport; source .env; set +o allexport
+  fi
+  if [ -f .env.dev ]; then
+    set -o allexport; source .env.dev; set +o allexport
+  fi
+  if [ -f .env.prod ]; then
+    set -o allexport; source .env.prod; set +o allexport
+  fi
+}

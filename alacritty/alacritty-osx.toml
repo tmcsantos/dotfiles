@@ -34,7 +34,7 @@ TERM = "xterm-256color"
 
 [font]
 builtin_box_drawing = false
-size = 14
+size = 16
 
 [font.normal]
 family = "Monaco Nerd Font Mono"

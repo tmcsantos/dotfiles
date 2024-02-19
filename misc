@@ -93,19 +93,6 @@ relPath() {
     path=${path%/}; printf %s "${path:-.}"
 }
 
-### Load .env files
-dotenv() {
-  if [ -f .env ]; then
-    set -o allexport; source .env; set +o allexport
-  fi
-  if [ -f .env.dev ]; then
-    set -o allexport; source .env.dev; set +o allexport
-  fi
-  if [ -f .env.prod ]; then
-    set -o allexport; source .env.prod; set +o allexport
-  fi
-}
-
 try-lock() {
   __LOCKFILE="${TMPDIR:-/tmp}/$1"
   if ( set -o noclobber; : > "${__LOCKFILE}" ) &>/dev/null; then
