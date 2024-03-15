@@ -97,7 +97,7 @@ return {
 
       require("mason-lspconfig").setup({
         ensure_installed = {
-          "diagnosticls",
+          -- "diagnosticls",
           "jedi_language_server",
           "lua_ls",
           "ruff_lsp",
