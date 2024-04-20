@@ -42,7 +42,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist)
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
 -- Clears hlsearch after doing search
-vim.keymap.set('n', '<CR>', '<cmd>nohl<CR><CR>')
+vim.keymap.set('n', '<ESC>', '<cmd>nohlsearch<CR>')
 
 -- terminal
 -- Do I want this?

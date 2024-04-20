@@ -1,5 +1,6 @@
 return {
   -- lsp-zero and mason
+  -- TODO: ditch lsp-zero
   {
     "VonHeikemen/lsp-zero.nvim",
     branch = "v3.x",
@@ -39,8 +40,8 @@ return {
         vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
 
         vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
-        vim.keymap.set("n", "<C-j>", vim.diagnostic.goto_next, opts)
-        vim.keymap.set("n", "<C-k>", vim.diagnostic.goto_prev, opts)
+        -- vim.keymap.set("n", "<C-j>", vim.diagnostic.goto_next, opts) -- changed for tmux nav
+        -- vim.keymap.set("n", "<C-k>", vim.diagnostic.goto_prev, opts) -- changed for tmux nav
 
         vim.keymap.set("n", "gd", require("telescope.builtin").lsp_definitions, opts)
         vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
@@ -87,6 +88,8 @@ return {
     config = function()
       local lsp_zero = require("lsp-zero")
       local lspconfig = require("lspconfig")
+      local configs = require("lspconfig.configs")
+
       require("lspconfig.ui.windows").default_options.border = "rounded"
       vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 
@@ -94,6 +97,19 @@ return {
         update_in_insert = true,
         virtual_text = true,
       })
+
+      -- add custom lsp servers
+      -- wasi - WebAssembly Interface
+      -- if not configs.wit_lsp then
+      --   configs.wit_lsp = {
+      --     default_config = {
+      --       cmd = { 'wit-language-server', '--stdio' },
+      --       root_dir = lspconfig.util.root_pattern('wit'),
+      --       filetypes = { 'wit' },
+      --     }
+      --   }
+      -- end
+      -- lspconfig.wit_lsp.setup({})
 
       require("mason-lspconfig").setup({
         ensure_installed = {

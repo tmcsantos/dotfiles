@@ -4,6 +4,21 @@ return {
     build = ":TSUpdate",
     config = function()
       local configs = require("nvim-treesitter.configs")
+      -- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
+      -- parser_config.wit = {
+      --   install_info = {
+      --     url = "https://github.com/Michael-F-Bryan/wit-lsp", -- local path or git repo
+      --     files = {                                           -- note that some parsers also require src/scanner.c or src/scanner.cc
+      --       "tree-sitter-wit/src/parser.c",
+      --     },
+      --     -- optional entries:
+      --     branch = "main",                        -- default branch in case of git repo if different from master
+      --     generate_requires_npm = false,          -- if stand-alone parser without npn dependencies
+      --     requires_generate_from_grammar = false, -- if folder contains pre-generated src/parser.c
+      --   },
+      --   filetype = "wit",                         -- if filetype does not match the parser name
+      -- }
+
       configs.setup({
         ensure_installed = {
           "bash",

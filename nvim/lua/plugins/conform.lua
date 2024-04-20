@@ -17,6 +17,7 @@ return {
         go = { "goimports", "gofmt" },
         -- Use a sub-list to run only the first available formatter
         javascript = { { "prettierd", "prettier" } },
+        html = { { "prettierd", "prettier" } },
       },
     })
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
