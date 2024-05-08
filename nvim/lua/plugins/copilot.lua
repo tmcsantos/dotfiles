@@ -1,6 +1,7 @@
 return {
   -- consider replacing with zbirenbaum/copilot.lua
   "github/copilot.vim",
+  enabled = false,
   config = function()
     local opts = { remap = false, silent = true, noremap = true }
 

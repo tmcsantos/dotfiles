@@ -6,6 +6,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
       local builtin = require("telescope.builtin")
+      local actions = require("telescope.actions")
 
       require("telescope").setup({
         defaults = {
@@ -13,6 +14,13 @@ return {
             "node_modules/.*",
             "secret.d/*",
             "%.pem",
+          },
+          mappings = {
+            i = {
+              ["<ESC>"] = actions.close,
+              ["<C-k>"] = actions.move_selection_previous,
+              ["<C-j>"] = actions.move_selection_next,
+            },
           },
         }
       })
