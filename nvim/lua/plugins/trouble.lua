@@ -4,7 +4,7 @@ return {
   config = function()
     local trouble = require("trouble")
     trouble.setup({})
-    vim.keymap.set('n', '<leader>tt', trouble.toggle)
+    vim.keymap.set('n', '<leader>tt', '<cmd>Trouble diagnostics toggle<cr>')
     vim.keymap.set('n', '<leader>tn', function()
       trouble.next({ skip_groups = true, jump = true })
     end)

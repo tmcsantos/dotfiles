@@ -1,9 +1,17 @@
+function ColorMyPencils(color)
+  color = color or "gruvbox"
+  vim.cmd.colorscheme(color)
+
+  vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+  vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+end
+
 return {
   -- gruvbox
   {
     "ellisonleao/gruvbox.nvim",
     priority = 1000,
-    lazy = false,
+    -- lazy = false,
     config = function()
       require("gruvbox").setup({
         terminal_colors = true,
@@ -12,37 +20,40 @@ return {
         bold = true,
         -- transparent_mode = true,
       })
-      vim.o.background = "dark"
-      vim.cmd.colorscheme "gruvbox"
+      -- vim.o.background = "dark"
+      -- vim.cmd.colorscheme "gruvbox"
+      ColorMyPencils()
     end,
   },
+  -- rosé pine
   {
-    "sainnhe/gruvbox-material",
-    lazy = true,
-    priority = 1000,
+    "rose-pine/neovim",
+    name = "rose-pine",
+    -- lazy = true,
     config = function()
-      vim.g.gruvbox_material_better_performance = 1
-      vim.g.gruvbox_material_background = 'soft'
-      -- vim.g.gruvbox_material_transparent_background = 2
-      vim.cmd.colorscheme "gruvbox-material"
+      require("rose-pine").setup({
+        disable_background = false,
+      })
+      -- vim.cmd.colorscheme "rose-pine-moon"
     end
   },
-
   -- catppuccin
   {
     "catppuccin/nvim",
-    lazy = true,
+    -- lazy = true,
     name = "catppuccin",
     priority = 1000,
     opts = {
-      flavour = "mocha", -- latte, frappe, macchiato, mocha
+      flavour = "macchiato", -- latte, frappe, macchiato, mocha
       -- styles = {
       --   keywords = { "bold" },
       --   functions = { "italic" },
       -- },
       -- transparent_background = true,
       integrations = {
+        cmp = true,
         gitsigns = true,
+        harpoon = true,
         mason = true,
         native_lsp = {
           enabled = true,
@@ -63,14 +74,14 @@ return {
     },
     config = function(_, opts)
       require("catppuccin").setup(opts)
-      vim.cmd.colorscheme "catppuccin"
+      -- vim.cmd.colorscheme "catppuccin"
     end
   },
 
   -- tokyonight
   {
     "folke/tokyonight.nvim",
-    lazy = true,
+    -- lazy = true,
     priority = 1000,
     opts = {
       style = "moon",
@@ -79,7 +90,7 @@ return {
     },
     config = function(_, opts)
       require("tokyonight").setup(opts)
-      vim.cmd.colorscheme "tokyonight"
+      -- vim.cmd.colorscheme "tokyonight"
     end
   },
 }
