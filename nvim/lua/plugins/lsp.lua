@@ -20,13 +20,18 @@ return {
     cmd = { "LspInfo", "LspInstall", "LspStart" },
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<leader>ll", "<cmd>LspLog<cr>",     desc = "Lsp Log" },
-      { "<leader>li", "<cmd>LspInfo<cr>",    desc = "Lsp Info" },
+      { "<leader>ll", "<cmd>LspLog<cr>", desc = "Lsp Log" },
+      { "<leader>li", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
       { "<leader>lr", "<cmd>LspRestart<cr>", desc = "Lsp Restart" },
     },
     dependencies = {
-      { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-      { "folke/neodev.nvim",  opts = {} },
+      {
+        "folke/neoconf.nvim",
+        cmd = "Neoconf",
+        config = false,
+        dependencies = { "nvim-lspconfig" },
+      },
+      { "folke/neodev.nvim", opts = {} },
       "hrsh7th/cmp-nvim-lsp",
     },
     config = function()
@@ -57,7 +62,7 @@ return {
 
         -- vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
       end)
-    end
+    end,
   },
 
   -- mason
@@ -155,9 +160,9 @@ return {
                     ["https://json.schemastore.org/github-action.json"] = ".github/action.{yml,yaml}",
                     -- kustomization
                     ["https://json.schemastore.org/kustomization.json"] = "kustomization.{yml,yaml}",
-                  }
-                }
-              }
+                  },
+                },
+              },
             })
           end,
           -- python
@@ -165,7 +170,23 @@ return {
             lspconfig.ruff_lsp.setup({
               on_init = function(client)
                 client.server_capabilities.hoverProvider = false
-              end
+              end,
+            })
+          end,
+          -- rust
+          rust_analyzer = function()
+            lspconfig.rust_analyzer.setup({
+              -- on_attach = function(_, bufnr)
+              --   vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+              -- end,
+              settings = {
+                ["rust-analyzer"] = {
+                  inlayHints = {
+                    parameterHints = { enable = false },
+                    closingBraceHints = { enable = false },
+                  },
+                },
+              },
             })
           end,
           -- diagnosticls
@@ -203,5 +224,5 @@ return {
         },
       })
     end,
-  }
+  },
 }
