@@ -5,5 +5,5 @@ if is_app_installed nvim; then
   export VISUAL=nvim
   export EDITOR="$VISUAL"
 
-  check_dotfile ~/.config/nvim $(pwd)/nvim
+  check_dotfile ~/.config/nvim "$PWD"/nvim
 fi

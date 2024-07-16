@@ -16,7 +16,7 @@ else
   against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
 fi
 
-files_modified=$(git diff-index --cached --name-only --diff-filter=ACM $against)
+files_modified=$(git diff-index --cached --name-only --diff-filter=ACM "$against")
 #protected_files=(credentials)
 
 return_code=0
@@ -28,8 +28,8 @@ return_code=0
 #  fi
 #done
 
-for FILE in ${files_modified} ; do
-  if grep -Eq "[a-zA-Z0-9]{40}" $FILE; then
+for FILE in "$files_modified" ; do
+  if grep -Eq "[a-zA-Z0-9]{40}" "$FILE"; then
     echo "${YELLOW}${FILE}${NC} contains a sequence of chars that resembles a password. Please remove it!"
     return_code=1
   fi
@@ -37,4 +37,4 @@ done
 
 [[ $return_code -ne 0 ]] && echo "If you think this is a mistake add --no-verify when checking in." 
 
-exit $return_code
+exit "$return_code"

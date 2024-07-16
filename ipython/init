@@ -2,7 +2,7 @@
 
 if is_app_installed ipython; then
   if [[ ! -r ~/.ipython/profile_default/ipython_config.py ]]; then
-    check_dotfile ~/.ipython/profile_default/ipython_config.py $(pwd)/ipython/ipython_config.py 
+    check_dotfile ~/.ipython/profile_default/ipython_config.py "$PWD"/ipython/ipython_config.py 
     ipython profile create
   fi
 fi

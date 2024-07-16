@@ -66,9 +66,9 @@ function __git_prompt() {
 		--short HEAD 2>/dev/null)"
 	rev_parse_exit_code="$?"
   
-	if [ -z "$repo_info" ]; then
+	if [ "$repo_info" = "" ]; then
     PS1="${PS1/__git_prompt__/$gitstring}"
-		return $exit
+		return "$exit"
 	fi
 
 	local short_sha=""
@@ -94,7 +94,7 @@ function __git_prompt() {
   else
     local head=""
     if ! __git_prompt_read "$git_dir/HEAD" head; then
-      return $exit
+      return "$exit"
     fi
     # is it a symbolic ref?
     branch="${head#ref: }"
@@ -123,7 +123,7 @@ function __git_prompt() {
   elif [[ "$inside_worktree" = "true" ]]; then
     while read line ; do
       # echo $line
-      [[ $line =~ ^#' 'stash ]] && stashed=$(echo $line | awk '/stash/ {printf($3)}')
+      [[ $line =~ ^#' 'stash ]] && stashed=$(echo "$line" | awk '/stash/ {printf($3)}')
       if [[ $line =~ ([MTARCD.])([MTARCD.]) ]]; then
         unset x y
         x=${BASH_REMATCH[1]}
@@ -159,7 +159,7 @@ function __git_prompt() {
 
   PS1="${PS1/__git_prompt__/$gitstring}"
 
-  return $exit
+  return "$exit"
 }
 
 

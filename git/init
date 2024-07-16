@@ -4,10 +4,10 @@
 if is_app_installed git; then
   mkdir -p ~/.config/git
 
-  check_dotfile ~/.config/git/config $(pwd)/git/config 
-  check_dotfile ~/.gitignore_global $(pwd)/git/gitignore_global 
+  check_dotfile ~/.config/git/config "$PWD"/git/config 
+  check_dotfile ~/.gitignore_global "$PWD"/git/gitignore_global 
   
-  export GIT_TEMPLATE_DIR=$(pwd)/git-templates
+  export GIT_TEMPLATE_DIR=$PWD/git-templates
 
   cfg="command git --no-optional-locks config --global"
 
@@ -28,7 +28,7 @@ if is_app_installed git; then
 
   # install git-filter-repo
   if [ ! -f "$WORKDIR/.git-filter-repo/git-filter-repo" ]; then
-    pushd $WORKDIR >&1 >/dev/null
+    pushd "$WORKDIR" >&1 >/dev/null
     git clone https://github.com/newren/git-filter-repo.git .git-filter-repo  --depth=1 --quiet
     pushd .git-filter-repo >&1 >/dev/null
     git remote set-branches origin docs 
@@ -40,5 +40,5 @@ if is_app_installed git; then
   pathmunge "$WORKDIR/.git-filter-repo"
 
   # git prompt
-  source $(pwd)/git/git-prompt
+  source "$PWD"/git/git-prompt
 fi

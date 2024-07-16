@@ -6,10 +6,10 @@
 function mvn-clean {
   path=${1:-$WORKDIR}
   exclude=${2}
-  if [ -z "${exclude}" ]; then
-    find ${path} -maxdepth 3 -type f -name "pom.xml" -print0 | xargs -0 -n1 -P4 sh -c 'mvn clean -T 1C -o -f $0'
+  if [ "$exclude" = "" ]; then
+    find "$path" -maxdepth 3 -type f -name "pom.xml" -print0 | xargs -0 -n1 -P4 sh -c 'mvn clean -T 1C -o -f $0'
   else
-    find ${path} -maxdepth 3 -type f \( -name "pom.xml" ! -iname "${exclude}" \) -print0 | xargs -0 -n1 -P4 sh -c 'mvn clean -T 1C -o -f $0'
+    find "$path" -maxdepth 3 -type f \( -name "pom.xml" ! -iname "$exclude" \) -print0 | xargs -0 -n1 -P4 sh -c 'mvn clean -T 1C -o -f $0'
   fi
 }
 
@@ -20,11 +20,11 @@ function mvn-mv {
     while IFS= read -r -d $'\0' file; do
       local d=${file%/*}
       d=${d#*/}
-      local basedir=$(perl -pe 's|(.*)java.*|\./\1|g' <<< ${d})
-      d=$(perl -pe 's|.*java(.*)|\./\1|g' <<< ${d})
+      local basedir=$(perl -pe 's|(.*)java.*|\./\1|g' <<< "$d")
+      d=$(perl -pe 's|.*java(.*)|\./\1|g' <<< "$d")
       local resources="${basedir}resources/${d}"
-      mkdir -p ${resources}
-      ${versioned} mv "$file" "$resources"
+      mkdir -p "$resources"
+      "$versioned" mv "$file" "$resources"
     done
   # cleanup empty dirs
   find . -type d -not -path "**/.git/*" -empty -delete
@@ -51,17 +51,17 @@ function mvn-tree {
   if [ ${#fields[@]} -eq 4 ]; then packaging=${fields[2]}; version=${fields[3]}; fi
   if [ ${#fields[@]} -eq 5 ]; then packaging=${fields[2]}; classifier=${fields[3]}; version=${fields[4]}; fi
 
-  local POM_DIR="`echo "${groupId}" | tr . /`/${artifactId}/${version}"
+  local POM_DIR="$(echo "$groupId" | tr . /)/${artifactId}/${version}"
   local POM_PATH="$POM_DIR/${artifactId}-${version}.pom"
 
   artifact=${groupId}:${artifactId}:${version}:${packaging:=pom}
-  [ -n "${classifier}" ] && artifact=${artifact}:${classifier}
+  [ "$classifier" != "" ] && artifact=${artifact}:${classifier}
 
-  debug artifact=${artifact}
-  debug path=${POM_PATH}
+  debug artifact="$artifact"
+  debug path="$POM_PATH"
 
   # A string of the form groupId:artifactId:version[:packaging][:classifier]
-  mvn dependency:get -Dartifact=${artifact} -Dtransitive=false "$@" || kill -INT $$
+  mvn dependency:get -Dartifact="$artifact" -Dtransitive=false "$@" || kill -INT $$
   mvn -f "$HOME/.m2/repository/$POM_PATH" dependency:tree "$@"
 }
 
@@ -85,17 +85,17 @@ function mvn-analyze {
   if [ ${#fields[@]} -eq 3 ]; then version=${fields[2]}; fi
   if [ ${#fields[@]} -eq 4 ]; then classifier=${fields[2]}; version=${fields[3]}; fi
 
-  local POM_DIR="`echo "${groupId}" | tr . /`/${artifactId}/${version}"
+  local POM_DIR="$(echo "$groupId" | tr . /)/${artifactId}/${version}"
   local POM_PATH="$POM_DIR/${artifactId}-${version}.pom"
 
   artifact=${groupId}:${artifactId}:${version}:${packaging:=jar}
-  [ -n "${classifier}" ] && artifact=${artifact}:${classifier}
+  [ "$classifier" != "" ] && artifact=${artifact}:${classifier}
 
-  debug artifact=${artifact}
-  debug path=${POM_PATH}
+  debug artifact="$artifact"
+  debug path="$POM_PATH"
 
   # A string of the form groupId:artifactId:version[:packaging][:classifier]
-  mvn dependency:get -Dartifact=${artifact} "$@"
+  mvn dependency:get -Dartifact="$artifact" "$@"
 
   local tmpdir=$(mktemp -d)
   mkdir -p "$tmpdir/target/classes"

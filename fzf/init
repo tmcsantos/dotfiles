@@ -3,11 +3,11 @@
 # install fzf
 if [ ! -d "$WORKDIR/.fzf" ]; then
   if is_app_installed git; then
-    git clone --quiet --depth 1 https://github.com/junegunn/fzf.git $WORKDIR/.fzf
-    $WORKDIR/.fzf/install --completion --key-bindings --no-update-rc
+    git clone --quiet --depth 1 https://github.com/junegunn/fzf.git "$WORKDIR"/.fzf
+    "$WORKDIR"/.fzf/install --completion --key-bindings --no-update-rc
   fi
 fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-source $(pwd)/fzf/config
+source "$PWD"/fzf/config

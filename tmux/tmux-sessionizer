@@ -16,8 +16,8 @@ fi
 selected_name=$(basename "$selected" | tr . _)
 
 if [[ -z $TMUX ]]; then
-  tmux new-session -As $selected_name -c $selected
+  tmux new-session -As "$selected_name" -c "$selected"
 else
-  tmux new-session -ds $selected_name -c $selected
-  tmux switch-client -t $selected_name
+  tmux new-session -ds "$selected_name" -c "$selected"
+  tmux switch-client -t "$selected_name"
 fi

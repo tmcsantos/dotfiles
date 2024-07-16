@@ -2,4 +2,4 @@
 
 mkdir -p ~/.config/yapf/
 
-check_dotfile ~/.config/yapf/style $(pwd)/yapf/style
+check_dotfile ~/.config/yapf/style "$PWD"/yapf/style

@@ -24,28 +24,28 @@ case "$(uname -s)" in
 esac
 
 mount_point=$1
-if [ ! -d "${mount_point}" ]; then
+if [ ! -d "$mount_point" ]; then
     echo "The mount point dir isn't available." >&2
     exit 1
 fi
 
-mount_point=$(cd $mount_point && pwd)
+mount_point=$(cd "$mount_point" && pwd)
 
 
-if [ "${darwin}" = "true" ]; then
-  device_name=$(df "${mount_point}" 2>/dev/null | tail -1 | grep "${mount_point}" | cut -d' ' -f1)
-  if [ -z "${device_name}" ]; then
+if [ "$darwin" = "true" ]; then
+  device_name=$(df "$mount_point" 2>/dev/null | tail -1 | grep "$mount_point" | cut -d' ' -f1)
+  if [ "$device_name" = "" ]; then
       echo "The mount point didn't mount disk image." >&2
       exit 1
   fi
 
-  umount "${mount_point}"
+  umount "$mount_point"
   if [ $? -ne 0 ]; then
       echo "Could not unmount." >&2
       exit $?
   fi
 
-  hdiutil detach -quiet $device_name
+  hdiutil detach -quiet "$device_name"
 else
-  sudo umount ${mount_point}
+  sudo umount "$mount_point"
 fi

@@ -9,17 +9,17 @@ selected=`printf "$languages\n$core_utils" | fzf --bind=enter:replace-query+prin
 
 cht_sh="curl cht.sh/$selected"
 
-if printf "$languages" | grep -qs $selected; then
+if printf "$languages" | grep -qs "$selected"; then
     read -p "query: " query
-    query=$(echo $query | tr ' ' '+')
+    query=$(echo "$query" | tr ' ' '+')
     cht_sh="$cht_sh/$query"
-elif printf "$core_utils" | grep -qs $selected; then
+elif printf "$core_utils" | grep -qs "$selected"; then
     read -p "operation: " operation
     cht_sh="$cht_sh~$operation"
 fi
 
 if [[ -z $TMUX ]]; then
-    $cht_sh
+    "$cht_sh"
 else
     tmux neww bash -c "$cht_sh & while [ : ]; do sleep 1; done"
 fi

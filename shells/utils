@@ -2,7 +2,7 @@
 
 function gql {
     data=${1}
-    curl -s -X POST ${2:-$SCHEMA_ENDPOINT} --json "$(jq -c -n --arg query "$(cat $data)" '{"query": $query}')"
+    curl -s -X POST "${2:-$SCHEMA_ENDPOINT}" --json "$(jq -c -n --arg query "$(cat "$data")" '{"query": $query}')"
 }
 
 
@@ -18,7 +18,7 @@ function free-port {
     comm -23 <(seq 49152 65535) <(lsof -nP -i | awk '{print $9}' | cut -d':' -f2 | cut -d'-' -f1 | grep "[0-9]\{1,5\}" | sort | uniq) | head -n 1
 }
 
-if [ "${darwin}" = "true" ]; then
+if [ "$darwin" = "true" ]; then
   function used_ports {
     netstat -Watnlv | grep LISTEN | awk '{"ps -ww -o args= -p " $9 | getline procname;colred="\033[01;31m";colclr="\033[0m"; print colred "proto: " colclr $1 colred " | addr.port: " colclr $4 colred " | pid: " colclr $9 colred " | name: " colclr procname;  }' | column -t -s "|"
   }

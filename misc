@@ -21,15 +21,15 @@ export WORKDIR="$HOME/projects"
 export COLUMNS
 export LINES
 
-if [ "${darwin}" = "false" ]; then
+if [ "$darwin" = "false" ]; then
   alias open='xdg-open'
 fi
 
 # make sure WORKDIR exists
-mkdir -p ${WORKDIR}
+mkdir -p "$WORKDIR"
 
 usagesort() {
-  du -h -d 1 $1 | sort -k 1,1 -g
+  du -h -d 1 "$1" | sort -k 1,1 -g
 }
 
 is_app_installed() {
@@ -41,8 +41,8 @@ check_dotfile() {
   # delete it so it can be recreated
   local dotfile="$1"
   local src="$2"
-  [[ ! -r $dotfile && -L $dotfile ]] && rm $dotfile
-  [[ -r $dotfile ]] || ln -s $src $dotfile
+  [[ ! -r $dotfile && -L $dotfile ]] && rm "$dotfile"
+  [[ -r $dotfile ]] || ln -s "$src" "$dotfile"
 }
 
 die() {
@@ -71,20 +71,20 @@ realpath() {
   OURPWD=${PWD}
   cd "$(dirname "${1}")"
   LINK=$(readlink "$(basename "${1}")")
-  while [ "${LINK}" ]; do
-    cd "$(dirname "${LINK}")"
+  while [ "$LINK" ]; do
+    cd "$(dirname "$LINK")"
     LINK=$(readlink "$(basename "${1}")")
   done
   REALPATH="${PWD}/$(basename "${1}")"
-  cd "${OURPWD}"
-  echo "${REALPATH}"
+  cd "$OURPWD"
+  echo "$REALPATH"
 }
 fi
 
 relPath() {
     local common path up
-    common=$(realpath ${1})
-    path=$(realpath ${2})
+    common=$(realpath "${1}")
+    path=$(realpath "${2}")
     while test "${path#"$common"/}" = "$path"; do
         common=${common%/*} 
         up=../$up
@@ -95,7 +95,7 @@ relPath() {
 
 try-lock() {
   __LOCKFILE="${TMPDIR:-/tmp}/$1"
-  if ( set -o noclobber; : > "${__LOCKFILE}" ) &>/dev/null; then
+  if ( set -o noclobber; : > "$__LOCKFILE" ) &>/dev/null; then
     trap 'rm -f "${__LOCKFILE}" &>/dev/null' INT TERM EXIT RETURN
     return 0
   fi
@@ -112,7 +112,7 @@ function pathmunge() {
 # from https://github.com/robhague/dotfiles/
 function _ensure_cwd {
   # If the working directory doesn't exist, try and find one that does
-  if [ ! -d $PWD ]
+  if [ ! -d "$PWD" ]
   then
     warn "$PWD no longer exists, "
     D=$PWD
@@ -120,7 +120,7 @@ function _ensure_cwd {
     do
       D=${D%/*}
     done
-    builtin cd $D
+    builtin cd "$D"
     info "moved to $PWD"
   fi
 }

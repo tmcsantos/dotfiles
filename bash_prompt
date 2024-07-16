@@ -36,7 +36,7 @@ function __bash_history_sync() {
 function __set_ps1() {
   local exit=$?
   PS1=$_PS1
-  return $exit
+  return "$exit"
 }
 
 function __nonzero_return() {
@@ -46,7 +46,7 @@ function __nonzero_return() {
   local status_code=$prompt_ok
   [[ $exit -ne 0 ]] && status_code=$prompt_fail
   PS1="${PS1/__nonzero_return__/$status_code}"
-  return $exit
+  return "$exit"
 }
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -56,9 +56,9 @@ function __virtualenv_info() {
   local str=""
   if [[ -n "$VIRTUAL_ENV" ]]; then
     local venv
-    venv=$(basename "$(dirname $VIRTUAL_ENV)")
+    venv=$(basename "$(dirname "$VIRTUAL_ENV")")
     str="(\[${BLUE}\]venv:\[${B_BLUE}\]${venv}\[${NC}\]) "
   fi
   PS1="${PS1/__virtualenv_info__/$str}"
-  return $exit
+  return "$exit"
 }

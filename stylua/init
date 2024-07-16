@@ -2,4 +2,4 @@
 
 mkdir -p ~/.config/stylua/
 
-check_dotfile ~/.config/stylua/stylua.toml $(pwd)/stylua/stylua.toml
+check_dotfile ~/.config/stylua/stylua.toml "$PWD"/stylua/stylua.toml

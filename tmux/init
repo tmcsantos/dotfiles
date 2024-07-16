@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 show_available_sessions() {
-  if [[ -z "${TMUX}" ]]; then
+  if [[ -z "$TMUX" ]]; then
     sessions=$( tmux ls 2> /dev/null | awk '! /attached/ { sub(":", "", $1); print $1; }' | xargs echo )
     if [[ ! -z $sessions ]]; then
       echo "==> Available tmux sessions: $sessions"
@@ -12,7 +12,7 @@ show_available_sessions() {
 }
 
 tssh() {
-  ssh -t $@ "tmux attach || tmux new"
+  ssh -t "$@" "tmux attach || tmux new"
 }
 
 if is_app_installed tmux; then
@@ -20,8 +20,8 @@ if is_app_installed tmux; then
     warn "git command not found. Install it first."
   else
     # Add dotfiles to home
-    check_dotfile ~/.tmux.conf $(pwd)/tmux/tmux.conf 
-    check_dotfile ~/.tmux.remote.conf $(pwd)/tmux/tmux.remote.conf 
+    check_dotfile ~/.tmux.conf "$PWD"/tmux/tmux.conf 
+    check_dotfile ~/.tmux.remote.conf "$PWD"/tmux/tmux.remote.conf 
 
     # Check if tpm is installed
     if [ ! -e "$HOME/.tmux/plugins/tpm" ]; then
