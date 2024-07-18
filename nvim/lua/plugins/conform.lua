@@ -8,7 +8,8 @@ return {
         -- Conform will run multiple formatters sequentially
         python = function(bufnr)
           if conform.get_formatter_info("ruff_format", bufnr).available then
-            return { "isort", "ruff_format", "isort" }
+            -- return { "isort", "ruff_format" }
+            return { "ruff_fix", "ruff_format" }
           else
             return { "isort", "yapf" }
           end

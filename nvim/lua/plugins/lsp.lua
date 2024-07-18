@@ -93,7 +93,6 @@ return {
     config = function()
       local lsp_zero = require("lsp-zero")
       local lspconfig = require("lspconfig")
-      local configs = require("lspconfig.configs")
 
       require("lspconfig.ui.windows").default_options.border = "rounded"
       vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
@@ -103,25 +102,11 @@ return {
         virtual_text = true,
       })
 
-      -- add custom lsp servers
-      -- wasi - WebAssembly Interface
-      -- if not configs.wit_lsp then
-      --   configs.wit_lsp = {
-      --     default_config = {
-      --       cmd = { 'wit-language-server', '--stdio' },
-      --       root_dir = lspconfig.util.root_pattern('wit'),
-      --       filetypes = { 'wit' },
-      --     }
-      --   }
-      -- end
-      -- lspconfig.wit_lsp.setup({})
-
       require("mason-lspconfig").setup({
         ensure_installed = {
-          -- "diagnosticls",
           "jedi_language_server",
           "lua_ls",
-          "ruff_lsp",
+          "ruff",
           "yamlls",
         },
         handlers = {
@@ -167,7 +152,7 @@ return {
           end,
           -- python
           ruff_lsp = function()
-            lspconfig.ruff_lsp.setup({
+            lspconfig.ruff.setup({
               on_init = function(client)
                 client.server_capabilities.hoverProvider = false
               end,
@@ -189,38 +174,6 @@ return {
               },
             })
           end,
-          -- diagnosticls
-          -- diagnosticls = function()
-          --   lspconfig.diagnosticls.setup({
-          --     filetypes = { "python", },
-          --     init_options = {
-          --       filetypes = {
-          --         python = "flake8",
-          --       },
-          --       formatFiletypes = {
-          --         python = { "yapf", "isort" },
-          --       },
-          --       formatters = {
-          --         yapf = {
-          --           command = "yapf",
-          --           args = { "--quiet" },
-          --           rootPatterns = {
-          --             "requirements.txt",
-          --             ".style.yapf",
-          --             "setup.cfg",
-          --             "pyproject.toml",
-          --             ".git",
-          --           },
-          --         },
-          --         isort = {
-          --           command = "isort",
-          --           args = { "--quiet", "--stdout", "-" },
-          --           rootPatterns = { "pyproject.toml", ".isort.cfg", ".git" },
-          --         }
-          --       },
-          --     }
-          --   })
-          -- end,
         },
       })
     end,
