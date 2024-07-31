@@ -12,5 +12,10 @@
     version = 2
 [pull]
     rebase = true
+[merge]
+  tool = nvimdiff
 [mergetool]
-    keepBackup = false
+  prompt = false
+  keepBackup = false
+[mergetool "nvimdiff"]
+  layout = "LOCAL,BASE,REMOTE / MERGED"
