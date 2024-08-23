@@ -82,3 +82,7 @@ __pycache__
 # pyenv generated files #
 #########################
 .python-version
+
+# asdf - language runtime manager
+#################################
+.tool-versions
