@@ -25,12 +25,17 @@ return {
       window = "vsplit",
     })
     ollama.setup({
-      model = "phi3:mini",
+      model = "gemma2:2b",
       prompts = {
         Ask_About_Context = {
           prompt = "$input\n\n```$ftype\n$buf```",
           action = action,
-          input_label = ">",
+          input_label = ">>>",
+        },
+        More = {
+          prompt = "$sel\n\n$input\n",
+          action = action,
+          input_label = ">>>",
         },
       },
     })

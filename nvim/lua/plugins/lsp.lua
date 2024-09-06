@@ -174,6 +174,12 @@ return {
               },
             })
           end,
+          -- clang
+          clangd = function()
+            lspconfig.clangd.setup({
+              filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }, -- exclude "proto".
+            })
+          end,
         },
       })
     end,

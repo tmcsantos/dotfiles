@@ -22,6 +22,7 @@ return {
         javascript = { "prettierd", "prettier", stop_after_first = true },
         html = { "prettierd", "prettier", stop_after_first = true },
         sh = { "shellharden", lsp_format = "last" },
+        proto = { "buf" },
       },
     })
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
