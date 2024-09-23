@@ -3,6 +3,7 @@
 # Lazy chdir
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
 
 # Verbosity
 alias \

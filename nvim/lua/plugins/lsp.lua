@@ -159,21 +159,22 @@ return {
             })
           end,
           -- rust
-          rust_analyzer = function()
-            lspconfig.rust_analyzer.setup({
-              -- on_attach = function(_, bufnr)
-              --   vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-              -- end,
-              settings = {
-                ["rust-analyzer"] = {
-                  inlayHints = {
-                    parameterHints = { enable = false },
-                    closingBraceHints = { enable = false },
-                  },
-                },
-              },
-            })
-          end,
+          rust_analyzer = function() end,
+          -- rust_analyzer = function()
+          --   lspconfig.rust_analyzer.setup({
+          --     on_attach = function(_, bufnr)
+          --       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+          --     end,
+          --     settings = {
+          --       ["rust-analyzer"] = {
+          --         inlayHints = {
+          --           parameterHints = { enable = false },
+          --           closingBraceHints = { enable = false },
+          --         },
+          --       },
+          --     },
+          --   })
+          -- end,
           -- clang
           clangd = function()
             lspconfig.clangd.setup({
