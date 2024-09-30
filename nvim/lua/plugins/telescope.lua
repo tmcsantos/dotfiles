@@ -16,8 +16,11 @@ return {
             "%.pem",
           },
           mappings = {
+            n = {
+              ["dd"] = actions.delete_buffer,
+            },
             i = {
-              ["<ESC>"] = actions.close,
+              -- ["<ESC>"] = actions.close,
               ["<C-k>"] = actions.move_selection_previous,
               ["<C-j>"] = actions.move_selection_next,
             },
