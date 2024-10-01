@@ -23,6 +23,15 @@ return {
         html = { "prettierd", "prettier", stop_after_first = true },
         sh = { "shellharden", lsp_format = "last" },
         proto = { "buf" },
+        toml = { "taplo" },
+      },
+      formatters = {
+        taplo = {
+          -- Adds environment args to the taplo formatter
+          env = {
+            TAPLO_CONFIG = vim.fn.expand("$HOME/dotfiles/taplo.toml"),
+          }
+        }
       },
     })
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
