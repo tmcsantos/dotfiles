@@ -15,10 +15,8 @@ return {
         default_settings = {
           -- rust-analyzer language server configuration
           ["rust-analyzer"] = {
-            -- numThreads = 8,
             cargo = {
               allFeatures = true,
-              -- extraArgs = { "--jobs", "8" },
             },
             files = {
               excludeDirs = {
