@@ -1,9 +1,18 @@
+# do not bell on tab-completion
+set bell-style none
+set meta-flag on
+set input-meta on
+set convert-meta off
+set output-meta on
+
 #################### VIM ####################
 # FOR MORE INFORMATION CHECK:
 # https://wiki.archlinux.org/index.php/Readline
 
 # TURN ON VIM (E.G. FOR READLINE)
 set editing-mode vi
+
+$if mode=vi
 
 # SHOW THE VIM MODE IN THE PROMPT (COMMAND OR INSERT)
 set show-mode-in-prompt on
@@ -18,6 +27,8 @@ set show-mode-in-prompt on
 #     5: blinking bar (xterm)
 #     6: steady bar (xterm)
 set vi-ins-mode-string \1\e[5 q\2
-set vi-cmd-mode-string \1\e[2 q22
+set vi-cmd-mode-string \1\e[2 q\2
 
 set show-all-if-ambiguous on
+
+$endif
