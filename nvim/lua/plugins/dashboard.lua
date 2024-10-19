@@ -33,6 +33,14 @@ return {
             key = 'f',
           },
           {
+            icon = ' ',
+            icon_hl = '@variable',
+            desc = 'Sketch',
+            group = '@property',
+            action = 'bd',
+            key = 'd',
+          },
+          {
             icon = ' ',
             icon_hl = '@variable',
             desc = 'Quit',
