@@ -6,7 +6,7 @@ return {
     vim.g.rustaceanvim = {
       -- Plugin configuration
       tools = {
-        enable_clippy = false,
+        enable_clippy = true,
         float_win_config = {
           border = "rounded",
         },

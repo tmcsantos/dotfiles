@@ -7,7 +7,8 @@ end
 -- [[ Highlight on yank ]]
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
-    vim.highlight.on_yank()
+    -- vim.highlight.on_yank() -- deprecated, this guys...
+    vim.hl.on_yank()
   end,
   group = augroup("highlight_yank"),
   pattern = '*',
