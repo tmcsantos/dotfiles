@@ -5,10 +5,9 @@ if is_app_installed alacritty; then
   mkdir -p ~/.config/alacritty/themes
 
   check_dotfile ~/.config/alacritty/themes/gruvbox_dark.toml $(pwd)/alacritty/gruvbox_dark.toml 
+  check_dotfile ~/.config/alacritty/alacritty.toml $(pwd)/alacritty/alacritty.toml 
   
   if [ "${darwin}" = "true" ]; then
-    check_dotfile ~/.config/alacritty/alacritty.toml $(pwd)/alacritty/alacritty-osx.toml 
-  else
-    check_dotfile ~/.config/alacritty/alacritty.toml $(pwd)/alacritty/alacritty-linux.toml 
+    check_dotfile ~/.config/alacritty/osx.toml $(pwd)/alacritty/osx.toml 
   fi
 fi

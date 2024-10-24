@@ -1,5 +1,3 @@
-import = ["~/.config/alacritty/themes/gruvbox_dark.toml"]
-
 [bell]
 duration = 0
 
@@ -11,7 +9,7 @@ shape = "Block"
 TERM = "xterm-256color"
 
 [font]
-builtin_box_drawing = false
+builtin_box_drawing = true
 size = 16
 
 [font.normal]
@@ -57,14 +55,12 @@ mods = "Control"
 history = 10000
 multiplier = 3
 
-[shell]
+[terminal.shell]
 args = ["-l", "-c", "tmux new -As local"]
 program = "/bin/bash"
 
 [window]
-decorations = "none"
 opacity = 1
-option_as_alt = "None"
 
 [window.dimensions]
 columns = 120
@@ -73,3 +69,11 @@ lines = 25
 [window.padding]
 x = 5
 y = 2
+
+[general]
+import = [
+    "~/.config/alacritty/osx.toml",
+    "~/.config/alacritty/themes/gruvbox_dark.toml",
+]
+
+[terminal]
