@@ -1,7 +1,7 @@
 return {
   "mrcjkb/rustaceanvim",
   version = "^5", -- Recommended
-  lazy = false, -- This plugin is already lazy
+  lazy = false,   -- This plugin is already lazy
   init = function()
     vim.g.rustaceanvim = {
       -- Plugin configuration
@@ -30,7 +30,10 @@ return {
             checkOnSave = false,
             -- check = {
             --   command = "clippy",
-            --   workspace = false,
+            --   -- workspace = true,
+            --   extraArgs = {
+            --     "--no-deps",
+            --   },
             --   -- features = "all",
             -- },
           },

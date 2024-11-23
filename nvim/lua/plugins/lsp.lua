@@ -20,8 +20,8 @@ return {
     cmd = { "LspInfo", "LspInstall", "LspStart" },
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<leader>ll", "<cmd>LspLog<cr>", desc = "Lsp Log" },
-      { "<leader>li", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
+      { "<leader>ll", "<cmd>LspLog<cr>",     desc = "Lsp Log" },
+      { "<leader>li", "<cmd>LspInfo<cr>",    desc = "Lsp Info" },
       { "<leader>lr", "<cmd>LspRestart<cr>", desc = "Lsp Restart" },
     },
     dependencies = {
@@ -94,8 +94,12 @@ return {
       local lsp_zero = require("lsp-zero")
       local lspconfig = require("lspconfig")
 
-      require("lspconfig.ui.windows").default_options.border = "rounded"
-      vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+      local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+      function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+        opts = opts or {}
+        opts.border = "rounded"
+        return orig_util_open_floating_preview(contents, syntax, opts, ...)
+      end
 
       vim.diagnostic.config({
         update_in_insert = true,
