@@ -16,6 +16,14 @@ size = 12
 family = "Monaco Nerd Font Mono"
 style = "Regular"
 
+[font.bold]
+family = "Monaco Nerd Font Mono"
+style = "Regular"
+
+[font.italic]
+family = "Monaco Nerd Font Mono"
+style = "Regular"
+
 [[keyboard.bindings]]
 chars = "@"
 key = 19
