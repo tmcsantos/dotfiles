@@ -155,7 +155,7 @@ return {
             })
           end,
           -- python
-          ruff_lsp = function()
+          ruff = function()
             lspconfig.ruff.setup({
               on_init = function(client)
                 client.server_capabilities.hoverProvider = false
