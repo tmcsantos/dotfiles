@@ -39,6 +39,10 @@ return {
           },
         },
       },
+      -- DAP configuration
+      dap = {
+
+      },
     }
   end,
 }

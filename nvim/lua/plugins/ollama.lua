@@ -25,7 +25,7 @@ return {
       window = "vsplit",
     })
     ollama.setup({
-      model = "gemma2:2b",
+      model = "deepseek-r1:7b",
       prompts = {
         Ask_About_Context = {
           prompt = "$input\n\n```$ftype\n$buf```",
