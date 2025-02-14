@@ -49,3 +49,11 @@ vim.api.nvim_create_autocmd({ 'WinLeave' }, {
     vim.opt_local.cursorline = false
   end
 })
+
+-- au BufReadCmd *.whl call zip#Browse(expand("<amatch>"))
+-- Create an autocommand for reading .whl files
+vim.api.nvim_create_autocmd("BufReadCmd", {
+  group = augroup("python"),
+  pattern = "*.whl",
+  command = "call zip#Browse(expand('<amatch>'))",
+})
