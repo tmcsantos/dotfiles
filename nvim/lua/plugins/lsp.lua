@@ -189,4 +189,34 @@ return {
       })
     end,
   },
+  -- none-ls
+  -- {
+  --   "nvimtools/none-ls.nvim",
+  --   config = function()
+  --     local null_ls = require("null-ls")
+  --     local diagnostics = null_ls.builtins.diagnostics
+  --     null_ls.setup({
+  --       sources = {
+  --         diagnostics.mypy
+  --       }
+  --     })
+  --   end,
+  -- },
+  -- nvim-lint
+  {
+    "mfussenegger/nvim-lint",
+    config = function()
+      local lint = require("lint")
+      lint.linters_by_ft = {
+        python = { 'mypy' },
+      }
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          -- try_lint without arguments runs the linters defined in `linters_by_ft`
+          -- for the current filetype
+          lint.try_lint()
+        end,
+      })
+    end,
+  },
 }

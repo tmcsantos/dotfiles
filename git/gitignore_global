@@ -72,6 +72,8 @@ pip-wheel-metadata
 .ipynb_checkpoints
 .ropeproject
 __pycache__
+.dmypy.json
+.tox
 
 # pytest generated files #
 ##########################
