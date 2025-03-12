@@ -109,6 +109,7 @@ return {
       require("mason-lspconfig").setup({
         ensure_installed = {
           "jedi_language_server",
+          -- "pylsp",
           "lua_ls",
           "ruff",
           "yamlls",
@@ -155,6 +156,18 @@ return {
             })
           end,
           -- python
+          -- pylsp = function()
+          --   lspconfig.pylsp.setup({
+          --     settings = {
+          --       pylsp = {
+          --         plugins = {
+          --           ruff = { enabled = false },
+          --           rope_autoimport = { enabled = true }
+          --         }
+          --       }
+          --     }
+          --   })
+          -- end,
           ruff = function()
             lspconfig.ruff.setup({
               on_init = function(client)

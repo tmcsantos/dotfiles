@@ -5,7 +5,7 @@ c.TerminalInteractiveShell.true_color = True
 # Getting a list of available styles
 # from pygments.styles import get_all_styles
 # list(get_all_styles())
-c.TerminalInteractiveShell.highlighting_style = 'gruvbox-dark'
+# c.TerminalInteractiveShell.highlighting_style = 'gruvbox-dark' # deprecated
 c.TerminalInteractiveShell.editing_mode = 'vi'
 c.TerminalInteractiveShell.editor = 'vi'
 c.TerminalInteractiveShell.timeoutlen = 0
