@@ -25,7 +25,9 @@ return {
       window = "vsplit",
     })
     ollama.setup({
-      model = "deepseek-r1:7b",
+      -- model = "deepseek-r1:7b",
+      -- model = "gemma3:12b",
+      model = "gemma3:4b",
       prompts = {
         Ask_About_Context = {
           prompt = "$input\n\n```$ftype\n$buf```",
@@ -36,6 +38,15 @@ return {
           prompt = "$sel\n\n$input\n",
           action = action,
           input_label = ">>>",
+        },
+        Generate_Docstring = {
+          prompt = "You are a helpful code understanding assistant.\n"
+              .. "Please look at the following code and create a comprehensive docstring.\n"
+              .. "Each line of the docstring should be no longer than 100 characters.\n"
+              .. "\n```$ftype\n$sel\n```",
+          -- prompt = "Generate a docstring for this code:\n```$ftype\n$sel\n```"
+          action = action,
+          input_label = ">>>"
         },
       },
     })
