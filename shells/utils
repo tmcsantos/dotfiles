@@ -42,6 +42,8 @@ function dotenv {
   fi
 }
 
-if is_app_installed cmatrix; then
+if is_app_installed unimatrix; then
+  alias brb="command unimatrix -s 96 -a"
+elif is_app_installed cmatrix; then
   alias brb="command cmatrix"
 fi
