@@ -1,3 +1,5 @@
+-- TODO: try saghen/blink.cmp
+-- https://cmp.saghen.dev/
 return {
   {
     "hrsh7th/cmp-nvim-lsp",
