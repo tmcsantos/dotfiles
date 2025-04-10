@@ -198,6 +198,19 @@ return {
               filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }, -- exclude "proto".
             })
           end,
+          -- harper-ls Harper is a grammar checker designed to run anywhere there is text
+          harper_ls = function()
+            lspconfig.harper_ls.setup({
+              settings = {
+                ["harper-ls"] = {
+                  userDictPath = "~/.config/nvim/spell/en.utf8.add",
+                  linters = {
+                    ToDoHyphen = false,
+                  },
+                },
+              },
+            })
+          end
         },
       })
     end,
