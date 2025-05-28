@@ -31,15 +31,16 @@ fi
 
 ### Load .env files
 function dotenv {
-  if [ -f .env ]; then
-    set -o allexport; source .env; set +o allexport
-  fi
-  if [ -f .env.dev ]; then
-    set -o allexport; source .env.dev; set +o allexport
-  fi
-  if [ -f .env.prod ]; then
-    set -o allexport; source .env.prod; set +o allexport
-  fi
+  local slashes=${PWD//[^\/]/}
+  local directory="$PWD"
+  for (( n=${#slashes}; n>0; --n ))
+  do
+    if [ -f "$directory/.env" ]; then
+      set -o allexport; source "$directory/.env"; set +o allexport
+      break
+    fi
+    directory=$(dirname $directory)
+  done
 }
 
 if is_app_installed unimatrix; then
