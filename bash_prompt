@@ -1,26 +1,26 @@
 #!/usr/bin/env bash
 
 # avoid bash history duplicates..
-HISTCONTROL=ignoredups:erasedups
-HISTSIZE=20000
+export HISTCONTROL=ignoredups:erasedups
+export HISTSIZE=20000
 # When the shell exits, append to the history file instead of overwriting it
 shopt -s histappend
 
 # Using \[ and \] around colors is necessary to prevent
 # issues with command line editing/browsing/completion!
-PROMPT_DIRTRIM=4                           # shorten deep paths in the prompt
-line0='\[\033]0;Per Aspera Ad Astra\007\]' # set window title
-# line1="\[${CYAN}\]\u\[${NC}\]"             # user
-# line1="$line1@\[${GREEN}\]\h\[${NC}\]"     # host
-# line1="$line1 "                            # seperator
-line1="$line1\[${B_YELLOW}\]\w\[${NC}\]"   # working directory
+export PROMPT_DIRTRIM=4                      # shorten deep paths in the prompt
+line0='\[\033]0;Per Aspera Ad Astra\007\]'   # set window title
+# line1="\[${CYAN}\]\u\[${NC}\]"               # user
+# line1="$line1@\[${GREEN}\]\h\[${NC}\]"       # host
+# line1="$line1 "                              # seperator
+line1="$line1\[${B_YELLOW}\]\w\[${NC}\]"     # working directory
 
 line2="\n"
-# line2="\[${MAGENTA}\]\D{%b %d}\[${NC}\]" # Date, for more info, man 3 strftime
-# line2="$line2 "                          # seperator
-# line2="$line2\[${WHITE}\]\A\[${NC}\]"      # 24h time
-# line2="$line2 "                            # seperator
-line2="$line2\$ "                          # prompt: always $
+# line2="\[${MAGENTA}\]\D{%b %d}\[${NC}\]"     # Date, for more info, man 3 strftime
+# line2="$line2 "                              # seperator
+# line2="$line2\[${WHITE}\]\A\[${NC}\]"        # 24h time
+# line2="$line2 "                              # seperator
+line2="$line2\$ "                            # prompt: always $
 
 _PS1="${line0}__nonzero_return____virtualenv_info__${line1}${line2}"
 
