@@ -16,7 +16,7 @@ alias \
   ls='ls -hNGF --color=auto --group-directories-first' \
   grep='grep --color=auto' \
   diff='diff --color=auto' \
-  less='less -R' 
+  less='less -R'
 
 # Some other stuff
 alias \
@@ -36,8 +36,8 @@ if is_app_installed uv; then
   alias \
     pip='uv pip' \
     ipython='uv run --with ipython ipython' \
-    ve='uv venv; source .venv/bin/activate; uv pip install -U pip' \
-    jupyter='uv pip install jupyterlab-lsp jedi-language-server; uv run --with jupyter jupyter lab --ip=0.0.0.0 --no-browser'
+    ve='uv venv --seed; source .venv/bin/activate; uv pip install -U pip' \
+    jupyter='uv pip install jupyterlab-lsp jedi-language-server jupyterlab; .venv/bin/jupyter lab --ip=0.0.0.0 --no-browser'
 else
   alias \
     ve='python3 -m venv --symlinks .venv; source .venv/bin/activate; pip install -U pip; pip install ipython'
