@@ -2,9 +2,13 @@
 
 # OS specific support.
 darwin=false;
+linux=false;
 case "$(uname -s)" in
   Darwin*)
     darwin=true
+    ;;
+  Linux*)
+    linux=true
     ;;
 esac
 

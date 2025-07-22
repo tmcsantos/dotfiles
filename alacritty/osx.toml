@@ -1,3 +1,7 @@
 [window]
 decorations = "none"
 option_as_alt = "None"
+
+[font]
+builtin_box_drawing = true
+size = 16

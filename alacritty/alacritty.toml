@@ -8,10 +8,6 @@ shape = "Block"
 [env]
 TERM = "xterm-256color"
 
-[font]
-builtin_box_drawing = true
-size = 12
-
 [font.normal]
 family = "Monaco Nerd Font Mono"
 style = "Regular"
@@ -23,41 +19,6 @@ style = "Regular"
 [font.italic]
 family = "Monaco Nerd Font Mono"
 style = "Regular"
-
-[[keyboard.bindings]]
-chars = "@"
-key = 19
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "{"
-key = 26
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "["
-key = 28
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "]"
-key = 25
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "}"
-key = 29
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = '\'
-key = 50
-mods = "Alt"
-
-[[keyboard.bindings]]
-chars = "\u0000"
-key = "Space"
-mods = "Control"
 
 [scrolling]
 history = 10000
@@ -80,7 +41,9 @@ y = 2
 
 [general]
 import = [
+    "~/.config/alacritty/linux.toml",
     "~/.config/alacritty/osx.toml",
+    "~/.config/alacritty/keybindings.toml",
     "~/.config/alacritty/themes/gruvbox_dark.toml",
 ]
 
