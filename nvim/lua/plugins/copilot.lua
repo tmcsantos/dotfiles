@@ -15,20 +15,22 @@ return {
           inline = { adapter = "ollama_code" },
         },
         adapters = {
-          ollama_chat = function()
-            return adapters.extend("ollama", {
-              schema = {
-                model = { default = "cogito:3b" }
-              }
-            })
-          end,
-          ollama_code = function()
-            return adapters.extend("ollama", {
-              schema = {
-                model = { default = "qwen2.5-coder:1.5b" }
-              }
-            })
-          end
+          http = {
+            ollama_chat = function()
+              return adapters.extend("ollama", {
+                schema = {
+                  model = { default = "cogito:3b" }
+                }
+              })
+            end,
+            ollama_code = function()
+              return adapters.extend("ollama", {
+                schema = {
+                  model = { default = "qwen2.5-coder:1.5b" }
+                }
+              })
+            end
+          }
         }
       })
     end

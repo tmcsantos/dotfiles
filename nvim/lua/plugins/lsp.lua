@@ -176,7 +176,7 @@ return {
             })
           end,
           -- rust
-          rust_analyzer = function() end,
+          -- rust_analyzer = function() end,
           -- rust_analyzer = function()
           --   lspconfig.rust_analyzer.setup({
           --     on_attach = function(_, bufnr)
