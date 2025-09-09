@@ -1,9 +1,22 @@
+# For more read: man 3 readline
+###############################
+
 # do not bell on tab-completion
 set bell-style none
-set meta-flag on
+
+# enable eight-bit input (likely to depend on the LC_CTYPE locale category)
 set input-meta on
 set convert-meta off
 set output-meta on
+
+# enable coloring of completion of files by types
+set colored-stats on
+
+# causes readline to display all possible completions immediately after a single Tab key press
+set show-all-if-ambiguous on
+
+# To enable case-insensitive tab completion in Bash
+set completion-ignore-case on
 
 #################### VIM ####################
 # FOR MORE INFORMATION CHECK:
@@ -28,7 +41,5 @@ set show-mode-in-prompt on
 #     6: steady bar (xterm)
 set vi-ins-mode-string \1\e[5 q\2
 set vi-cmd-mode-string \1\e[2 q\2
-
-set show-all-if-ambiguous on
 
 $endif

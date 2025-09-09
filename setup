@@ -5,3 +5,5 @@
 
 # bash completion user dir
 mkdir -p "$BASH_COMPLETION_USER_DIR"/completions
+
+install --preserve-timestamps --mode=644 inputrc ${HOME}/.inputrc

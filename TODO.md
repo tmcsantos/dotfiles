@@ -13,6 +13,8 @@ move miscellaneous functions to a dedicated user folder, that is added to the `$
 
 look up `install .rcfile ~/.config/app/rcfile`
 
+add "shopt -s autocd cdspell" to .bashrc
+
 SEE: https://github.com/naggie/dotfiles/
 
 
