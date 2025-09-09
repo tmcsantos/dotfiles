@@ -86,3 +86,7 @@ __pycache__
 # asdf - language runtime manager
 #################################
 .tool-versions
+
+# sketch directory for quick prototypes
+#######################################
+_sketch_/
