@@ -21,6 +21,23 @@ return {
         dapui.close()
       end
 
+      -- rust
+      dap.adapters.codelldb = {
+        type = "executable",
+        command = "codelldb",
+      }
+      dap.configurations.rust = {
+        {
+          -- If you get an "Operation not permitted" error using this, try disabling YAMA:
+          --  echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+          name = "Attach to process",
+          type = 'codelldb',
+          request = 'attach',
+          pid = require('dap.utils').pick_process,
+          args = {},
+        }
+      }
+
       -- keybindings
       vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
     end
