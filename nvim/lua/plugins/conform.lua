@@ -26,14 +26,14 @@ return {
         proto = { "buf" },
         toml = { "taplo" },
       },
-      formatters = {
-        taplo = {
-          -- Adds environment args to the taplo formatter
-          env = {
-            TAPLO_CONFIG = vim.fn.expand("$HOME/dotfiles/taplo.toml"),
-          }
-        }
-      },
+      -- formatters = {
+      --   taplo = {
+      --     -- Adds environment args to the taplo formatter
+      --     env = function(client, bufnr)
+      --       return { TAPLO_CONFIG = vim.fn.expand("$HOME/dotfiles/taplo.toml") }
+      --     end
+      --   }
+      -- },
     })
     vim.keymap.set({ "n", "v" }, "<leader>f", function()
       conform.format()

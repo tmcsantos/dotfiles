@@ -17,7 +17,9 @@ return {
     opts = {},
     -- enabled = false,
     -- Optional dependencies
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" },
+    lazy = false,
     config = function()
       local oil = require("oil")
       oil.setup({
@@ -44,7 +46,7 @@ return {
           show_hidden = true,
         },
       })
-      vim.keymap.set("n", "<leader>pv", oil.toggle_float, {})
+      vim.keymap.set("n", "<leader>pv", oil.open, {})
     end,
   },
 }
