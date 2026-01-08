@@ -110,7 +110,7 @@ return {
         ensure_installed = {
           "jedi_language_server",
           -- "pylsp",
-          "lua_ls",
+          "lua_ls@3.15.0",
           "ruff",
           "yamlls",
         },
