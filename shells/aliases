@@ -42,3 +42,9 @@ else
   alias \
     ve='python3 -m venv --symlinks .venv; source .venv/bin/activate; pip install -U pip; pip install ipython'
 fi
+
+if is_app_installed cal; then
+  if [ "$linux" = "true" ]; then
+    alias cal='cal -m'
+  fi
+fi
