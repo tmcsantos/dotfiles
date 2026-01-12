@@ -7,6 +7,8 @@ return {
       theme = 'hyper',
       config = {
         week_header = { enable = true },
+        project = { enable = false },
+        mru = { enable = false },
         shortcut = {
           {
             icon = '󰒲 ',
