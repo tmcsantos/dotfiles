@@ -8,9 +8,9 @@ return {
   },
   config = function()
     require("neotest").setup({
-      adapters = {
-        require("rustaceanvim.neotest"),
-      },
+      -- adapters = {
+      --   require("rustaceanvim.neotest"),
+      -- },
     })
   end,
 }

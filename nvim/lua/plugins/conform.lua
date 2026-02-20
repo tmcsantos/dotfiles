@@ -25,6 +25,7 @@ return {
         json = { "jq" },
         proto = { "buf" },
         toml = { "taplo" },
+        yaml = { "yamlfmt" },
       },
       -- formatters = {
       --   taplo = {

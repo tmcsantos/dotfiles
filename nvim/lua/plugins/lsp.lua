@@ -17,12 +17,12 @@ return {
   -- lspconfig
   {
     "neovim/nvim-lspconfig",
-    cmd = { "LspInfo", "LspInstall", "LspStart" },
+    cmd = { "LspInstall", "LspStart" },
     event = { "BufReadPre", "BufNewFile" },
     keys = {
-      { "<leader>ll", "<cmd>LspLog<cr>",     desc = "Lsp Log" },
-      { "<leader>li", "<cmd>LspInfo<cr>",    desc = "Lsp Info" },
-      { "<leader>lr", "<cmd>LspRestart<cr>", desc = "Lsp Restart" },
+      { "<leader>ll", "<cmd>LspLog<cr>",              desc = "Lsp Log" },
+      { "<leader>li", "<cmd>checkhealth vim.lsp<cr>", desc = "Lsp Info" },
+      { "<leader>lr", "<cmd>lsp restart<cr>",         desc = "Lsp Restart" },
     },
     dependencies = {
       {
@@ -119,11 +119,13 @@ return {
           -- Lua
           lua_ls = function()
             local lua_opts = lsp_zero.nvim_lua_ls()
-            lspconfig.lua_ls.setup(lua_opts)
+            -- lspconfig.lua_ls.setup(lua_opts)
+            vim.lsp.enable("lua_ls")
           end,
           -- YAML
           yamlls = function()
-            lspconfig.yamlls.setup({
+            -- lspconfig.yamlls.setup({
+            vim.lsp.config("yamlls", {
               settings = {
                 yaml = {
                   format = { enable = true },
@@ -169,7 +171,8 @@ return {
           --   })
           -- end,
           ruff = function()
-            lspconfig.ruff.setup({
+            -- lspconfig.ruff.setup({
+            vim.lsp.config("ruff", {
               on_init = function(client)
                 client.server_capabilities.hoverProvider = false
               end,
@@ -177,30 +180,40 @@ return {
           end,
           -- rust
           -- rust_analyzer = function() end,
-          -- rust_analyzer = function()
-          --   lspconfig.rust_analyzer.setup({
-          --     on_attach = function(_, bufnr)
-          --       vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-          --     end,
-          --     settings = {
-          --       ["rust-analyzer"] = {
-          --         inlayHints = {
-          --           parameterHints = { enable = false },
-          --           closingBraceHints = { enable = false },
-          --         },
-          --       },
-          --     },
-          --   })
-          -- end,
+          rust_analyzer = function()
+            -- lspconfig.rust_analyzer.setup({
+            -- vim.lsp.config("rust_analyzer", {
+            --   on_attach = function(_, bufnr)
+            --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+            --   end,
+            --   settings = {
+            --     ["rust-analyzer"] = {
+            --       checkOnSave = false,
+            --       procMacro = {
+            --         enable = true,
+            --         ignored = {
+            --           ["async-trait"] = { "async_trait" },
+            --         }
+            --       },
+            --       inlayHints = {
+            --         parameterHints = { enable = false },
+            --         closingBraceHints = { enable = false },
+            --       },
+            --     },
+            --   },
+            -- })
+          end,
           -- clang
           clangd = function()
-            lspconfig.clangd.setup({
+            -- lspconfig.clangd.setup({
+            vim.lsp.config("clangd", {
               filetypes = { "c", "cpp", "objc", "objcpp", "cuda" }, -- exclude "proto".
             })
           end,
           -- harper-ls Harper is a grammar checker designed to run anywhere there is text
           harper_ls = function()
-            lspconfig.harper_ls.setup({
+            -- lspconfig.harper_ls.setup({
+            vim.lsp.config("harper_ls", {
               settings = {
                 ["harper-ls"] = {
                   userDictPath = "~/.config/nvim/spell/en.utf8.add",

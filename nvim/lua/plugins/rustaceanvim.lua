@@ -1,5 +1,6 @@
 return {
   "mrcjkb/rustaceanvim",
+  enabled = true,
   version = "^7",
   lazy = false, -- This plugin is already lazy
   init = function()
@@ -25,9 +26,19 @@ return {
               },
             },
             checkOnSave = false,
+            procMacro = {
+              enable = true,
+              ignored = {
+                ["async-trait"] = { "async_trait" },
+              }
+            },
+            check = {
+              command = "check",
+              workspace = false,
+            },
             -- check = {
-            --   command = "clippy",
-            --   -- workspace = true,
+            --   -- command = "clippy",
+            --   workspace = true,
             --   extraArgs = {
             --     "--no-deps",
             --   },
