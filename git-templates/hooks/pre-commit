@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
 
 set -eo pipefail
 # This script verifies if any credentials are being submited, and, fails if found.
