@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+LOCAL_USER=$(logname)
+REMOTE_HOST=${REMOTE_USER:-$LOCAL_USER}@192.168.68.102
+SSHDIR=/home/${LOCAL_USER}/.ssh
+
+# OS specific support.
+darwin=false
+linux=false
+case "$(uname -s)" in
+Darwin*)
+  darwin=true
+  ;;
+Linux*)
+  linux=true
+  ;;
+esac
+
+config=$(mktemp)
+cat >"$config" <<'EOF'
+TCPKeepAlive yes
+ServerAliveInterval 30
+EOF
+
+if [ "$darwin" = "true" ]; then
+  SSHDIR=/Users/${LOCAL_USER}/.ssh
+
+  if [[ $EUID -ne 0 ]]; then
+    echo "This script must be run as root. Trying to elevate privileges..."
+    exec sudo "$0" "$@"
+    exit 1
+  fi
+
+  disable_proxy() {
+    networksetup -setsocksfirewallproxy Wi-Fi "" ""
+    networksetup -setsocksfirewallproxystate Wi-Fi off
+    echo "SOCKS proxy disabled"
+  }
+  trap disable_proxy INT
+
+  networksetup -setsocksfirewallproxy Wi-Fi 0.0.0.0 1080
+  networksetup -setsocksfirewallproxystate Wi-Fi on
+  networksetup -setproxybypassdomains Wi-Fi media.azure.net bmc.cdn.office.net
+fi
+
+echo "SOCKS proxy enabled"
+echo "Tunneling..."
+ssh -ND 1080 "$REMOTE_HOST" -i "$SSHDIR"/id_rsa -F "$config"
+rm "$config"
