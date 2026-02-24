@@ -12,6 +12,7 @@ if is_app_installed git; then
   cfg="command git --no-optional-locks config --global"
 
   if is_app_installed gpg; then
+    touch ~/.gitconfig
     export GPG_TTY=$(tty)
     if ! $cfg --get user.signingkey &>/dev/null; then
       GPG_SIGNINGKEY=$(gpg --list-secret-keys --keyid-format LONG | grep sec | awk '{print $2}' | cut -d/ -f 2)
