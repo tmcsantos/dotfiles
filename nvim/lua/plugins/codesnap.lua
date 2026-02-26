@@ -1,11 +1,16 @@
 return {
   "mistricky/codesnap.nvim",
-  build = "make",
+  tag = "v2.0.0",
   config = function()
     require("codesnap").setup({
-      has_breadcrumbs = true,
-      code_font_family = "Monaco Nerd Font Mono",
-      watermark = "",
+      snapshot_config = {
+        code_config = {
+          breadcrumbs = {
+            enable = true,
+            font_family = "Monaco Nerd Font Mono",
+          },
+        },
+      },
     })
   end,
 }
