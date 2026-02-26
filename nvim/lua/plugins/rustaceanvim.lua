@@ -28,9 +28,9 @@ return {
             checkOnSave = false,
             procMacro = {
               enable = true,
-              ignored = {
-                ["async-trait"] = { "async_trait" },
-              }
+              -- ignored = {
+              --   ["async-trait"] = { "async_trait" },
+              -- }
             },
             check = {
               command = "check",
