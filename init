@@ -23,7 +23,7 @@ for comp in completion/*.bash; do
 done
   
 
-scripts=(`find . -mindepth 2 -maxdepth 2 -not -path "./.git/*" -perm /u+x -type f`)
+scripts=(`find . -mindepth 2 -maxdepth 2 -not -path "./.git/*" -perm -u+x -type f`)
 [[ -n $DEBUG ]] && debug "scripts: ${scripts[@]}"
 
 for script in "${scripts[@]}"; do
