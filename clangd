@@ -1,7 +1,8 @@
 CompileFlags:
-  CompilationDatabase: build/
+  Remove:
+    - -fno-canonical-system-headers
+    - -Werror
   Add:
-    - -DLOCAL
     - -Wall
     - -O2
     - -Wextra
@@ -10,6 +11,7 @@ CompileFlags:
     - -Wfloat-equal
     - -Wno-unused-const-variable
     - -Wno-sign-conversion
+    - -ferror-limit=0
     - -std=c++20
 Index:
   Background: Skip

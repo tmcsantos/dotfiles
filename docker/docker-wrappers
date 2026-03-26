@@ -8,7 +8,8 @@
 if [ "${darwin}" = "true" ]; then
   alias docker-du='usagesort $HOME/Library/Containers/com.docker.docker'
 else
-  alias docker-du='usagesort /var/lib/docker'
+  # alias docker-du='usagesort /var/lib/docker'
+  alias docker-du='sudo du -h -d 1 "/var/lib/docker" | sort -k 1,1 -g'
 fi
 
 function docker-clean {
