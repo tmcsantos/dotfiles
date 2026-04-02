@@ -2,26 +2,48 @@
 [user]
   name = {{ .gituser | quote }}
   email = {{ .gitemail | quote }}
+
+[includeIf "gitdir:~/work/"]
+  path = ~/work/.gitconfig
+
+[credential]
+  helper = cache --timeout=86400
+
 [init]
   defaultBranch = main
   templateDir = ~/.git_templates
+
 [core]
-  excludesfile = ~/.gitignore_global
   autocrlf = input
-  editor = nvim
+  editor = nvim --clean
+  excludesfile = ~/.gitignore_global
+
 [alias]
   lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   st = status
+
 [protocol]
   version = 2
+
 [pull]
   rebase = true
+
 [push]
   autoSetupRemote = true
+
+[commit]
+  template = ~/.config/git/template
+
+[rerere]
+  enabled = true     # Reuse recorded resolution of conflicted merges
+  autoUpdate = true  # Apply stored conflict resolutions automatically
+
 [merge]
   tool = nvimdiff
+
 [mergetool]
-  prompt = false
   keepBackup = false
+  prompt = false
+
 [mergetool "nvimdiff"]
   layout = "LOCAL,BASE,REMOTE / MERGED"

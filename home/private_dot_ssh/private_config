@@ -1,0 +1,15 @@
+Include config.d/*
+Include ~/.lima/*/ssh.config
+
+Host *
+  # Multiplexing reuses existing SSH connections for multiple sessions, reducing
+  # authentication overhead and improving speed for subsequent logins.
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%r@%h:%p
+  ControlPersist 10m
+
+  Compression yes
+  TCPKeepAlive yes
+  ServerAliveInterval 30
+  ServerAliveCountMax 3
+  AddKeysToAgent yes

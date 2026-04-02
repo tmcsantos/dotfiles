@@ -8,17 +8,18 @@ fi
 # list directories of interest
 __list_tracked_dirs() {
   local tracked_directories=(
-    "${WORKDIR:-$HOME/projects}"
-    "${WORKDIR:-$HOME/journal}"
-    "${WORKDIR:-$HOME/services}"
-    "${WORKDIR:-$HOME/playground}"
+    "$HOME/projects"
+    "$HOME/work"
+    "$HOME/journal"
+    "$HOME/services"
+    "$HOME/playground"
   )
 
   local targets=()
   for target in "${tracked_directories[@]}"; do
     [[ -d $target ]] && targets+=("$target")
   done
-  echo "$targets"
+  echo "${targets[@]}"
 }
 
 # Use ~~ as the trigger sequence instead of the default **
