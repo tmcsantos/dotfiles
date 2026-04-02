@@ -1,0 +1,40 @@
+# Colors (Gruvbox Material Dark Hard)
+
+# Default colors
+[colors.primary]
+background = '#1d2021'
+foreground = '#d4be98'
+dim_foreground = '#d4be98'
+bright_foreground = '#d4be98'
+
+# Selection colors
+[colors.selection]
+background = '#d4be98'
+text = '#1d2021'
+
+# Cursor colors
+[colors.cursor]
+cursor = '#a89984'
+text = '#1d2021'
+
+# Normal colors
+[colors.normal]
+black = '#665c54'
+red = '#ea6962'
+green = '#a9b665'
+yellow = '#e78a4e'
+blue = '#7daea3'
+magenta = '#d3869b'
+cyan = '#89b482'
+white = '#d4be98'
+
+# Bright colors
+[colors.bright]
+black = '#928374'
+red = '#ea6962'
+green = '#a9b665'
+yellow = '#d8a657'
+blue = '#7daea3'
+magenta = '#d3869b'
+cyan = '#89b482'
+white = '#d4be98'

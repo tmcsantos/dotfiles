@@ -1,0 +1,61 @@
+{{ $sudo := "sudo " -}}
+{{ if eq .chezmoi.username "root" -}}
+{{ $sudo = "" -}}
+{{ end -}}
+
+{{ $packages := list
+  "bat"
+  "btop"
+  "clang"
+  "cmake"
+  "cowsay"
+  "curl"
+  "fastfetch"
+  "findutils"
+  "fortune-mod"
+  "fzf"
+  "gcc"
+  "git"
+  "gnupg"
+  "jq"
+  "lsd"
+  "make"
+  "man-db"
+  "parallel"
+  "python3"
+  "ripgrep"
+  "tmux"
+  "tree"
+  "tree-sitter-cli"
+  "unzip"
+  "vim"
+  "wget"
+  "which"
+  "wl-clipboard"
+  "xclip"
+  "yq"
+  "zip"
+-}}
+
+{{ if eq .osid "linux-arch" -}}
+{{    $packages = concat $packages (list "fd" "man-pages") -}}
+{{ end -}}
+
+{{ if eq .osid "linux-debian" "linux-raspbian" "linux-ubuntu" -}}
+{{    $packages = concat $packages (list "fd-find" "python3-venv") -}}
+{{ end -}}
+
+
+#!/usr/bin/env bash
+# This script is to install system-wide cli-tools.
+
+set -euo pipefail
+
+{{ if eq .osid "linux-arch" -}}
+{{ $sudo }}pacman -Sy {{ $packages | join " " }} --noconfirm --needed
+{{ end -}}
+
+{{ if eq .osid "linux-debian" "linux-raspbian" "linux-ubuntu" -}}
+{{ $sudo }}apt update
+{{ $sudo }}apt install -y {{ $packages | join " " }}
+{{ end -}}

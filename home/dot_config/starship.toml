@@ -1,0 +1,68 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+
+format = """\
+$os\
+$status\
+$all\
+$jobs\
+$line_break\
+$character"""
+
+[directory]
+truncation_length = 4
+truncate_to_repo = false
+style = "yellow bold"
+truncation_symbol = ".../"
+fish_style_pwd_dir_length = 0
+
+[character]
+success_symbol = "[\\$]()"
+error_symbol = "[\\$]()"
+
+[status]
+disabled = false
+format = "[$symbol]($style) "
+success_symbol = "[✔](bold green)"
+symbol = "[✘-$status](bold red)"
+
+[username]
+disabled = true
+
+[os]
+disabled = false
+format = "[$symbol]($style) "
+
+[os.symbols]
+Bluefin = "󰌽"
+Windows = ""
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+[git_status]
+ahead = "⇡${count}"
+behind = "⇣${count}"
+conflicted = "[✘](red)"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+modified = "[!${count}](yellow)"
+staged = "[+${count}](green)"
+untracked = "[…${count}](cyan)"
+stashed = "[⚑${count}](blue bold)"
+use_git_executable = true

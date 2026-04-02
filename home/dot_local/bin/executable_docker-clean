@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -eu
+
+docker rm -v "$(docker ps --filter=status=exited --filter=status=created -q)" 2>/dev/null
+docker rmi "$(docker images -a --filter=dangling=true -q)" 2>/dev/null
+docker volume rm "$(docker volume ls --filter=dangling=true -q)" 2>/dev/null

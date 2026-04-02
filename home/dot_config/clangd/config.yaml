@@ -1,0 +1,16 @@
+CompileFlags:
+  Remove:
+    - -fno-canonical-system-headers
+    - -Werror
+  Add:
+    - -Wall
+    - -O2
+    - -Wextra
+    - -Wshadow
+    - -Wconversion
+    - -Wfloat-equal
+    - -Wno-unused-const-variable
+    - -Wno-sign-conversion
+    - -ferror-limit=0
+Index:
+  Background: Skip

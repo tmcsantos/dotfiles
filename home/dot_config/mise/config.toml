@@ -1,0 +1,15 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+
+min_version = "2026.3.9"
+
+[tools]
+chezmoi = "latest"
+glow = "latest"
+jwt = "latest"
+lazygit = "latest"
+node = "latest"
+python = "latest"
+starship = "latest"
+usage = "latest"
+uv = "latest"
+yazi = "latest"

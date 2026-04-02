@@ -1,0 +1,6 @@
+{{ if not (lookPath "nvim") }}
+[".local"]
+type = "archive"
+url = 'https://github.com/neovim/neovim/releases/latest/download/nvim-{{- .chezmoi.os -}}-{{ .uname_arch }}.tar.gz'
+stripComponents = 1
+{{ end }}

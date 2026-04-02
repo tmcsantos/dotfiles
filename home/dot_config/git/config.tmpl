@@ -1,0 +1,27 @@
+# vim:filetype=gitconfig
+[user]
+  name = {{ .gituser | quote }}
+  email = {{ .gitemail | quote }}
+[init]
+  defaultBranch = main
+  templateDir = ~/.git_templates
+[core]
+  excludesfile = ~/.gitignore_global
+  autocrlf = input
+  editor = nvim
+[alias]
+  lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  st = status
+[protocol]
+  version = 2
+[pull]
+  rebase = true
+[push]
+  autoSetupRemote = true
+[merge]
+  tool = nvimdiff
+[mergetool]
+  prompt = false
+  keepBackup = false
+[mergetool "nvimdiff"]
+  layout = "LOCAL,BASE,REMOTE / MERGED"

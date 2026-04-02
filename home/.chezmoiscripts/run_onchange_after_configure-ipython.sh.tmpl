@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if command -v ipython &>/dev/null; then
+  [[ -r ~/.ipython/profile_default/ipython_config.py ]] && ipython profile create
+fi

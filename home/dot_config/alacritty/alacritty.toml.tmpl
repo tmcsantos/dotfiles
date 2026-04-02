@@ -1,0 +1,50 @@
+# vim:filetype=toml
+[bell]
+duration = 0
+
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[env]
+TERM = "tmux-256color"
+
+[font.normal]
+family = "Monaco Nerd Font Mono"
+style = "Regular"
+
+[font.bold]
+family = "Monaco Nerd Font Mono"
+style = "Regular"
+
+[font.italic]
+family = "Monaco Nerd Font Mono"
+style = "Regular"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[terminal.shell]
+args = ["-l", "-c", "tmux new -As local"]
+program = "/bin/bash"
+
+[window]
+opacity = 1
+
+[window.dimensions]
+columns = 120
+lines = 25
+
+[window.padding]
+x = 5
+y = 2
+
+[general]
+import = [
+  "~/.config/alacritty/{{.chezmoi.os}}.toml",
+  "~/.config/alacritty/keybindings.toml",
+  "~/.config/alacritty/themes/gruvbox_dark.toml",
+]
+
+[terminal]

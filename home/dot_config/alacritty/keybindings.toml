@@ -1,0 +1,34 @@
+[[keyboard.bindings]]
+chars = "@"
+key = 19
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "{"
+key = 26
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "["
+key = 28
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "]"
+key = 25
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "}"
+key = 29
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = '\'
+key = 50
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u0000"
+key = "Space"
+mods = "Control"

@@ -1,0 +1,18 @@
+{{- $osid := .chezmoi.os -}}
+{{- if hasKey .chezmoi.osRelease "id" -}}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+{{- $remote := or (env "CODESPACES" | not | not) (env "SSH_CONNECTION" | not | not) (env "KUBERNETES_SERVICE_HOST" | not | not) (env "container" | not | not) (env "REMOTE_CONTAINERS" | not | not) (stat "/.dockerenv" | not | not) -}}
+sourceDir = {{ .chezmoi.sourceDir | quote }}
+
+{{ $gitemail := promptStringOnce . "email" "git user.email" -}}
+{{ $gituser := promptStringOnce . "user" "git user.name" -}}
+
+
+[data]
+  osid = {{ $osid | quote }}
+  uname_arch = {{ output "uname" "-m" | trim | quote }}
+  remote = {{ $remote }}
+  gitemail = {{ $gitemail | quote }}
+  gituser = {{ $gituser | quote }}

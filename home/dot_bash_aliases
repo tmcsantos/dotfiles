@@ -1,0 +1,95 @@
+# vim:filetype=sh
+
+# Lazy chdir
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+# Verbosity
+alias \
+  cp='cp -iv' \
+  mv='mv -iv' \
+  rm='rm -v'
+
+# Colorize commands when possible
+if command -v lsd &>/dev/null; then
+  alias \
+    ls='lsd' \
+    tree='lsd --tree -a -I ".git|__pycache__|*.pyc|.venv|.idea"'
+else
+  alias \
+    ls='ls -hNGF --color=auto --group-directories-first' \
+    tree='tree -a -I ".git|__pycache__|*.pyc|.venv|.idea"'
+fi
+
+alias \
+  grep='grep --color=auto' \
+  diff='diff --color=auto' \
+  less='less -R'
+
+# Some other stuff
+alias \
+  ll='ls -l' \
+  l='ll' \
+  la='ls -al' \
+  top='btop 2>/dev/null || htop 2>/dev/null || \top' \
+  va='source .venv/bin/activate'
+
+if command -v grc &>/dev/null; then
+  alias tailf='grc tail -f'
+else
+  alias tailf='tail -f'
+fi
+
+# don't use URL to create filename (do I really want a file called
+# unetbootin-source-494.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Funetbootin%2Ffiles%2FUNetbootin%2F494%2F&ts=1391695063&use_mirror=heanet?)
+alias wget='wget --content-disposition'
+
+if command -v uv &>/dev/null; then
+  alias \
+    pip='uv pip' \
+    ipython='uv run --with ipython ipython' \
+    ve='uv venv --seed; source .venv/bin/activate; uv pip install -U pip' \
+    jupyter='uv pip install jupyterlab-lsp jedi-language-server jupyterlab; .venv/bin/jupyter lab --ip=0.0.0.0 --no-browser'
+else
+  alias \
+    ve='python3 -m venv --symlinks .venv; source .venv/bin/activate; pip install -U pip; pip install ipython'
+fi
+
+# neofecth archived :'(
+alias neofetch=fastfetch
+
+if command -v nvim &>/dev/null; then
+  alias vim=nvim
+  alias vi=nvim
+  export EDITOR="nvim"
+  export VISUAL="nvim"
+elif command -v vim &>/dev/null; then
+  export EDITOR="vim"
+  export VISUAL="vim"
+fi
+
+if command -v rsync &>/dev/null; then
+  # rsync commands
+  # all commands include the options
+  # -a archive mode; preserve owner/group/chmod
+  # -v verbose output
+  # -z compression
+  # --progress detailed progress
+  # -h human readable (size, transfer rates...)
+  alias rsync-copy='rsync -avz --progress -h'                       # copy file(s) to destination
+  alias rsync-move='rsync -avz --progress -h --remove-source-files' # move files(s) to destination (removes them from source)
+  alias rsync-update='rsync -avzu --progress -h'                    # update file(s) in destination (new and existing files)
+  alias rsync-synchronize='rsync -avzu --delete --progress -h'      # sync file(s) with destination (deletes files in dest if they are deleted)
+fi
+
+## use bat instead of cat
+if command -v bat &>/dev/null; then
+  alias cat='bat'
+fi
+## bat on debian based is batcat.
+if command -v batcat &>/dev/null; then
+  alias cat='batcat'
+fi
+
+alias brb="command unimatrix -s 96 -a"

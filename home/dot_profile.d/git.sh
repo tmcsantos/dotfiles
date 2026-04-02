@@ -1,0 +1,47 @@
+#!/usr/bin/env bash
+
+# Shows you the largest objects in your repo's pack file.
+# Written for osx.
+#
+# @see http://stubbisms.wordpress.com/2009/07/10/git-script-to-show-largest-pack-objects-and-trim-your-waist-line/
+# @author Antony Stubbs
+git-du() {
+  # set the internal field separator to line break, so that we can iterate easily over the verify-pack output
+  IFS=$'\n'
+
+  # display error if not in a repository
+  gitdir=$(git rev-parse --absolute-git-dir) || return
+  if [[ -f ${gitdir}/commondir ]]; then
+    pushd "$gitdir"
+    pushd "$(cat commondir)"
+    gitdir=$PWD
+    popd
+    popd
+  fi
+
+  objects=$(git verify-pack -v "$gitdir"/objects/pack/pack-*.idx | grep -v chain | sort -k3nr | head)
+
+  echo "All sizes are in kB. The pack column is the size of the object, compressed, inside the pack file."
+
+  output="size,pack,SHA,location"
+  for y in "$objects"; do
+    # extract the size in bytes
+    size=$(($(echo "$y" | cut -f 5 -d ' ') / 1024))
+    # extract the compressed size in bytes
+    compressedSize=$(($(echo "$y" | cut -f 6 -d ' ') / 1024))
+    # extract the SHA
+    sha=$(echo "$y" | cut -f 1 -d ' ')
+    # find the objects location in the repository tree
+    other=$(git rev-list --all --objects | grep "$sha")
+    #lineBreak=`echo -e "\n"`
+    output="${output}\n${size},${compressedSize},${other}"
+  done
+
+  echo -e "$output" | column -t -s ', '
+}
+
+# perform git gc on all git repositories
+git-gc() {
+  path=${1}
+  find "$path" -type d -name ".git" -print0 | xargs -0 -n1 -P4 sh -c 'cd $0; git gc --prune'
+}

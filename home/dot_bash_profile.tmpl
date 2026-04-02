@@ -1,0 +1,41 @@
+#
+# ~/.bash_profile
+#
+
+# Append "$1" to $PATH when not already in.
+append_path() {
+  case ":$PATH:" in
+    *:"$1":*) ;;
+    *)
+      PATH="${PATH:+$PATH:}$1"
+      ;;
+  esac
+}
+
+{{ if eq .chezmoi.os "linux" }}
+# use systemd-environment-d-generator(8) to generate environment, and export those variables
+# variables are set in $HOME/.config/environmnet.d/envvars.conf
+set -o allexport
+source <(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
+set +o allexport
+{{ end }}
+
+append_path "$HOME/.local/bin"
+append_path "$HOME/.local/share/mise/shims"
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
+
+# 
+# Load profiles from ~/.profile.d, mimicking /etc/profile.d
+if [ -d ~/.profile.d/ ]; then
+  for profile in ~/.profile.d/*.sh; do
+    [[ -f "$profile" ]] && . "$profile"
+  done
+  unset profile
+fi
+
+
+export WORKDIR=${WORKDIR:-"$HOME/projects"}
+export COLUMNS
+export LINES

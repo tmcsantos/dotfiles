@@ -1,0 +1,104 @@
+# Compiled source #
+###################
+*.a
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.o.d
+*.py[ocd]
+*.so
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.db
+
+# Patches #
+##########
+*.patch
+*.diff
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDES #
+########
+.idea
+*.iml
+.ant-targets*
+.classpath
+.project
+.settings
+.tags
+.vim
+.factorypath
+
+# JENKINS GDSL #
+################
+*.gdsl
+.jenkins_version
+
+# PYTHON VIRTUAL ENV #
+######################
+venv
+.venv
+
+# Bash .env integration #
+#########################
+.env
+.dev.vars
+
+# Python files #
+################
+# setup.py dist directory
+dist
+doc/build
+doc/cdoc/build
+# Egg metadata
+*.egg-info
+.cache
+pip-wheel-metadata
+.ipynb_checkpoints
+.ropeproject
+__pycache__
+.dmypy.json
+.tox
+
+# pytest generated files #
+##########################
+/.pytest_cache
+
+# pyenv generated files #
+#########################
+.python-version
+
+
+# c/clang tooling #
+###################
+compile_commands.json
+
+# languages runtime managers
+#################################
+.tool-versions
+mise.toml
+
+# sketch directory for quick prototypes
+#######################################
+_sketch_/
+
+# Bazel build system
+####################
+# Ignore all bazel-* symlinks. There is no full list since this can change
+# based on the name of the directory bazel is cloned into.
+/bazel-*

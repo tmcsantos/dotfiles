@@ -1,0 +1,6 @@
+{{- if not (lookPath "unimatrix") -}}
+[".local/bin/unimatrix"]
+type = "file"
+executable = true
+url = "https://raw.githubusercontent.com/will8211/unimatrix/master/unimatrix.py"
+{{- end -}}
