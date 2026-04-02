@@ -1,25 +1,21 @@
 #!/usr/bin/env bash
 
-__find_ssh_agent_socket() {
-  shopt -s nullglob
-  local -a try_socks=("$SSH_AUTH_SOCK" /tmp/ssh-*/agent.*)
-  $oldnullglob
+shopt -s nullglob
 
-  local txt
+# Searches for a valid agent socket containing keys
+#
+# Usage:
+#   source <($0)
+__find_ssh_agent_socket() {
+  local -a try_socks=("$SSH_AUTH_SOCK" /tmp/ssh-*/agent.*)
+
   for sock in "${try_socks[@]}"; do
-    echo -n "Trying $sock ... "
-    export SSH_AUTH_SOCK=$sock
-    if
-      txt=$(ssh-add -l) || [[ "$txt" == "The agent has no identities." ]]
-    then
-      echo "OK"
+    SSH_AUTH_SOCK=$sock
+    if ssh-add -l &>/dev/null; then 
+      echo "SSH_AUTH_SOCK=$sock"
       return
-    else
-      echo
     fi
   done
-
-  echo "A working SSH Agent socket could not be found"
   return 1
 }
 
