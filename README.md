@@ -13,12 +13,12 @@ Compatible with Linux and macOS.
 
 1. Bootstrapping
 
-Clone the repo and run the setup scrip:
+Clone the repo and run the setup script:
 
 ```bash
 ./setup
 ```
 
 This will:
-- Install chezmoi (if not present)
+- Install [chezmoi](https://www.chezmoi.io/) (if not present)
 - Apply all dotfiles to your home directory
