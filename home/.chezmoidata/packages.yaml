@@ -1,0 +1,43 @@
+commonPackages:
+  linux:
+    common:
+      # packages names common to Arch and debian based distros
+      - bat
+      - btop
+      - clang
+      - cmake
+      - cowsay
+      - curl
+      - fastfetch
+      - findutils
+      - fortune-mod
+      - fzf
+      - gcc
+      - git
+      - gnupg
+      - jq
+      - lsd
+      - make
+      - man-db
+      - parallel
+      - python3
+      - ripgrep
+      - tmux
+      - tree
+      - tree-sitter-cli
+      - unzip
+      - vim
+      - wget
+      - which
+      - wl-clipboard
+      - xclip
+      - yq
+      - zip
+    arch:
+      - fd
+      - man-pages
+      - pinentry
+    debian:
+      - fd-find
+      - python3-venv
+      - pinentry-curses

@@ -21,4 +21,5 @@ Clone the repo and run the setup script:
 
 This will:
 - Install [chezmoi](https://www.chezmoi.io/) (if not present)
+- Install required system packages
 - Apply all dotfiles to your home directory
