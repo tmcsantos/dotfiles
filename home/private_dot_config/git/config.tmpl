@@ -15,7 +15,7 @@
 
 [core]
   autocrlf = input
-  editor = nvim --clean
+  editor = nvim
   excludesfile = ~/.gitignore_global
 
 [alias]
@@ -47,3 +47,9 @@
 
 [mergetool "nvimdiff"]
   layout = "LOCAL,BASE,REMOTE / MERGED"
+
+[diff]
+  tool = nvim_difftool
+
+[difftool "nvim_difftool"]
+  cmd = nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"
