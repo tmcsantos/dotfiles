@@ -1,0 +1,20 @@
+{{- if (eq .chezmoi.os "darwin") -}}
+
+#!/usr/bin/env bash
+# This script is to install system-wide cli-tools.
+# packages hash: {{ include "Brewfile" | sha256sum }}
+# MacOS build version: {{ output "sw_vers" "--buildVersion" }}
+
+set -euo pipefail
+
+# 1. Install Homebrew
+command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+brew="/opt/homebrew/bin/brew"
+$brew --version
+
+
+# 2. Install Homebrew packages
+## `brew bundle dump` to generate Brewfile
+$brew bundle --file="{{ .chezmoi.sourceDir }}/Brewfile"
+
+{{- end -}}

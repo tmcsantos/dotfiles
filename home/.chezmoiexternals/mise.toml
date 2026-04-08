@@ -1,6 +1,9 @@
-{{- if not (lookPath "mise") -}}
+{{- $osname := .chezmoi.os -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $osname = "macos" -}}
+{{- end -}}
 [".local/bin/mise"]
 type = "file"
 executable = true
-url = "https://mise.jdx.dev/mise-latest-{{.chezmoi.os}}-{{.chezmoi.arch}}"
-{{- end -}}
+url = "https://mise.jdx.dev/mise-latest-{{- $osname -}}-{{- .chezmoi.arch -}}"
+refreshPeriod = "672h"  # four weeks

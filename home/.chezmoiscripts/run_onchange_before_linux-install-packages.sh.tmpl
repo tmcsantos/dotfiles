@@ -1,3 +1,5 @@
+{{- if (eq .chezmoi.os "linux") -}}
+
 #!/usr/bin/env bash
 # This script is to install system-wide cli-tools.
 
@@ -8,7 +10,9 @@ set -euo pipefail
 {{ $sudo = "" -}}
 {{ end -}}
 
+{{ if eq .chezmoi.os "linux" -}}
 packages="{{ .commonPackages.linux.common | join " " }}"
+{{ end -}}
 
 {{ if eq .osid "linux-arch" -}}
 packages="$packages {{ .commonPackages.linux.arch | join " " }}"
@@ -27,3 +31,5 @@ packages="$packages {{ .commonPackages.linux.debian | join " " }}"
 {{ $sudo }}apt update
 {{ $sudo }}apt install -y $packages
 {{ end -}}
+
+{{- end -}}

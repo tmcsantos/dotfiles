@@ -1,7 +1,8 @@
 commonPackages:
   linux:
     common:
-      # packages names common to Arch and debian based distros
+      # packages names common to Arch and Debian based distros
+      - age
       - bat
       - btop
       - clang
@@ -22,6 +23,7 @@ commonPackages:
       - parallel
       - python3
       - ripgrep
+      - rsync
       - tmux
       - tree
       - tree-sitter-cli
@@ -39,5 +41,5 @@ commonPackages:
       - pinentry
     debian:
       - fd-find
-      - python3-venv
       - pinentry-curses
+      - python3-venv

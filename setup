@@ -10,10 +10,10 @@ fi
 
 # if mise is installed, install chezmoi and apply sources
 if command -v mise >/dev/null; then
-  mise exec chezmoi -- chezmoi init --apply --source $PWD
+  mise exec chezmoi -- chezmoi init --apply --source "$PWD"
   exit 0
 fi
 
 # install chezmoi and install sources
-sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply --source "$PWD"
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$HOME"/.local/bin init --apply --source "$PWD"
 exit 0

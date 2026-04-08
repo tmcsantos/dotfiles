@@ -1,18 +1,28 @@
+#!/usr/bin/env bash
+
 #
 # ~/.bash_profile
 #
 
-# Append "$1" to $PATH when not already in.
-append_path() {
-  case ":$PATH:" in
-    *:"$1":*) ;;
-    *)
-      PATH="${PATH:+$PATH:}$1"
-      ;;
-  esac
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# Prepend "$1" to $PATH when not already in.
+prepend_path() {
+  local dir="$1"
+  # Remove all instances of the directory from PATH
+  PATH="${PATH//$dir/}"
+  # Remove extra colons (e.g., leading, trailing, or multiple adjacent)
+  PATH="${PATH//::/:}"
+  # Prepend the directory to the front
+  PATH="$dir:$PATH"
+  # prevent duplicate directories in your PATH variable
+  if [[ -d "${dir:-}" && ! $PATH =~ (^|:)"$dir"($|:) ]]; then
+    export PATH="${1}:$PATH"
+  fi
 }
 
-{{ if eq .chezmoi.os "linux" }}
+{{ if eq .chezmoi.os "linux" -}}
 # use systemd-environment-d-generator(8) to generate environment, and export those variables
 # variables are set in $HOME/.config/environmnet.d/envvars.conf
 set -o allexport
@@ -20,8 +30,14 @@ source <(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-g
 set +o allexport
 {{ end }}
 
-append_path "$HOME/.local/bin"
-append_path "$HOME/.local/share/mise/shims"
+{{ if eq .chezmoi.os "darwin" -}}
+prepend_path "$(brew --prefix)/opt/gnu-sed/libexec/gnubin"
+prepend_path "$(brew --prefix)/opt/grep/libexec/gnubin"
+prepend_path "$(brew --prefix)/opt/findutils/libexec/gnubin"
+prepend_path "$(brew --prefix)/opt/coreutils/libexec/gnubin"
+{{ end -}}
+prepend_path "$HOME/.local/share/mise/shims"
+prepend_path "$HOME/.local/bin"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 [[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
@@ -35,6 +51,21 @@ if [ -d ~/.profile.d/ ]; then
   unset profile
 fi
 
+{{ if eq .chezmoi.os "darwin" }}
+if command -v brew &>/dev/null; then
+  HOMEBREW_PREFIX="$(brew --prefix)"
+  eval "$(brew shellenv)"
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
+  then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*
+    do
+      [[ -r "${COMPLETION}" ]] && source "${COMPLETION}"
+    done
+  fi
+fi
+{{ end -}}
 
 export WORKDIR=${WORKDIR:-"$HOME/projects"}
 export COLUMNS

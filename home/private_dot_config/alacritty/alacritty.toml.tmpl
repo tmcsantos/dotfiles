@@ -26,8 +26,13 @@ history = 10000
 multiplier = 3
 
 [terminal.shell]
-args = ["-l", "-c", "tmux new -As local"]
+{{ if eq .chezmoi.os "linux" -}}
 program = "/bin/bash"
+{{ end -}}
+{{ if eq .chezmoi.os "darwin" -}}
+program = "/opt/homebrew/bin/bash"
+{{ end -}}
+args = ["-l", "-c", "tmux new -As local"]
 
 [window]
 opacity = 1

@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-LOCAL_USER=$(logname)
+# LOCAL_USER=$(logname) # if only this worked in Apple landia: https://github.com/electron/electron/issues/26721
+LOCAL_USER=${SUDO_USER:-$(logname)}
 REMOTE_HOST=${REMOTE_USER:-$LOCAL_USER}@192.168.68.102
 SSHDIR=/home/${LOCAL_USER}/.ssh
 

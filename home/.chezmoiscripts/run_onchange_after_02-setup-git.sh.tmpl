@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# vim:filetype=sh
+
+set -euo pipefail
+
+touch "$HOME"/.gitconfig
+
+cfg="command git --no-optional-locks config --global"
+if ! $cfg --get user.signingkey &>/dev/null; then
+  GPG_SIGNINGKEY=$(gpg --list-secret-keys --keyid-format LONG {{ .gitemail | quote }} | grep sec | awk '{print $2}' | cut -d/ -f 2)
+
+  if [[ -n $GPG_SIGNINGKEY ]]; then 
+    $cfg user.signingkey $GPG_SIGNINGKEY
+    $cfg commit.gpgsign true
+    $cfg gpg.program gpg
+  fi
+fi
+
+$cfg url."git@github.com:".insteadOf "https://github.com/"
