@@ -4,8 +4,11 @@
 # ~/.bash_profile
 #
 
+export WORKDIR=${WORKDIR:-"$HOME/projects"}
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export COLUMNS
+export LINES
 
 # Prepend "$1" to $PATH when not already in.
 prepend_path() {
@@ -39,18 +42,6 @@ prepend_path "$(brew --prefix)/opt/coreutils/libexec/gnubin"
 prepend_path "$HOME/.local/share/mise/shims"
 prepend_path "$HOME/.local/bin"
 
-[[ -f ~/.bashrc ]] && . ~/.bashrc
-[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
-
-# 
-# Load profiles from ~/.profile.d, mimicking /etc/profile.d
-if [ -d ~/.profile.d/ ]; then
-  for profile in ~/.profile.d/*.sh; do
-    [[ -f "$profile" ]] && . "$profile"
-  done
-  unset profile
-fi
-
 {{ if eq .chezmoi.os "darwin" }}
 if command -v brew &>/dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
@@ -67,6 +58,15 @@ if command -v brew &>/dev/null; then
 fi
 {{ end -}}
 
-export WORKDIR=${WORKDIR:-"$HOME/projects"}
-export COLUMNS
-export LINES
+
+[[ -f ~/.bashrc ]] && . ~/.bashrc
+[[ -f ~/.bash_aliases ]] && . ~/.bash_aliases
+
+# 
+# Load profiles from ~/.profile.d, mimicking /etc/profile.d
+if [ -d ~/.profile.d/ ]; then
+  for profile in ~/.profile.d/*.sh; do
+    [[ -f "$profile" ]] && . "$profile"
+  done
+  unset profile
+fi
