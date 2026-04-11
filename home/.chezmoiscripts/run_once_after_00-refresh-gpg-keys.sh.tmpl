@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# vim:filetype=sh
+
+set -euo pipefail
+
+# using IPs instead, having issues resolving ubuntu server.
+
+# hkps://keys.openpgp.org
+# gpg --refresh-keys --keyserver hkps://195.201.47.43 || true
+
+# hkps://keyserver.ubuntu.com
+gpg --refresh-keys --keyserver hkps://185.125.188.26 || true
