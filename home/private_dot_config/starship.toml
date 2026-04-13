@@ -10,6 +10,13 @@ $jobs\
 $line_break\
 $character"""
 
+[aws]
+disabled = true
+[azure]
+disabled = true
+[gcloud]
+disabled = true
+
 [directory]
 truncation_length = 4
 truncate_to_repo = false

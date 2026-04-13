@@ -9,7 +9,11 @@ set -euo pipefail
 
 # 1. Install Homebrew
 command -v brew &>/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+{{ if (eq .uname_arch "x86_64") }}
+brew="/usr/local/bin/brew"
+{{ else }}
 brew="/opt/homebrew/bin/brew"
+{{ end }}
 $brew --version
 
 

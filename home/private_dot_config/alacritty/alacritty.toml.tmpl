@@ -30,7 +30,11 @@ multiplier = 3
 program = "/bin/bash"
 {{ end -}}
 {{ if eq .chezmoi.os "darwin" -}}
+{{   if eq .uname_arch "x86_64" -}}
+program = "/usr/local/bin/bash"
+{{   else -}}
 program = "/opt/homebrew/bin/bash"
+{{   end -}}
 {{ end -}}
 args = ["-l", "-c", "tmux new -As local"]
 
