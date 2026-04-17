@@ -13,3 +13,5 @@ Host *
   ServerAliveInterval 30
   ServerAliveCountMax 3
   AddKeysToAgent yes
+
+# vim:filetype=sshconfig
