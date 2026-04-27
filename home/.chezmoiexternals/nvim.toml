@@ -1,9 +1,13 @@
 {{- $osname := .chezmoi.os -}}
+{{- $arch := .uname_arch -}}
 {{- if eq .chezmoi.os "darwin" -}}
 {{-   $osname = "macos" -}}
 {{- end -}}
+{{- if eq .uname_arch "aarch64" -}}
+{{-   $arch = "arm64" -}}
+{{- end -}}
 [".local"]
 type = "archive"
-url = 'https://github.com/neovim/neovim/releases/latest/download/nvim-{{- $osname }}-{{ .uname_arch }}.tar.gz'
+url = 'https://github.com/neovim/neovim/releases/latest/download/nvim-{{- $osname }}-{{ $arch }}.tar.gz'
 stripComponents = 1
 refreshPeriod = "672h"  # four weeks

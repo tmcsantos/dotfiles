@@ -1,0 +1,10 @@
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   if eq .uname_arch "arm64" -}}
+pinentry-program /opt/homebrew/bin/pinentry-mac
+{{-   else }}
+pinentry-program /usr/local/bin/pinentry-mac
+{{-   end }}
+{{ end -}}
+# Timeout to 12 hours
+default-cache-ttl 43200
+max-cache-ttl 43200
