@@ -5,7 +5,6 @@ min_version = "2026.3.9"
 [tools]
 chezmoi = "latest"
 glow = "latest"
-jwt = "latest"
 lazygit = "latest"
 node = "latest"
 python = "latest"
