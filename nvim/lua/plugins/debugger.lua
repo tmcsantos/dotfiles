@@ -1,45 +1,80 @@
 return {
-  { 'mfussenegger/nvim-dap' },
-  { 'jay-babu/mason-nvim-dap.nvim' },
-  {
-    'rcarriga/nvim-dap-ui',
-    dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
-    config = function()
-      local dap, dapui = require("dap"), require("dapui")
-      dapui.setup()
+	{
+		"mfussenegger/nvim-dap",
+		event = "VeryLazy",
+		dependencies = {
+			"williamboman/mason.nvim",
+			"rcarriga/nvim-dap-ui",
+			"nvim-neotest/nvim-nio",
+			"jay-babu/mason-nvim-dap.nvim",
+			"theHamsta/nvim-dap-virtual-text",
+		},
+		config = function()
+			local dap = require("dap")
+			local mason_dap = require("mason-nvim-dap")
+			local dapui = require("dapui")
+			local dap_virtual_text = require("nvim-dap-virtual-text")
 
-      dap.listeners.before.attach.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.launch.dapui_config = function()
-        dapui.open()
-      end
-      dap.listeners.before.event_terminated.dapui_config = function()
-        dapui.close()
-      end
-      dap.listeners.before.event_exited.dapui_config = function()
-        dapui.close()
-      end
+			-- Dap Virtual Text
+			dap_virtual_text.setup()
 
-      -- rust
-      dap.adapters.codelldb = {
-        type = "executable",
-        command = "codelldb",
-      }
-      dap.configurations.rust = {
-        {
-          -- If you get an "Operation not permitted" error using this, try disabling YAMA:
-          --  echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
-          name = "Attach to process",
-          type = 'codelldb',
-          request = 'attach',
-          pid = require('dap.utils').pick_process,
-          args = {},
-        }
-      }
+			mason_dap.setup({
+				ensure_installed = { "codelldb", "python" },
+				automatic_installation = true,
+				handlers = {
+					function(config)
+						require("mason-nvim-dap").default_setup(config)
+					end,
+				},
+			})
 
-      -- keybindings
-      vim.keymap.set('n', '<Leader>b', function() require('dap').toggle_breakpoint() end)
-    end
-  }
+			-- Configurations
+			dap.configurations = {
+				python = {
+					{
+						type = "debugpy",
+						request = "launch",
+						name = "Launch file",
+						program = "${file}",
+					},
+				},
+				cpp = {
+					{
+						name = "Launch file",
+						type = "codelldb",
+						request = "launch",
+						program = function()
+							return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+						end,
+						cwd = "${workspaceFolder}",
+						stopAtEntry = false,
+					},
+				},
+			}
+			dap.configurations.c = dap.configurations.cpp
+			dap.configurations.rust = dap.configurations.cpp
+
+			-- Dap UI
+			dapui.setup()
+
+			dap.listeners.before.attach.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.launch.dapui_config = function()
+				dapui.open()
+			end
+			dap.listeners.before.event_terminated.dapui_config = function()
+				dapui.close()
+			end
+			dap.listeners.before.event_exited.dapui_config = function()
+				dapui.close()
+			end
+
+			-- keybindings
+			vim.keymap.set("n", "<Leader>b", function()
+				require("dap").toggle_breakpoint()
+			end)
+
+		end,
+	},
 }
