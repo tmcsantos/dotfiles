@@ -7,5 +7,5 @@ export GPG_TTY
 
 # launch gpg-agent if not up
 if ! pgrep -U "$USER" gpg-agent >/dev/null; then
-  eval "$(gpg-agent --daemon)"
+  eval "$(gpg-connect-agent --quiet /bye)"
 fi
