@@ -2,15 +2,12 @@
 
 set -eu
 
-docker_=docker
-
 if command -v docker &>/dev/null; then
-  docker_=docker
+  docker rm -v $(docker ps --filter=status=exited --filter=status=created -q) 2>/dev/null
+  docker rmi $(docker images -a --filter=dangling=true -q) 2>/dev/null
+  docker volume rm $(docker volume ls --filter=dangling=true -q) 2>/dev/null
 elif command -v podman &>/dev/null; then
-  docker_=podman
+  podman rm -v $(podman ps --filter=status=exited --filter=status=created --external -q) 2>/dev/null || true
+  podman rmi $(podman images -a --filter=dangling=true -q) 2>/dev/null || true
+  podman volume rm $(podman volume ls --filter=dangling=true -q) 2>/dev/null || true
 fi
-
-
-$docker_ rm -v "$($docker_ ps --filter=status=exited --filter=status=created -q)" 2>/dev/null
-$docker_ rmi "$($docker_ images -a --filter=dangling=true -q)" 2>/dev/null
-$docker_ volume rm "$($docker_ volume ls --filter=dangling=true -q)" 2>/dev/null
