@@ -48,3 +48,7 @@ dotenv() {
     directory=$(dirname "$directory")
   done
 }
+
+tssh() {
+  ssh -t "$@" "tmux attach-session || tmux new"
+}
