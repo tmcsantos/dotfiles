@@ -6,12 +6,13 @@ Host *
   # authentication overhead and improving speed for subsequent logins.
   ControlMaster auto
   ControlPath ~/.ssh/cm-%r@%h:%p
-  ControlPersist 10m
+  ControlPersist 1m
 
   Compression yes
   TCPKeepAlive yes
   ServerAliveInterval 30
-  ServerAliveCountMax 3
+  ServerAliveCountMax 2
   AddKeysToAgent yes
+  ConnectTimeout 5
 
 # vim:filetype=sshconfig
