@@ -15,11 +15,11 @@ alias \
 if command -v lsd &>/dev/null; then
   alias \
     ls='lsd' \
-    tree='lsd --tree -a -I ".git|__pycache__|*.pyc|.venv|.idea"'
+    tree='lsd --tree -a -I ".git" -I "__pycache__" -I "*.pyc" -I ".venv" -I ".mypy_cache" -I ".idea"'
 else
   alias \
     ls='ls -hNGF --color=auto --group-directories-first' \
-    tree='tree -a -I ".git|__pycache__|*.pyc|.venv|.idea"'
+    tree='tree -a -I ".git|__pycache__|*.pyc|.venv|.mypy_cache|.idea"'
 fi
 
 alias \

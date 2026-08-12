@@ -6,12 +6,16 @@ return {
     "nvim-lua/plenary.nvim",
     "antoinemadec/FixCursorHold.nvim",
     "nvim-treesitter/nvim-treesitter",
+    "alfaix/neotest-gtest",
+    "orjangj/neotest-ctest",
   },
   config = function()
     require("neotest").setup({
       adapters = {
         require("neotest-python"),
         require("rustaceanvim.neotest"),
+        require("neotest-gtest").setup({}),
+        require("neotest-ctest").setup({}),
       },
     })
   end,

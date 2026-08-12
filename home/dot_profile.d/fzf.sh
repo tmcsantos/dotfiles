@@ -9,6 +9,7 @@ fi
 __list_tracked_dirs() {
   local tracked_directories=(
     "$HOME/projects"
+    "$HOME/workspace"
     "$HOME/work"
     "$HOME/journal"
     "$HOME/services"
