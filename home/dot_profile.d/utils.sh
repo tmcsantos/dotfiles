@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 usagesort() {
-  du -h -d 1 "$1" | sort -k 1,1 -h
+  du -h -d 1 "$1" | sort -k 1,1 -h -r
 }
 
 gql() {
