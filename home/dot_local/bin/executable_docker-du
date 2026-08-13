@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+LOCAL_USER=${SUDO_USER:-$(logname)}
+
+if command -v docker &>/dev/null; then
+  sudo du -h -d 1 "/var/lib/docker" | sort -k 1,1 -h -r
+elif command -v podman &>/dev/null; then
+  sudo du -h -d 1 "/var/lib/containers" | sort -k 1,1 -h -r
+  sudo du -h -d 1 "/home/${LOCAL_USER}/.local/share/containers" | sort -k 1,1 -h -r
+fi
