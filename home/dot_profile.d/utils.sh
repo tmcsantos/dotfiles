@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 usagesort() {
-  du -h -d 1 "$1" | sort -k 1,1 -g
+  du -h -d 1 "$1" | sort -k 1,1 -h
 }
 
 gql() {
@@ -47,8 +47,4 @@ dotenv() {
     fi
     directory=$(dirname "$directory")
   done
-}
-
-tssh() {
-  ssh -t "$@" "tmux attach-session || tmux new"
 }
