@@ -3,9 +3,9 @@
 LOCAL_USER=${SUDO_USER:-$(logname)}
 
 if command -v docker &>/dev/null; then
-  s=$(docker context inspect | jq -r ".[].Endpoints.docker.Host" | cut -d':' -f2)
+  socket=$(docker context inspect | jq -r ".[].Endpoints.docker.Host" | cut -d':' -f2)
   ctx=$(docker context show)
-  if [[ -S "$s" ]]; then
+  if [[ -S "$socket" ]]; then
     echo "@$ctx"
     if [[ $ctx == lima-* ]]; then
       ssh "$ctx" -T sudo du -h -d 1 "/var/lib/docker" | sort -k 1,1 -h -r
