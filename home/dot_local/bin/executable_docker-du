@@ -3,8 +3,16 @@
 LOCAL_USER=${SUDO_USER:-$(logname)}
 
 if command -v docker &>/dev/null; then
-  sudo du -h -d 1 "/var/lib/docker" | sort -k 1,1 -h -r
+  s=$(docker context inspect | jq -r ".[].Endpoints.docker.Host" | cut -d':' -f2)
+  ctx=$(docker context show)
+  if [[ -S "$s" ]]; then
+    echo "@$ctx"
+    if [[ $ctx == lima-* ]]; then
+      ssh "$ctx" -T sudo du -h -d 1 "/var/lib/docker" | sort -k 1,1 -h -r
+    else
+      sudo du -h -d 1 "/var/lib/docker" | sort -k 1,1 -h -r
+    fi
+  fi
 elif command -v podman &>/dev/null; then
-  sudo du -h -d 1 "/var/lib/containers" | sort -k 1,1 -h -r
-  sudo du -h -d 1 "/home/${LOCAL_USER}/.local/share/containers" | sort -k 1,1 -h -r
+  sudo du -h -d 1 "/var/lib/containers" "/home/${LOCAL_USER}/.local/share/containers" | sort -k 1,1 -h -r
 fi
