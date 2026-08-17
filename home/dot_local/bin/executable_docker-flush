@@ -3,8 +3,8 @@
 set -eu
 
 if command -v docker &>/dev/null; then
-  docker rm -v $(docker ps -a -q) 2>/dev/null
-  docker rmi $(docker images -a -q) 2>/dev/null
+  docker rm -v $(docker ps -a -q) 2>/dev/null || true
+  docker rmi $(docker images -a -q) 2>/dev/null || true
 elif command -v podman &>/dev/null; then
   podman rm -v $(podman ps -a --external -q) 2>/dev/null || true
   podman rmi $(podman images -a -q) 2>/dev/null || true
