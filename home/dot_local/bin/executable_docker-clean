@@ -5,12 +5,12 @@ set -eu
 if command -v docker &>/dev/null; then
   socket=$(docker context inspect | jq -r ".[].Endpoints.docker.Host" | cut -d':' -f2)
   if [[ -S "$socket" ]]; then
-    docker rm -v "$(docker ps --filter=status=exited --filter=status=created -q)" 2>/dev/null || true
-    docker rmi "$(docker images -a --filter=dangling=true -q)" 2>/dev/null || true
-    docker volume rm "$(docker volume ls --filter=dangling=true -q)" 2>/dev/null || true
+    docker rm -v $(docker ps --filter=status=exited --filter=status=created -q) 2>/dev/null || true
+    docker rmi $(docker images -a --filter=dangling=true -q) 2>/dev/null || true
+    docker volume rm $(docker volume ls --filter=dangling=true -q) 2>/dev/null || true
   fi
 elif command -v podman &>/dev/null; then
-  podman rm -v "$(podman ps --filter=status=exited --filter=status=created --external -q)" 2>/dev/null || true
-  podman rmi "$(podman images -a --filter=dangling=true -q)" 2>/dev/null || true
-  podman volume rm "$(podman volume ls --filter=dangling=true -q)" 2>/dev/null || true
+  podman rm -v $(podman ps --filter=status=exited --filter=status=created --external -q) 2>/dev/null || true
+  podman rmi $(podman images -a --filter=dangling=true -q) 2>/dev/null || true
+  podman volume rm $(podman volume ls --filter=dangling=true -q) 2>/dev/null || true
 fi
