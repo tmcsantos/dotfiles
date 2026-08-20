@@ -107,8 +107,9 @@ return {
       })
       lint.linters_by_ft = {
         python = { 'mypy' },
-        c = { 'cpplint' },
-        cpp = { 'cpplint' },
+        -- commenting this out in favor or .clang-tidy/.clangd configs
+        -- c = { 'cpplint' },
+        -- cpp = { 'cpplint' },
       }
       local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
       vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {

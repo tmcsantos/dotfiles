@@ -14,3 +14,16 @@ CompileFlags:
     - -ferror-limit=0
 Index:
   Background: Skip
+Hover:
+  ShowAKA: true
+---
+Diagnostics:
+  ClangTidy:
+    Add:
+      - clang-diagnostic-*
+      - clang-analyzer-*
+      - cppcoreguidelines-*
+      - modernize-*
+    Remove:
+      - llvm-header-guard
+      - modernize-use-trailing-return-type
