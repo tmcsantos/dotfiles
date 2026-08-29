@@ -21,6 +21,9 @@
 [alias]
   lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   st = status
+	gh-pr-worktree = "!f() { git fetch origin refs/pull/$1/head:pr-$1 && git worktree add \"${2:-pr-$1}\" pr-$1; }; f"
+  gl-mr-worktree = "!f() { git fetch origin refs/merge-requests/$1/head:mr-$1 && git worktree add \"${2:-mr-$1}\" mr-$1; }; f"
+  forgejo-pr-worktree = "!f() { git fetch origin refs/pull/$1/head:pr-$1 && git worktree add \"${2:-pr-$1}\" pr-$1; }; f"
 
 [protocol]
   version = 2
