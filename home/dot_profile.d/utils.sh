@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
 usagesort() {
-  du -h -d 1 "$1" | sort -k 1,1 -h -r
+  du -h -d 1 "${1:-.}" | sort -k 1,1 -h -r
+}
+
+countfiles() {
+  find "${1:-.}" -maxdepth 1 -mindepth 1 -type d -print0 \
+    | xargs -0 -I{} sh -c 'printf "%4d : %s\n" "$(find {} -type f | wc -l)" "{}"'
 }
 
 gql() {
