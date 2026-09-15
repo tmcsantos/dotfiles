@@ -5,7 +5,7 @@ return {
   config = function()
     require("render-markdown").setup({
       indent = {
-        enabled = true,
+        enabled = false,
       },
       code = {
         border = "thin",
