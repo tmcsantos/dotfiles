@@ -14,8 +14,8 @@ gql() {
     curl -s -X POST "${2:-$SCHEMA_ENDPOINT}" --json "$(jq -c -n --arg query "$(cat "$data")" '{"query": $query}')"
 }
 
-if command -v fortune &>/dev/null; then
-  if command -v cowsay &>/dev/null; then
+if type -P fortune &>/dev/null; then
+  if type -P cowsay &>/dev/null; then
     alias cclear="command clear && fortune | cowsay"
   else
     alias cclear="command clear && fortune"

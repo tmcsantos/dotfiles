@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # enable fzf autocompletion and key-bindings if found
-if command -v fzf >/dev/null; then
+if type -P fzf >/dev/null; then
   source <(fzf --bash)
 fi
 

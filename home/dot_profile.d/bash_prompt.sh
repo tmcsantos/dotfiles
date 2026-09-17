@@ -16,7 +16,7 @@ __bash_history_sync() {
 }
 
 # enable the starship prompt
-if command -v starship &>/dev/null; then
+if type -P starship &>/dev/null; then
   starship_precmd_user_func="__bash_history_sync"
   eval "$(starship init bash)"
 fi

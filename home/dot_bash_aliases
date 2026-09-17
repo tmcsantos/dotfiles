@@ -12,7 +12,7 @@ alias \
   rm='rm -v'
 
 # Colorize commands when possible
-if command -v lsd &>/dev/null; then
+if type -P lsd &>/dev/null; then
   alias \
     ls='lsd' \
     tree='lsd --tree -a -I ".git" -I "__pycache__" -I "*.pyc" -I ".venv" -I ".mypy_cache" -I ".idea"'
@@ -35,7 +35,7 @@ alias \
   top='btop 2>/dev/null || htop 2>/dev/null || \top' \
   va='source .venv/bin/activate'
 
-if command -v grc &>/dev/null; then
+if type -P grc &>/dev/null; then
   alias tailf='grc tail -f'
 else
   alias tailf='tail -f'
@@ -45,7 +45,7 @@ fi
 # unetbootin-source-494.tar.gz?r=http%3A%2F%2Fsourceforge.net%2Fprojects%2Funetbootin%2Ffiles%2FUNetbootin%2F494%2F&ts=1391695063&use_mirror=heanet?)
 alias wget='wget --content-disposition'
 
-if command -v uv &>/dev/null; then
+if type -P uv &>/dev/null; then
   alias \
     pip='uv pip' \
     ipython='uv run --with ipython ipython' \
@@ -59,17 +59,17 @@ fi
 # neofecth archived :'(
 alias neofetch=fastfetch
 
-if command -v nvim &>/dev/null; then
+if type -P nvim &>/dev/null; then
   alias vim=nvim
   alias vi=nvim
   export EDITOR="nvim"
   export VISUAL="nvim"
-elif command -v vim &>/dev/null; then
+elif type -P vim &>/dev/null; then
   export EDITOR="vim"
   export VISUAL="vim"
 fi
 
-if command -v rsync &>/dev/null; then
+if type -P rsync &>/dev/null; then
   # rsync commands
   # all commands include the options
   # -a archive mode; preserve owner/group/chmod
@@ -84,12 +84,25 @@ if command -v rsync &>/dev/null; then
 fi
 
 ## use bat instead of cat
-if command -v bat &>/dev/null; then
+if type -P bat &>/dev/null; then
   alias cat='bat'
 fi
 ## bat on debian based is batcat.
-if command -v batcat &>/dev/null; then
+if type -P batcat &>/dev/null; then
   alias cat='batcat'
 fi
 
 alias brb="command unimatrix -s 96 -a"
+
+## if podman is installed fix muscle memory
+if type -p podman &>/dev/null; then
+  alias docker=podman
+  # fix auto complete
+  if [ "$(declare -f __start_podman)" = "" ]; then
+    if [ -f "$(pkg-config --variable=completionsdir bash-completion)"/podman ]; then
+      # shellcheck source=/usr/share/bash-completion/completions/podman
+      source "$(pkg-config --variable=completionsdir bash-completion)"/podman
+      complete -o bashdefault -o default -o nospace -F __start_podman docker
+    fi
+  fi
+fi

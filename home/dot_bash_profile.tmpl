@@ -43,7 +43,7 @@ prepend_path "$HOME/.local/share/mise/shims"
 prepend_path "$HOME/.local/bin"
 
 {{ if eq .chezmoi.os "darwin" }}
-if command -v brew &>/dev/null; then
+if type -P brew &>/dev/null; then
   HOMEBREW_PREFIX="$(brew --prefix)"
   eval "$(brew shellenv)"
   if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]
