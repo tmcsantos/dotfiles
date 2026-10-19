@@ -4,6 +4,7 @@ return {
   opts = {},
   config = function()
     require("render-markdown").setup({
+      -- file_types = { 'markdown', 'copilot-chat' },
       indent = {
         enabled = false,
       },

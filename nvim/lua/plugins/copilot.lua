@@ -7,45 +7,51 @@ return {
     build = "make tiktoken",
     opts = {
       -- See Configuration section for options
-    },
-  },
-  {
-    "olimorris/codecompanion.nvim",
-    enabled = false,
-    opts = {},
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-treesitter/nvim-treesitter",
-    },
-    config = function()
-      local companion = require("codecompanion")
-      local adapters = require("codecompanion.adapters")
-      companion.setup({
-        strategies = {
-          chat = { adapter = "ollama_chat" },
-          inline = { adapter = "ollama_code" },
+      mappings = {
+        reset = {
+          normal = '<C-x>',
+          insert = '<C-x>'
         },
-        adapters = {
-          http = {
-            ollama_chat = function()
-              return adapters.extend("ollama", {
-                schema = {
-                  model = { default = "cogito:3b" }
-                }
-              })
-            end,
-            ollama_code = function()
-              return adapters.extend("ollama", {
-                schema = {
-                  model = { default = "qwen2.5-coder:1.5b" }
-                }
-              })
-            end
-          }
-        }
-      })
-    end
+      }
+    },
   },
+  -- {
+  --   "olimorris/codecompanion.nvim",
+  --   enabled = false,
+  --   opts = {},
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "nvim-treesitter/nvim-treesitter",
+  --   },
+  --   config = function()
+  --     local companion = require("codecompanion")
+  --     local adapters = require("codecompanion.adapters")
+  --     companion.setup({
+  --       strategies = {
+  --         chat = { adapter = "ollama_chat" },
+  --         inline = { adapter = "ollama_code" },
+  --       },
+  --       adapters = {
+  --         http = {
+  --           ollama_chat = function()
+  --             return adapters.extend("ollama", {
+  --               schema = {
+  --                 model = { default = "cogito:3b" }
+  --               }
+  --             })
+  --           end,
+  --           ollama_code = function()
+  --             return adapters.extend("ollama", {
+  --               schema = {
+  --                 model = { default = "qwen2.5-coder:1.5b" }
+  --               }
+  --             })
+  --           end
+  --         }
+  --       }
+  --     })
+  --   end
+  -- },
 }
 
 -- return {
