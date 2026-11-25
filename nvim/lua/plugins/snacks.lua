@@ -13,6 +13,5 @@ return {
     },
     quickfile = { enabled = true },
     scope = { enabled = true },
-    words = { enabled = true },
   },
 }
